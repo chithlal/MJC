@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MJC</string>
+    <string name="text_or">OR</string>
+    <string name="string_consumer">Consumer</string>
+    <string name="string_engineer">Engineer</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="text_login">Login</string>
+</resources>
