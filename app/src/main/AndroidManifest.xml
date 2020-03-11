@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".app.Login.LoginActivity"></activity>
+        <activity android:name=".app.signup.SignupActivity"></activity>
+        <activity android:name=".app.Login.LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.developer.chithlal.mjc.app.IntroActivity.IntroActivity" />
+        </activity>
         <activity android:name=".app.IntroActivity.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

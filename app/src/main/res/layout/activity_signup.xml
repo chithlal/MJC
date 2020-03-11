@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".app.signup.SignupActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/signup_toolbar"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/signup_cv_username"
+        android:layout_width="@dimen/login_username_width"
+        android:layout_height="@dimen/intro_cardview_height"
+        android:layout_marginTop="200dp"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="@dimen/intro_cardview_cornner_radius"
+        app:cardElevation="@dimen/intro_cardview_elevation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/login_icon_size"
+                android:layout_height="@dimen/login_icon_size"
+                android:layout_marginStart="@dimen/login_icon_margin"
+                android:layout_marginTop="@dimen/login_icon_margin"
+                android:layout_marginEnd="@dimen/login_icon_margin"
+                android:layout_marginBottom="9dp"
+                android:padding="@dimen/login_icon_padding"
+                android:src="@drawable/ic_user_name" />
+
+            <EditText
+                android:id="@+id/et_signup_username"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLines="1"
+                android:inputType="text"
+                android:hint="@string/hint_name"
+                android:maxWidth="@dimen/login_user_maxwidth" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/signup_cv_email"
+        android:layout_width="@dimen/login_username_width"
+        android:layout_height="@dimen/intro_cardview_height"
+        android:layout_marginTop="290dp"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="@dimen/intro_cardview_cornner_radius"
+        app:cardElevation="@dimen/intro_cardview_elevation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/login_icon_size"
+                android:layout_height="@dimen/login_icon_size"
+                android:layout_marginStart="@dimen/login_icon_margin"
+                android:layout_marginTop="@dimen/login_icon_margin"
+                android:layout_marginEnd="@dimen/login_icon_margin"
+                android:layout_marginBottom="9dp"
+                android:padding="@dimen/login_icon_padding"
+                android:src="@drawable/ic_mail" />
+
+            <EditText
+                android:id="@+id/et_signup_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLines="1"
+                android:inputType="text"
+                android:hint="@string/hint_email"
+                android:maxWidth="@dimen/login_user_maxwidth" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/signup_cv_phone"
+        android:layout_width="@dimen/login_username_width"
+        android:layout_height="@dimen/intro_cardview_height"
+        android:layout_marginTop="380dp"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="@dimen/intro_cardview_cornner_radius"
+        app:cardElevation="@dimen/intro_cardview_elevation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/login_icon_size"
+                android:layout_height="@dimen/login_icon_size"
+                android:layout_marginStart="@dimen/login_icon_margin"
+                android:layout_marginTop="@dimen/login_icon_margin"
+                android:layout_marginEnd="@dimen/login_icon_margin"
+                android:layout_marginBottom="9dp"
+                android:padding="@dimen/login_icon_padding"
+                android:src="@drawable/ic_phone" />
+
+            <EditText
+                android:id="@+id/et_signup_phone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLines="1"
+                android:inputType="text"
+                android:hint="@string/hint_phone"
+                android:maxWidth="@dimen/login_user_maxwidth" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/signup_cv_password"
+        android:layout_width="@dimen/login_username_width"
+        android:layout_height="@dimen/intro_cardview_height"
+        android:layout_marginTop="470dp"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="@dimen/intro_cardview_cornner_radius"
+        app:cardElevation="@dimen/intro_cardview_elevation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/login_icon_size"
+                android:layout_height="@dimen/login_icon_size"
+                android:layout_marginStart="@dimen/login_icon_margin"
+                android:layout_marginTop="@dimen/login_icon_margin"
+                android:layout_marginEnd="@dimen/login_icon_margin"
+                android:layout_marginBottom="9dp"
+                android:padding="@dimen/login_icon_padding"
+                android:src="@drawable/ic_password" />
+
+            <EditText
+                android:id="@+id/et_signup_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:hint="@string/hint_password"
+                android:maxWidth="@dimen/login_user_maxwidth" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/signup_cv_signup_bt"
+        android:layout_width="@dimen/login_username_width"
+        android:layout_height="@dimen/intro_cardview_height"
+        android:layout_marginTop="65dp"
+        app:cardBackgroundColor="@color/app_green"
+        app:cardCornerRadius="@dimen/intro_cardview_cornner_radius"
+        app:cardElevation="@dimen/intro_cardview_elevation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_cv_password">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_signup"
+            android:layout_gravity="center"
+            android:textSize="@dimen/login_font_size"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            />
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

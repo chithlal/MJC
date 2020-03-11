@@ -2,17 +2,17 @@ package com.developer.chithlal.mjc.app.Login;
 
 public interface LoginContract {
     interface View{
-        void getLoginData();
-        void showValidationMessage(String message);
+        LoginEvent getLoginData();
+        void showValidationMessage(String userNameMessage,String passwordMessage);
         void onLoginSuccess();
         void onLoginFailure(String mMessage);
     }
 
     interface Presenter{
-        void tryLogin(LoginEvent mLoginEvent);
+        void tryLogin();
         void onLoginSuccess();
         void onLoginFailure(String message);
-        void validateCred(LoginEvent mLoginEvent);
+        int validateCred(LoginEvent mLoginEvent);
     }
 
     interface Model{
