@@ -86,7 +86,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:maxLines="1"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:hint="@string/hint_email"
                 android:maxWidth="@dimen/login_user_maxwidth" />
 
@@ -127,7 +127,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:maxLines="1"
-                android:inputType="text"
+                android:inputType="phone"
                 android:hint="@string/hint_phone"
                 android:maxWidth="@dimen/login_user_maxwidth" />
 
