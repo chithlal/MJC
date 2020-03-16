@@ -14,7 +14,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     public void tryLogin() {
         mLoginModel = new LoginModel(this);
         LoginEvent mLoginEvent = mLoginView.getLoginData();
-        if(validateCred(mLoginEvent)==LoginConstants.VALID_CRED)
+        //if(validateCred(mLoginEvent)==LoginConstants.VALID_CRED)
             mLoginModel.login(mLoginEvent);
 
 

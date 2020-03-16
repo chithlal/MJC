@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 
 import com.developer.chithlal.mjc.R;
+
+
+import com.developer.chithlal.mjc.app.Base.BaseActivity;
 import com.developer.chithlal.mjc.app.signup.SignupActivity;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
@@ -104,7 +107,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void onLoginSuccess() {
-
+        Intent intent = new Intent(this, BaseActivity.class);
+        startActivity(intent);
     }
 
     @Override

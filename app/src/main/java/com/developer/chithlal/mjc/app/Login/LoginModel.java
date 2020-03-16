@@ -9,6 +9,7 @@ public class LoginModel implements LoginContract.Model {
 
     @Override
     public String login(LoginEvent mLoginEvent) {
-        return null;
+        mMLoginPresenter.onLoginSuccess();
+        return "Success";
     }
 }

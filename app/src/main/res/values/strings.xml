@@ -13,4 +13,11 @@
     <string name="hint_email">Email</string>
     <string name="hint_phone">Phone</string>
     <string name="text_signup">Register</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_base">BaseActivity</string>
+    <string name="title_orders">Orders</string>
+    <string name="title_profile">Profile</string>
 </resources>
