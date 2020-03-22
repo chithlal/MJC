@@ -18,7 +18,7 @@ import com.developer.chithlal.mjc.app.util.Constants;
 
 import java.util.List;
 
-public class SignupActivity extends AppCompatActivity implements SignUpContract.View{
+public class  SignupActivity extends AppCompatActivity implements SignUpContract.View{
 
     //View objects;
     private CardView mSignupButton;

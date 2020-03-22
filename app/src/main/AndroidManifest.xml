@@ -2,14 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.developer.chithlal.mjc">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.CAMERA" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,11 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".app.BuildingSpec.BuildingSpecActivity"></activity>
-        <activity
-            android:name=".app.Base.BaseActivity"
-            android:label="@string/title_activity_base" />
-        <activity android:name=".app.signup.SignupActivity" />
+        <activity android:name=".app.signup.SignupActivity"></activity>
         <activity android:name=".app.Login.LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
