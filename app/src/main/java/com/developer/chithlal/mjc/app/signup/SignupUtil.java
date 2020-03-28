@@ -20,7 +20,7 @@ public class SignupUtil {
     public void  updateUI(FirebaseUser account){
         if(account != null){
             //Toast.makeText(this,"U Signed In successfully",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this, /* NEW ACTIVITY IS SIGNED UP SUCCESSFULLY*/.class));
+            startActivity(new Intent(this, HomeActivity.class));
         }else {
             //Toast.makeText(this,"U Didnt signed in",Toast.LENGTH_LONG).show();
         }
