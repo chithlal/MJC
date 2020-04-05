@@ -24,4 +24,19 @@
     <dimen name="text_size_home_item">18sp</dimen>
     <dimen name="margin_home_item_text">8dp</dimen>
     <dimen name="home_card_margin">5dp</dimen>
+    <dimen name="bs_card_worktype_radius">8dp</dimen>
+    <dimen name="bs_card_radius">8dp</dimen>
+    <dimen name="bs_image_view_height">100dp</dimen>
+    <dimen name="bs_worktype_question_text_size">22sp</dimen>
+    <dimen name="bs_text_view_margin">10dp</dimen>
+    <dimen name="bs_image_view_margin">15dp</dimen>
+    <dimen name="mjc_cardview_default_elevation">4dp</dimen>
+    <dimen name="margin_bs_work_type">10dp</dimen>
+    <dimen name="bs_measurement_card_rad">7dp</dimen>
+    <dimen name="bs_measurement_card_margin">10dp</dimen>
+    <dimen name="bs_measurement_card_textSize">15sp</dimen>
+    <dimen name="bs_measurement_card_area_margin">5dp</dimen>
+    <dimen name="bs_upload_textView_size">180dp</dimen>
+    <dimen name="bs_upload_margin">20sp</dimen>
+    <dimen name="bs_mesurement_upload_text_size">25sp</dimen>
 </resources>

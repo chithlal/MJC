@@ -20,4 +20,16 @@
     <string name="title_activity_base">BaseActivity</string>
     <string name="title_orders">Orders</string>
     <string name="title_profile">Profile</string>
+    <string name="string_full_construction">Full Construction</string>
+    <string name="string_finishing_work">Finishing Work</string>
+    <string name="string_main_concrete">Main Concrete</string>
+    <string name="work_type">Work type?</string>
+    <string name="add_measurement">Add measurement</string>
+    <string name="bs_string_total">Total Area</string>
+    <string name="hint_bs_enter_area_text">Enter area</string>
+    <string name="bs_string_squreft">Squre feet</string>
+    <string name="bs_string_build">Build Area</string>
+    <string name="bs_string_upload_plan">Upload Plan</string>
+    <string name="bs_string_hire_engineer">Hire Engineer</string>
+    <string name="bs_string_buy_materials">Buy Materials</string>
 </resources>
