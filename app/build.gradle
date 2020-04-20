@@ -20,6 +20,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -36,4 +39,6 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
 }

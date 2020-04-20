@@ -26,8 +26,8 @@
     <dimen name="home_card_margin">5dp</dimen>
     <dimen name="bs_card_worktype_radius">8dp</dimen>
     <dimen name="bs_card_radius">8dp</dimen>
-    <dimen name="bs_image_view_height">100dp</dimen>
-    <dimen name="bs_worktype_question_text_size">22sp</dimen>
+    <dimen name="bs_image_view_height">45dp</dimen>
+    <dimen name="bs_worktype_question_text_size">20sp</dimen>
     <dimen name="bs_text_view_margin">10dp</dimen>
     <dimen name="bs_image_view_margin">15dp</dimen>
     <dimen name="mjc_cardview_default_elevation">4dp</dimen>
@@ -39,4 +39,23 @@
     <dimen name="bs_upload_textView_size">180dp</dimen>
     <dimen name="bs_upload_margin">20sp</dimen>
     <dimen name="bs_mesurement_upload_text_size">25sp</dimen>
+    <dimen name="bs_button_height">46dp</dimen>
+    <dimen name="app_button_text_size">24sp</dimen>
+    <dimen name="bs_measurement_item_text_size">18sp</dimen>
+    <dimen name="bs_measurement_card_tv_margin">5dp</dimen>
+    <dimen name="bs_measurement_card_tv_brand_margin">2dp</dimen>
+    <dimen name="bs_measur_linearLayout_margin">5dp</dimen>
+    <dimen name="bs_measurement_brand_text_size">12sp</dimen>
+    <dimen name="bs_card_measurement_icon_size">40dp</dimen>
+    <dimen name="bs_card_material_total_margin">6dp</dimen>
+    <dimen name="bs_card_material_cornner_radius">12dp</dimen>
+    <dimen name="bs_card_material_corner_radius">3dp</dimen>
+    <dimen name="eng_user_prof_imagesize">80dp</dimen>
+    <dimen name="eng_profile_margin">15dp</dimen>
+    <dimen name="eng_card_name_text_size">16sp</dimen>
+    <dimen name="eng_card_tv_margin">8dp</dimen>
+    <dimen name="eng_card_prof_text_size">12sp</dimen>
+    <dimen name="eng_card_tv_exp_margin">15dp</dimen>
+    <dimen name="rating_bar_size">30dp</dimen>
+    <dimen name="eng_rating_bar_size">40dp</dimen>
 </resources>

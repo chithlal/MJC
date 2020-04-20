@@ -32,4 +32,7 @@
     <string name="bs_string_upload_plan">Upload Plan</string>
     <string name="bs_string_hire_engineer">Hire Engineer</string>
     <string name="bs_string_buy_materials">Buy Materials</string>
+    <string name="bs_string_expense">Expense Estimate</string>
+    <string name="bs_string_continue">Continue</string>
+    <string name="bs_string_total_price">Total</string>
 </resources>

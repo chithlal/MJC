@@ -34,8 +34,10 @@
                     android:weightSum="2">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_weight="1"
                     >
                     <ImageView
@@ -58,9 +60,11 @@
                 </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:gravity="center"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:layout_weight="1">
                         <TextView
                             android:layout_margin="@dimen/margin_bs_work_type"
@@ -69,10 +73,8 @@
                             android:text="@string/string_full_construction"
                             android:textColor="@color/app_black"
                             android:gravity="center"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:id="@+id/bs_tv_workType_full_constr"
-                            android:background="@drawable/bs_worktype_card_background"
+                            android:background="@drawable/worktype_shape_normal"
                             />
                         <TextView
                             android:layout_margin="@dimen/margin_bs_work_type"
@@ -82,9 +84,8 @@
                             android:textColor="@color/app_black"
                             android:id="@+id/bs_tv_workType_main_conc"
                             android:gravity="center"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:background="@drawable/bs_worktype_card_background"
+
+                            android:background="@drawable/worktype_shape_normal"
                             />
                         <TextView
                             android:layout_margin="@dimen/margin_bs_work_type"
@@ -93,10 +94,8 @@
                             android:text="@string/string_finishing_work"
                             android:textColor="@color/app_black"
                             android:gravity="center"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:id="@+id/bs_tv_workType_finishing"
-                            android:background="@drawable/bs_worktype_card_background"
+                            android:background="@drawable/worktype_shape_normal"
                             />
 
                     </LinearLayout>
@@ -342,6 +341,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="2"
                     >
@@ -366,7 +369,70 @@
 
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/cardview_grey_background"
+                    android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_grey"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_margin="@dimen/bs_measurement_card_margin"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/bs_rv_material_list"/>
+                </LinearLayout>
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:id="@+id/bs_cv_expence_esitmate"
+                app:cardCornerRadius="@dimen/bs_card_radius"
+                app:cardElevation="@dimen/intro_cardview_elevation">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/bs_worktype_question_text_size"
+                        android:layout_margin="@dimen/bs_text_view_margin"
+                        android:gravity="center"
+                        android:text="@string/bs_string_expense"
+                        android:textStyle="bold"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        />
+                    <ImageView
+                        android:layout_width="@dimen/bs_image_view_height"
+                        android:layout_height="@dimen/bs_image_view_height"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:layout_margin="@dimen/bs_image_view_margin"
+                        android:src="@drawable/ic_expense_estimate"/>
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bs_button_height"
+                android:layout_margin="15dp"
+                android:text="@string/bs_string_continue"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/app_button_text_size"
+                android:textStyle="bold"
+                android:background="@drawable/bs_continue_button_bg"
+                />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

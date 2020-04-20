@@ -18,4 +18,13 @@ public  class Constants {
     public static final int PERMISSION_REQ_CODE = 123;
 
     public static final String  BUILDING_TYPE = "Building type";
+
+    /*Bulding Spec Constants*/
+    public static final String CONST_TYPE_FULL_CONST = "FULL CONSTRUCTION";
+    public static final String CONST_TYPE_MAIN_CONC = "MAIN CONCRETE";
+    public static final String CONST_TYPE_FINISHING = "FINISHING WORK";
+    public static final String CONST_TYPE_DEFAULT = "NON SELECTED";
+
+
+
 }

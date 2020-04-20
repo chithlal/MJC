@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".app.BuildingSpec.BuildingSpecActivity"></activity>
+        <activity android:name=".app.engineer.HireEngineer"></activity>
+        <activity android:name=".app.BuildingSpec.BuildingSpecActivity" />
         <activity
             android:name=".app.Base.BaseActivity"
             android:label="@string/title_activity_base" />
