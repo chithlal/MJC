@@ -41,4 +41,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
+    def daggerVersion = 2.27
+    api "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    implementation 'com.github.ApendIr:slider:1.0'
 }

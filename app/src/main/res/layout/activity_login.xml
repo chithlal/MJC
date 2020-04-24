@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".app.Login.LoginActivity">
 
-    <androidx.appcompat.widget.Toolbar
+       <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,5 +1,7 @@
 package com.developer.chithlal.mjc.app.engineer;
 
+import android.content.Context;
+
 import java.util.List;
 
 public interface HireEngineerContract  {
@@ -11,12 +13,12 @@ public interface HireEngineerContract  {
 
     }
     interface Presenter{
-        void setUpUi();
+        void setUpUi(Context context,HireEngineerContract.View view);
 
 
     }
     interface Model{
-
+        void setContext(Context context);
         List<Engineer> getEngineersList();
 
     }

@@ -2,20 +2,25 @@ package com.developer.chithlal.mjc.app.engineer;
 
 import android.content.Context;
 
+import javax.inject.Inject;
+
 public class HireEngineerPresenter implements HireEngineerContract.Presenter {
 
-    private final Context mContext;
-    private final HireEngineerContract.View mView;
-    private HireEngineerModel mHireEngineerModel;
+    private  Context mContext;
+    private  HireEngineerContract.View mView;
+    private HireEngineerContract.Model mHireEngineerModel;
 
-    public HireEngineerPresenter(Context context,HireEngineerContract.View view) {
-        mContext = context;
-        mView = view;
+    @Inject
+    public HireEngineerPresenter(HireEngineerContract.Model model) {
+        mHireEngineerModel = model;
+
     }
 
     @Override
-    public void setUpUi() {
-        mHireEngineerModel = new HireEngineerModel(mContext);
+    public void setUpUi(Context context,HireEngineerContract.View view) {
+        mView = view;
+        mContext = context;
+        mHireEngineerModel.setContext(context);
         mView.updateList(mHireEngineerModel.getEngineersList());
 
 

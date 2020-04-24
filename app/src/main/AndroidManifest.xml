@@ -12,12 +12,14 @@
 
     <application
         android:allowBackup="true"
+        android:name=".root.App"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".app.engineer.HireEngineer"></activity>
+        <activity android:name=".app.UserProfile.UserProfileActivity"></activity>
+        <activity android:name=".app.engineer.HireEngineer" />
         <activity android:name=".app.BuildingSpec.BuildingSpecActivity" />
         <activity
             android:name=".app.Base.BaseActivity"

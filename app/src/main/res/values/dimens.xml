@@ -58,4 +58,23 @@
     <dimen name="eng_card_tv_exp_margin">15dp</dimen>
     <dimen name="rating_bar_size">30dp</dimen>
     <dimen name="eng_rating_bar_size">40dp</dimen>
+    <dimen name="user_card_corner_rad">16dp</dimen>
+    <dimen name="user_image_size">100dp</dimen>
+    <dimen name="user_profile_circle_elevation">6dp</dimen>
+    <dimen name="user_profile_image_margin">8dp</dimen>
+    <dimen name="user_name_text_size">18sp</dimen>
+    <dimen name="user_name_textSize_margin">5dp</dimen>
+    <dimen name="user_profession_textSize_margin">5dp</dimen>
+    <dimen name="user_profession_text_size">12sp</dimen>
+    <dimen name="user_profile_rating_bar">15dp</dimen>
+    <dimen name="user_name_card_margin">25dp</dimen>
+    <dimen name="user_profile_image_marginStart">25dp</dimen>
+    <dimen name="user_profile_payment_text_size">29sp</dimen>
+    <dimen name="user_profile_rating_text_size">16sp</dimen>
+    <dimen name="app_line_margin">5dp</dimen>
+    <dimen name="user_profile_icon_size">20dp</dimen>
+    <dimen name="user_profile_icon_margin">5dp</dimen>
+    <dimen name="user_profile_user_details_text_size">16sp</dimen>
+    <dimen name="user_profile_details_texview_margin">5dp</dimen>
+    <dimen name="user_profile_slider_max_height">170dp</dimen>
 </resources>

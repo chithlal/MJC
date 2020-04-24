@@ -8,8 +8,14 @@ import java.util.List;
 public class HireEngineerModel implements HireEngineerContract.Model {
     private Context mContext;
 
-    public HireEngineerModel(Context context) {
-        mContext = context;
+    public HireEngineerModel(){
+    }
+
+
+    @Override
+    public void setContext(Context context) {
+
+            mContext = context;
     }
 
     @Override

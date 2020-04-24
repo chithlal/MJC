@@ -10,4 +10,5 @@
     <color name="app_gray">#707070</color>
     <color name="app_black">#000000</color>
     <color name="cardview_grey_background">#F3F3F3</color>
+    <color name="color_light_black">#514E4E</color>
 </resources>

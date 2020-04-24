@@ -35,4 +35,11 @@
     <string name="bs_string_expense">Expense Estimate</string>
     <string name="bs_string_continue">Continue</string>
     <string name="bs_string_total_price">Total</string>
+    <string name="user_profile_text_rating">Rating</string>
+    <string name="user_profile_text_payment">Payment</string>
+    <string name="user_profile_text_works">Works</string>
+    <string name="user_profile_string_id_proof">ID Proof</string>
+    <string name="user_profile_string_upload">Upload</string>
+    <string name="user_profile_string_previous_work">Previous Works</string>
+    <string name="bs_string_hire_me">Hire Me</string>
 </resources>
