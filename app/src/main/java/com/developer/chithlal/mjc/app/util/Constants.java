@@ -1,6 +1,7 @@
 package com.developer.chithlal.mjc.app.util;
 
 import android.Manifest;
+import android.net.Uri;
 
 public  class Constants {
     public static final int LOGIN_TYPE_ENGINEER = 100;
@@ -25,6 +26,13 @@ public  class Constants {
     public static final String CONST_TYPE_FINISHING = "FINISHING WORK";
     public static final String CONST_TYPE_DEFAULT = "NON SELECTED";
 
+    //Profile user constants
+    public static final int GALLERY_REQUEST_CODE = 1023;
 
 
+    public static final String ADD_IMAGE_BUTTON = "add_image_button";
+    public static final String CONST_STRING_WRK_TYPE_FULLCONSTR = "Full Construction";
+    public static final String CONST_STRING_WRK_TYPE_MAIN_CONC = "Main Concrete";
+    public static final String CONST_STRING_WRK_TYPE_FINSHING = "Finishing Work";
+    public static final Uri ADD_IMAGE_BUTTON_URI = null;
 }

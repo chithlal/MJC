@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:textSize="@dimen/tv_profession_card_text_size"
+    android:textColor="@color/white"
+    tools:text="Full construction"
+    android:padding="@dimen/work_type_card_padding"
+    android:layout_margin="@dimen/login_icon_padding"
+    android:gravity="center"
+    android:id="@+id/tv_item_card"
+    android:background="@drawable/app_edit_text_bg_filled">
+
+</TextView>

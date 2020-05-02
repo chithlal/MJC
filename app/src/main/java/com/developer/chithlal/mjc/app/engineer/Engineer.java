@@ -1,18 +1,23 @@
 package com.developer.chithlal.mjc.app.engineer;
 
+import com.developer.chithlal.mjc.app.UserProfile.Work;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Engineer extends User {
+public class Engineer extends User implements Serializable {
     private String Profession;
     private String IDProof;
     private int rating;
     private int works;
     private float feePerHour;
-    private List<String> previousWorks;
+    private List<Work> previousWorks;
 
 
     public Engineer(String name) {
         super(name);
+        previousWorks = new ArrayList<>();
     }
 
     public String getProfession() {
@@ -55,11 +60,16 @@ public class Engineer extends User {
         this.feePerHour = feePerHour;
     }
 
-    public List<String> getPreviousWorks() {
+    public List<Work> getAllPreviousWorks() {
         return previousWorks;
     }
 
-    public void setPreviousWorks(List<String> previousWorks) {
+    public void addWork(Work work){
+        this.previousWorks.add(work);
+        this.works++;
+    }
+
+    public void setAllPreviousWorks(List<Work> previousWorks) {
         this.previousWorks = previousWorks;
     }
 }

@@ -1,6 +1,8 @@
 package com.developer.chithlal.mjc.app.engineer;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private String name;
     private String email;
@@ -8,6 +10,15 @@ public class User {
     private String age;
     private String address;
     private String doj;
+    private String photo;
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
     public User(String name) {
         this.name = name;

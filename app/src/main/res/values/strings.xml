@@ -42,4 +42,22 @@
     <string name="user_profile_string_upload">Upload</string>
     <string name="user_profile_string_previous_work">Previous Works</string>
     <string name="bs_string_hire_me">Hire Me</string>
+    <string name="rupee_sign">₹</string>
+    <string name="string_edit">Edit</string>
+    <string name="add_previous_work">Add works</string>
+    <string name="age_string">Age</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_fee_p_h">"Fee per hour "</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hint_work_name">Work Name</string>
+    <string name="hint_desceiption">Description</string>
+    <string name="hint_date_of_completion">Date of completion</string>
+    <string name="hint_owner_name">Owner name</string>
+    <string name="hint_work_area">Building area (Sqft.)</string>
+    <string name="hint_work_type">Work type</string>
+    <string name="text_previous_work_photo">Add photos</string>
+    <string name="string_save">Save</string>
+    <string name="string_add">Add</string>
 </resources>

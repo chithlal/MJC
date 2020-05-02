@@ -1,5 +1,7 @@
 package com.developer.chithlal.mjc.app.BuildingSpec;
 
+import android.util.Log;
+
 import java.io.Serializable;
 
 public class CartItem implements Serializable {
@@ -41,6 +43,7 @@ public class CartItem implements Serializable {
     public void buy(){
         if (this.itemQty>=0)
         this.itemQty++;
+
     }
     public void remove(){
         if (this.itemQty>0)

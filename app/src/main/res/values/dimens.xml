@@ -77,4 +77,17 @@
     <dimen name="user_profile_user_details_text_size">16sp</dimen>
     <dimen name="user_profile_details_texview_margin">5dp</dimen>
     <dimen name="user_profile_slider_max_height">170dp</dimen>
+    <dimen name="add_work_frame_hieght">600dp</dimen>
+    <dimen name="user_profile_edit_text_min_width">150dp</dimen>
+    <dimen name="profession_rv_hieght">50dp</dimen>
+    <dimen name="tv_min_width">150dp</dimen>
+    <dimen name="tv_profession_card_text_size">13sp</dimen>
+    <dimen name="card_frsgment_add_work">10dp</dimen>
+    <dimen name="add_work_fragment_text_size">18sp</dimen>
+    <dimen name="add_work_frag_edittext_margin">5dp</dimen>
+    <dimen name="add_work_frag_edittext_padding">9dp</dimen>
+    <dimen name="work_type_card_padding">10dp</dimen>
+    <dimen name="add_photo_cornner_radiucs">8dp</dimen>
+    <dimen name="add_work_card_size">100dp</dimen>
+    <dimen name="user_profile_add_work_min_height">30dp</dimen>
 </resources>
