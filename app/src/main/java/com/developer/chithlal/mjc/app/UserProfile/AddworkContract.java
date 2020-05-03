@@ -9,6 +9,7 @@ public interface AddworkContract {
 
         void setWorkTypeOptions(List<String> workTypeOptions);
         void setMessage(String message);
+        void setWork(Work work);
 
     }
 

@@ -22,6 +22,7 @@ public class UserProfilePresenter implements UserProfileContract.Presenter {
         mView =view;
         mModel.getUser();
         mView.setUser(mView.getUser());
+        if (!mView.getUser().isUserMode())
         setupPreviousWorkImage((Engineer)mView.getUser());
 
     }

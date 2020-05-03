@@ -69,8 +69,8 @@
     <dimen name="user_profile_rating_bar">15dp</dimen>
     <dimen name="user_name_card_margin">25dp</dimen>
     <dimen name="user_profile_image_marginStart">25dp</dimen>
-    <dimen name="user_profile_payment_text_size">29sp</dimen>
-    <dimen name="user_profile_rating_text_size">16sp</dimen>
+    <dimen name="user_profile_payment_text_size">24sp</dimen>
+    <dimen name="user_profile_rating_text_size">18sp</dimen>
     <dimen name="app_line_margin">5dp</dimen>
     <dimen name="user_profile_icon_size">20dp</dimen>
     <dimen name="user_profile_icon_margin">5dp</dimen>

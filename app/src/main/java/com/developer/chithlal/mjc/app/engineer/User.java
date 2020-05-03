@@ -11,6 +11,8 @@ public class User implements Serializable {
     private String address;
     private String doj;
     private String photo;
+    private boolean userMode; //true if its normal user false if it is engineer
+    private boolean editable = false;
 
     public String getPhoto() {
         return photo;
@@ -70,5 +72,21 @@ public class User implements Serializable {
 
     public void setDoj(String doj) {
         this.doj = doj;
+    }
+
+    public boolean isUserMode() {
+        return userMode;
+    }
+
+    public void setUserMode(boolean userMode) {
+        this.userMode = userMode;
+    }
+
+    public boolean isEditable() {
+        return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
     }
 }

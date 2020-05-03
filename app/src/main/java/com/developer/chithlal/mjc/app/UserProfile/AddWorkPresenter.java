@@ -22,6 +22,7 @@ public class AddWorkPresenter implements AddworkContract.Presenter {
 
     @Override
     public void onSaveClicked(Work work) {
+        mView.setWork(work);
 
     }
 }

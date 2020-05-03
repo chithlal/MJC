@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.developer.chithlal.mjc.R;
 import com.developer.chithlal.mjc.app.util.InputValidationhelper;
@@ -133,7 +134,13 @@ public class AddWorkDetailsFragment extends Fragment implements ImageUploderAdap
 
     @Override
     public void setMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public void setWork(Work work) {
+        mAddWorkListener.onWorkAdded(work);
     }
 
     @Override
@@ -173,9 +180,11 @@ public class AddWorkDetailsFragment extends Fragment implements ImageUploderAdap
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GALLERY_REQUEST_CODE){
-            Uri selectedImage = data.getData();
-            mImageUploderAdapter.addImage(selectedImage);
-
+            if (data!=null) {
+                Uri selectedImage = data.getData();
+                mImageUploderAdapter.addImage(selectedImage);
+            }
+            else setMessage("Please select a photo");
 
         }
     }
