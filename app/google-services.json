@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "948000439419",
+    "firebase_url": "https://mjc-5256d.firebaseio.com",
+    "project_id": "mjc-5256d",
+    "storage_bucket": "mjc-5256d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:948000439419:android:0cf18c5c71a4da45fd76de",
+        "android_client_info": {
+          "package_name": "com.developer.chithlal.mjc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "948000439419-8ktegji5749hj7r43q13sc8dco0iooog.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC03GO1SVKp60fxvGATmSWNoQc8MOx-9Qs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "948000439419-8ktegji5749hj7r43q13sc8dco0iooog.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
