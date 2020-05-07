@@ -90,4 +90,8 @@
     <dimen name="add_photo_cornner_radiucs">8dp</dimen>
     <dimen name="add_work_card_size">100dp</dimen>
     <dimen name="user_profile_add_work_min_height">30dp</dimen>
+    <dimen name="pf_settings_icon_size">40dp</dimen>
+    <dimen name="pf_setting_icon_margin">10dp</dimen>
+    <dimen name="pf_text_size">20sp</dimen>
+    <dimen name="pf_setting_card_margin">5dp</dimen>
 </resources>

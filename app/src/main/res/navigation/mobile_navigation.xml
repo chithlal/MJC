@@ -14,13 +14,13 @@
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.developer.chithlal.mjc.app.Base.ui.dashboard.DashboardFragment"
+        android:name="com.developer.chithlal.mjc.app.Base.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/navigation_orders"
-        android:name="com.developer.chithlal.mjc.app.Base.ui.notifications.NotificationsFragment"
+        android:name="com.developer.chithlal.mjc.app.Base.ui.orders.OrdersFragment"
         android:label="@string/title_orders"
         tools:layout="@layout/fragment_orders" />
 </navigation>

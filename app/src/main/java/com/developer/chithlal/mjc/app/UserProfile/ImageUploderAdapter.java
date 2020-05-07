@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.developer.chithlal.mjc.R;
 import com.developer.chithlal.mjc.app.util.Constants;
 
@@ -38,7 +39,11 @@ public class ImageUploderAdapter extends RecyclerView.Adapter<ImageUploderAdapte
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
         if (imageList.get(position)!=null){
-            holder.mImageView.setImageURI(imageList.get(position));
+            Glide.with(mContext)
+                    .load(imageList.get(position))
+                    .centerCrop()
+                    .into(holder.mImageView);
+           
         }
 
         holder.mImageView.setOnClickListener(new View.OnClickListener() {

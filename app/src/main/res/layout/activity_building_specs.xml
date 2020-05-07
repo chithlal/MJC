@@ -110,6 +110,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:orientation="vertical">
 
 
@@ -117,6 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:id="@+id/bs_ll_add_measurement"
                     android:weightSum="2"
                     >
                     <ImageView
@@ -142,6 +144,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:id="@+id/bs_ll_add_measurement_expansion"
                         android:background="@color/cardview_grey_background"
                         android:orientation="vertical">
                     <View
@@ -290,6 +294,12 @@
                                 android:textStyle="bold"
                                 android:background="@drawable/bs_upload_view_bg"
                                 android:layout_margin="@dimen/bs_upload_margin"/>
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:visibility="gone"
+                                android:id="@+id/iv_bs_plan_place_holder"
+                               />
 
                         </androidx.cardview.widget.CardView>
 
@@ -341,12 +351,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="2"
+                    android:id="@+id/bs_ll_buy_material"
                     >
                     <TextView
                         android:layout_width="wrap_content"
@@ -372,7 +384,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:background="@color/cardview_grey_background"
+                    android:id="@+id/bs_ll_buy_material_expansion"
                     android:orientation="vertical">
                 <View
                     android:layout_width="match_parent"

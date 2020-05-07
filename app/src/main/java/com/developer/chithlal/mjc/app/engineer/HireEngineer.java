@@ -65,4 +65,9 @@ public class HireEngineer extends AppCompatActivity implements HireEngineerContr
     public void showMessage(String message) {
 
     }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

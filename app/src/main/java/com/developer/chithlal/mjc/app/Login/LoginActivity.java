@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -116,5 +117,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         mErrorText.setText("");
         mErrorText.setText(mMessage);
 
+    }
+
+    @Override
+    public Context getCurrentContext() {
+        return getApplicationContext();
     }
 }

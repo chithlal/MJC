@@ -1,9 +1,16 @@
 package com.developer.chithlal.mjc.app.Login;
 
+import android.app.Application;
+
+import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.root.App;
+import com.developer.chithlal.mjc.root.account_manager.AccountManager;
+
 public class LoginPresenter implements LoginContract.Presenter {
 
     private LoginContract.View mLoginView;
     private LoginModel mLoginModel;
+    private AccountManager mAccountManager;
 
     public LoginPresenter(LoginContract.View LoginView) {
         mLoginView = LoginView;
@@ -21,7 +28,12 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
-    public void onLoginSuccess() {
+    public void onLoginSuccess(User user) {
+        mAccountManager = new AccountManager(mLoginView.getCurrentContext());
+        mAccountManager.loginUser(user);
+        mAccountManager.saveUser(user);
+        ((App)mLoginView.getCurrentContext()).setAccountManager(mAccountManager);
+
         mLoginView.onLoginSuccess();
 
     }

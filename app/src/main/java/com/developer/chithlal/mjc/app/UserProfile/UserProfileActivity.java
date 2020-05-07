@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.developer.chithlal.mjc.R;
 import com.developer.chithlal.mjc.app.engineer.Engineer;
 import com.developer.chithlal.mjc.app.engineer.User;
@@ -231,7 +232,11 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
             mBinding.tvUserProfilePreivousWorkText.setVisibility(View.VISIBLE);
             mBinding.slider.setVisibility(View.VISIBLE);
             mBinding.rbUserProfileRatingStar.setVisibility(View.VISIBLE);
-
+            /*TODO: Add glide api call to set ID Proof image*/
+            /*Glide.with(this)
+                    .load(user.getIDProof())
+                    .centerCrop()
+                    .into(mBinding.ivUserProfileIdProofImage);*/
             mBinding.tvUserProfilePayment.setText(String.valueOf((int)user.getFeePerHour()));
             mBinding.tvUserProfileRating.setText(String.valueOf(user.getRating()));
             mBinding.tvUserProfileWorksCount.setText(String.valueOf(user.getWorks()));
@@ -271,7 +276,11 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
             if(data!=null) {
                 Uri selectedImage = data.getData();
                 mBinding.cvUserProfileIdCard.setVisibility(View.VISIBLE);
-                mBinding.ivUserProfileIdProofImage.setImageURI(selectedImage);
+                Glide.with(this)
+                        .load(selectedImage)
+                        .centerCrop()
+                        .into(mBinding.ivUserProfileIdProofImage);
+               /* mBinding.ivUserProfileIdProofImage.setImageURI(selectedImage);*/
                 mBinding.tvBsUpload.setVisibility(View.GONE);
             }
             else {
@@ -305,9 +314,9 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
                 dummyUser.setProfession(mBinding.tvUserProfileProfessionEdit.getText().toString());
             else isDataValid = false;
             if (inputValidationhelper.validate(mBinding.etUserProfileFee,
-                    InputValidationhelper.TYPE_DIGIT)||!mUser.isUserMode())
+                    InputValidationhelper.TYPE_DIGIT)&&!mUser.isUserMode())
                 dummyUser.setFeePerHour(
-                        Integer.valueOf(mBinding.etUserProfileFee.getText().toString()));
+                        Integer.parseInt(mBinding.etUserProfileFee.getText().toString()));
             else isDataValid = false;
 
 
@@ -371,4 +380,9 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         mBinding.btUserProfileEditButton.setVisibility(View.VISIBLE);
         else mBinding.btUserProfileEditButton.setVisibility(View.GONE);
    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

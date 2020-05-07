@@ -2,6 +2,7 @@ package com.developer.chithlal.mjc.root;
 
 import android.app.Application;
 
+import com.developer.chithlal.mjc.app.engineer.Engineer;
 import com.developer.chithlal.mjc.app.engineer.User;
 import com.developer.chithlal.mjc.root.account_manager.AccountManagerInterface;
 import com.developer.chithlal.mjc.root.di.AddWorkModule;
@@ -13,6 +14,7 @@ import com.developer.chithlal.mjc.root.di.UserProfileModule;
 
 public class App extends Application {
     private User mUser;
+
     AccountManagerInterface mAccountManager;
     private AppComponent mAppComponent;
     @Override
@@ -43,15 +45,28 @@ public class App extends Application {
     //setup after login and logout
     public void setAccountManager(AccountManagerInterface accountManager){
         this.mAccountManager = accountManager;
+        setUser(mAccountManager.getUser());
     }
 
-    public void setUser(User user){
+    private void setUser(User user){
         mUser = user;
+
 
     }
     public User getUser(){
         //nullable
+        if (mUser!=null){
+            if (mUser.isUserMode())
+                return mUser;
+            else {
+                /*TODO:this code should be replaced with engineer objects*/
+                Engineer engineer = new Engineer(mUser.getName());
+                engineer.setPhone(mUser.getPhone());
+            }
+        }
+        if (mUser!=null)
         return mUser;
+        else return null;
     }
 
 }

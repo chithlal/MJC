@@ -8,6 +8,7 @@ public  class ObjectFactory {
 
             sFragmentComponent = DaggerFragmentComponent.builder()
                     .addWorkModule(new AddWorkModule())
+                    .profileSettingsModule(new ProfileSettingsModule())
                     .build();
             return sFragmentComponent;
     }

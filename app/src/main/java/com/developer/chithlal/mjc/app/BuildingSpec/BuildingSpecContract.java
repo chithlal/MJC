@@ -8,6 +8,7 @@ public interface BuildingSpecContract {
         ConstructionType getConstructionType();
         Measurements getMeasurements();
         void setupMaterial(List<Materials> materialsList);
+        void showMessage(String message);
 
 
     }

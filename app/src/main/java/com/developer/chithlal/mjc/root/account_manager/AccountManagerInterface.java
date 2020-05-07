@@ -11,4 +11,5 @@ public interface AccountManagerInterface  {
     void saveUser(User user);
     void validateUser();
     boolean isLoggedIn();
+
 }

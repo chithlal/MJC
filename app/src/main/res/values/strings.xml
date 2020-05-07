@@ -60,4 +60,10 @@
     <string name="text_previous_work_photo">Add photos</string>
     <string name="string_save">Save</string>
     <string name="string_add">Add</string>
+    <string name="profile_string_profile_settings">Account settings</string>
+    <string name="profile_string_help_center">Help center</string>
+    <string name="profile_settings_notification">Notifications</string>
+    <string name="profile_string_privacy_policy">Privacy policy</string>
+    <string name="profie_string_about_us">About us</string>
+    <string name="profile_string_logout">Logout</string>
 </resources>

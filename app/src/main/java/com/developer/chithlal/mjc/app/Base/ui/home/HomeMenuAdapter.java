@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.developer.chithlal.mjc.R;
 import com.developer.chithlal.mjc.app.BuildingSpec.BuildingSpecActivity;
 
@@ -40,7 +41,11 @@ public class HomeMenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
         BuildingType mBuildingType = mMListBuildingType.get(position);
         holder.menuTitle.setText(mBuildingType.getName());
-        holder.menuImage.setImageResource(mBuildingType.getImageId());
+        Glide.with(mMContext)
+                .load(mBuildingType.getImageId())
+                .centerCrop()
+                .into(holder.menuImage);
+       /* holder.menuImage.setImageResource(mBuildingType.getImageId());*/
         holder.menuImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

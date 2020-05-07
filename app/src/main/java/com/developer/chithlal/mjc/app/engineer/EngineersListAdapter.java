@@ -34,6 +34,7 @@ public class EngineersListAdapter extends RecyclerView.Adapter<EngineersViewHold
     @Override
     public void onBindViewHolder(@NonNull EngineersViewHolder holder, int position) {
             Engineer engineer = mEngineerList.get(position);
+            /*TODO: replace static image with url and use glide instead of imageview loading*/
             holder.profilePic.setImageResource(R.drawable.chithlal_photo);
         holder.name.setText(engineer.getName());
         holder.profession.setText(engineer.getProfession());

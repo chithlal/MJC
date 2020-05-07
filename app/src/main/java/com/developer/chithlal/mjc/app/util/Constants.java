@@ -35,4 +35,9 @@ public  class Constants {
     public static final String CONST_STRING_WRK_TYPE_MAIN_CONC = "Main Concrete";
     public static final String CONST_STRING_WRK_TYPE_FINSHING = "Finishing Work";
     public static final Uri ADD_IMAGE_BUTTON_URI = null;
+    public static final String user_details_shared_pref_key = "com.developer.chithlal.mjc.USER_DATA";
+    public static final String user_details_shared_pref_USER_ID = "unique id";
+    public static final String INVALID_DATA_ERROR = "INVALID DATA_ERROR";
+    public static final String IS_USER_ENGINEER = "IS_CONSUMER";
+
 }

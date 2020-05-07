@@ -1,10 +1,19 @@
 package com.developer.chithlal.mjc.root.account_manager;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.util.Constants;
+import com.developer.chithlal.mjc.app.util.SharedPreferenceManger;
 
 public class AccountManager implements AccountManagerInterface {
     User mUser;
-    public AccountManager() {
+    SharedPreferenceManger mSharedPreferenceManger;
+    private Context mContext;
+
+    public AccountManager(Context context) {
+        mContext = context;
     }
 
     @Override
@@ -26,7 +35,9 @@ public class AccountManager implements AccountManagerInterface {
 
     @Override
     public void saveUser(User user) {
-
+        mSharedPreferenceManger = new SharedPreferenceManger(mContext, Constants.user_details_shared_pref_USER_ID);
+        mSharedPreferenceManger.initPreference();
+        mSharedPreferenceManger.writeUserDetails(user);
 
     }
 
