@@ -39,5 +39,7 @@ public  class Constants {
     public static final String user_details_shared_pref_USER_ID = "unique id";
     public static final String INVALID_DATA_ERROR = "INVALID DATA_ERROR";
     public static final String IS_USER_ENGINEER = "IS_CONSUMER";
+    public static final int SUCCESS_MESSAGE = 100;
+
 
 }

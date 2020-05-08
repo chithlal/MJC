@@ -1,5 +1,8 @@
 package com.developer.chithlal.mjc.app.signup;
 
+import com.developer.chithlal.mjc.app.engineer.User;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.List;
 
 public interface SignUpContract {
@@ -8,11 +11,12 @@ public interface SignUpContract {
         void setError(SignUpValidationError errorMessage);
         void onRegistrationCompleted(int status);
         void onRegistrationFailed(String errorMessage);
+        void showMessage(String message);
     }
 
     interface Presenter{
         void tryRegister();
-        void onRegistrationCompleted();
+        void onRegistrationCompleted(User user,String message);
         void onRegistrationFailed(String errorMessage);
 
 
@@ -20,6 +24,8 @@ public interface SignUpContract {
 
     interface Model{
         void registerUser(SignUpEvent signUpEvent);
+        void onRegistrationSuccess(FirebaseUser firebaseUser);
+        void onRegistrationFailed(String message);
 
     }
 }

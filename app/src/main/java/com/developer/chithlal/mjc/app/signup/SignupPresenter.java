@@ -1,6 +1,9 @@
 package com.developer.chithlal.mjc.app.signup;
 
+import static com.developer.chithlal.mjc.app.util.Constants.SUCCESS_MESSAGE;
+
 import com.developer.chithlal.mjc.app.Login.LoginConstants;
+import com.developer.chithlal.mjc.app.engineer.User;
 import com.developer.chithlal.mjc.app.util.Constants;
 
 public class SignupPresenter implements SignUpContract.Presenter {
@@ -24,12 +27,15 @@ public class SignupPresenter implements SignUpContract.Presenter {
     }
 
     @Override
-    public void onRegistrationCompleted() {
-
+    public void onRegistrationCompleted(User user, String message) {
+        mMSingupView.onRegistrationCompleted(SUCCESS_MESSAGE);
+        mMSingupView.showMessage(message);
     }
+
 
     @Override
     public void onRegistrationFailed(String errorMessage) {
+        mMSingupView.showMessage(errorMessage);
 
     }
     private int validateCred(SignUpEvent mSignupEvent){

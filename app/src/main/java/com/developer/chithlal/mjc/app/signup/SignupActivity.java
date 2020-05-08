@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.developer.chithlal.mjc.R;
 import com.developer.chithlal.mjc.app.Login.LoginConstants;
 import com.developer.chithlal.mjc.app.util.Constants;
+import com.google.firebase.FirebaseApp;
 
 
 import java.util.List;
@@ -105,5 +106,10 @@ public class  SignupActivity extends AppCompatActivity implements SignUpContract
     public void onRegistrationFailed(String errorMessage) {
         Toast.makeText(this,errorMessage,Toast.LENGTH_LONG).show();
 
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
