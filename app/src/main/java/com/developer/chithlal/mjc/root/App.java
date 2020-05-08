@@ -11,6 +11,7 @@ import com.developer.chithlal.mjc.root.di.AppModule;
 import com.developer.chithlal.mjc.root.di.DaggerAppComponent;
 import com.developer.chithlal.mjc.root.di.EngineerListModule;
 import com.developer.chithlal.mjc.root.di.UserProfileModule;
+import com.google.firebase.FirebaseApp;
 
 public class App extends Application {
     private User mUser;
@@ -20,7 +21,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        FirebaseApp.initializeApp(getApplicationContext());
         mAppComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .engineerListModule(new EngineerListModule())

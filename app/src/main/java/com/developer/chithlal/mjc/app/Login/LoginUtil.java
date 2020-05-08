@@ -21,7 +21,7 @@ public class LoginUtil {
     public void  updateUI(FirebaseUser account){
         if(account != null){
             //Toast.makeText(this,"U Signed In successfully",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this, HomeActivity.class));
+           // startActivity(new Intent(this, HomeActivity.class));
         }else {
             //Toast.makeText(this,"U Didnt signed in",Toast.LENGTH_LONG).show();
         }
@@ -30,7 +30,7 @@ public class LoginUtil {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     public LoginUtil(String email,String password){
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -41,13 +41,10 @@ public class LoginUtil {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this,"Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(LoginActivity.this,"Authentication failed.",Toast.LENGTH_SHORT).show();
                             updateUI(null);
                             // ...
                         }
-
-                        // ...
                     }
                 });
     }

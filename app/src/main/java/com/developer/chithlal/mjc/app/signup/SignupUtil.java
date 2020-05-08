@@ -17,35 +17,45 @@ import static androidx.core.content.ContextCompat.startActivity;
 
 public class SignupUtil {
 
-    public void  updateUI(FirebaseUser account){
-        if(account != null){
+    private SignUpContract.Model mModel;
+    private FirebaseAuth mAuth;
+
+    public void updateUI(FirebaseUser account) {
+        if (account != null) {
             //Toast.makeText(this,"U Signed In successfully",Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this, HomeActivity.class));
-        }else {
-            //Toast.makeText(this,"U Didnt signed in",Toast.LENGTH_LONG).show();
+
+            if (mModel != null)
+                mModel.onRegistrationSuccess(account);
+        } else {
+            mModel.onRegistrationFailed("Something went wrong! try again");
         }
     }
 
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    public SignupUtil( String name, String email,String pwd, String ph){
-        mAuth.createUserWithEmailAndPassword(email,pwd).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success");
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    updateUI(user);
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                    Toast.makeText(SignupActivity.this, "Authentication failed.",
-                            Toast.LENGTH_SHORT).show();
-                    updateUI(null);
-                }
 
-                // ...
-            }
-        });
+    public SignupUtil(SignUpContract.Model model) {
+
+        mModel = model;
+        mAuth = FirebaseAuth.getInstance();
+    }
+
+    public void trySignup(SignUpEvent signUpEvent) {
+        mAuth.createUserWithEmailAndPassword(signUpEvent.getEmail(), signUpEvent.getPassword())
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            updateUI(null);
+
+                        }
+                    }
+                });
+
     }
 }
