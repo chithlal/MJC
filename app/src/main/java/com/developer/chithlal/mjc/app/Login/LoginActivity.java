@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +18,11 @@ import com.developer.chithlal.mjc.R;
 
 
 import com.developer.chithlal.mjc.app.Base.BaseActivity;
+import com.developer.chithlal.mjc.app.IntroActivity.IntroActivity;
+import com.developer.chithlal.mjc.app.engineer.User;
 import com.developer.chithlal.mjc.app.signup.SignupActivity;
+import com.developer.chithlal.mjc.root.App;
+import com.developer.chithlal.mjc.root.account_manager.AccountManager;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
 
@@ -70,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent signupIntent = new Intent(getApplicationContext(), SignupActivity.class);
+                Intent signupIntent = new Intent(getApplicationContext(), IntroActivity.class);
                 startActivity(signupIntent);
             }
         });
@@ -107,7 +112,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     }
 
     @Override
-    public void onLoginSuccess() {
+    public void onLoginSuccess(User user) {
+        postLogin(user);
         Intent intent = new Intent(this, BaseActivity.class);
         startActivity(intent);
     }
@@ -121,6 +127,16 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public Context getCurrentContext() {
-        return getApplicationContext();
+        return this;
+    }
+    void postLogin(User user){
+        AccountManager accountManager = new AccountManager(this); //Setting the user  for the entire app session
+        accountManager.loginUser(user);
+        ((App)getApplication()).setAccountManager(accountManager);
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

@@ -2,6 +2,7 @@ package com.developer.chithlal.mjc.app.Base.ui.home;
 
 import static com.developer.chithlal.mjc.app.util.Constants.BUILDING_TYPE;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -17,6 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.developer.chithlal.mjc.R;
 import com.developer.chithlal.mjc.app.BuildingSpec.BuildingSpecActivity;
+import com.developer.chithlal.mjc.app.construction_history.ConstructionHistory;
+import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.root.App;
 
 import java.util.List;
 
@@ -49,9 +54,23 @@ public class HomeMenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         holder.menuImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent menuIntent = new Intent(mMContext, BuildingSpecActivity.class);
-                menuIntent.putExtra(BUILDING_TYPE,mBuildingType);
-                mMContext.startActivity(menuIntent);
+               User user =  ((App)((Activity)mMContext).getApplication()).getUser();
+               if(user == null)
+               {
+                   Toast.makeText(mMContext, "Something went wrong! User not available", Toast.LENGTH_SHORT).show();
+                   return;
+               }
+               else {
+                   if (user.isUserMode()) {
+                       Intent menuIntent = new Intent(mMContext, BuildingSpecActivity.class);
+                       menuIntent.putExtra(BUILDING_TYPE, mBuildingType);
+                       mMContext.startActivity(menuIntent);
+                   } else {
+                       Intent menuIntent = new Intent(mMContext, ConstructionHistory.class);
+                       menuIntent.putExtra(BUILDING_TYPE, mBuildingType);
+                       mMContext.startActivity(menuIntent);
+                   }
+               }
             }
         });
 

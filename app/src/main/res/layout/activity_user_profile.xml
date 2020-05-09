@@ -9,8 +9,6 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/user_profile_toolbar"
         app:layout_constraintTop_toTopOf="parent" >
         <LinearLayout
@@ -32,16 +30,32 @@
                 android:text="@string/string_edit" />
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
-    <com.facebook.shimmer.ShimmerFrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:shimmer_colored="false"
-        app:shimmer_shape="linear"
-        app:shimmer_auto_start="false"
-        android:id="@+id/user_profile_shimmer">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/cl_user_profile"
+        >
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/user_profile_loading_view"
+            android:layout_width="@dimen/loading_view_size"
+            android:layout_height="@dimen/loading_view_size"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading_circle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:id="@+id/user_profile_scroll_view">
 
         <LinearLayout
@@ -510,6 +524,6 @@
 
         </LinearLayout>
     </ScrollView>
-    </com.facebook.shimmer.ShimmerFrameLayout>
+
 
 </LinearLayout>

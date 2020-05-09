@@ -13,13 +13,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.developer.chithlal.mjc.R;
-import com.developer.chithlal.mjc.app.engineer.Engineer;
 import com.developer.chithlal.mjc.app.engineer.User;
 import com.developer.chithlal.mjc.app.util.InputValidationhelper;
 import com.developer.chithlal.mjc.databinding.ActivityUserProfileBinding;
@@ -131,12 +131,14 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         mBinding.slider.setVisibility(View.GONE);
         mBinding.cvUserProfileIdCard.setVisibility(View.GONE);
         mBinding.btUserProfileHireMe.setVisibility(View.GONE);
+
         if (mUser.isUserMode())
         mBinding.ivMemberSince.setVisibility(View.GONE);
 
        // mBinding.etUserProfilePhone.setVisibility(View.VISIBLE);
         mBinding.ivUserProfilePhone.setVisibility(View.GONE);
         mBinding.tvUserProfileProfessionEdit.setVisibility(View.VISIBLE);
+        mBinding.tvUserProfileProfessionEdit.setText("Profession");
         mBinding.btUserProfileEditProfession.setVisibility(View.VISIBLE);
         mBinding.rvProfessionList.setVisibility(View.GONE);
         mBinding.etUserProfileAge.setVisibility(View.VISIBLE);
@@ -146,7 +148,9 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
 
         if (!mUser.isUserMode())
         mBinding.cvUserProfileAddwork.setVisibility(View.VISIBLE);
+
         mBinding.tvBsUpload.setVisibility(View.VISIBLE);
+
         if (!mUser.isUserMode()) {
             mBinding.etUserProfileFee.setVisibility(View.VISIBLE);
             mBinding.ivMemberSince.setImageResource(R.drawable.ic_payment);
@@ -155,7 +159,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
 
         mPresenter.onEditEnabled();
 
-        mBinding.userProfileShimmer.stopShimmer();
+
         mBinding.btUserProfileEditProfession.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,7 +175,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
     @Override
     protected void onResume() {
         super.onResume();
-        mBinding.userProfileShimmer.startShimmer();
+        mBinding.userProfileLoadingView.setVisibility(View.VISIBLE);
         Log.d(TAG, "onResume: called");
         mPresenter.setUi(this);
     }
@@ -179,8 +183,8 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
     @Override
     protected void onPause() {
         super.onPause();
-        mBinding.userProfileShimmer.stopShimmer();
-        mBinding.userProfileShimmer.hideShimmer();
+        mBinding.userProfileLoadingView.setVisibility(View.GONE);
+        mBinding.clUserProfile.setVisibility(View.GONE);
     }
 
     @Override
@@ -192,7 +196,17 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
     @Override
     public void setUser(User user) {
         mUser = user;
-        setUserDetails((Engineer)mUser);
+        if (!isEditEnabled)
+        {
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    setUserDetails(mUser);
+                }
+            },5000);
+        }
+
 
     }
 
@@ -223,7 +237,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         mBinding.rvProfessionList.setAdapter(mOptionItemAdapter);
     }
 
-    private void setUserDetails(Engineer user){
+    private void setUserDetails(User user){
 
         if (!user.isUserMode()){
             mBinding.btUserProfileHireMe.setVisibility(View.VISIBLE);
@@ -254,8 +268,9 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         if (user.getPhoto()==null){
             mBinding.userProfileImage.setImageResource(R.drawable.user_png);
         }
-        mBinding.userProfileShimmer.stopShimmer();
-        mBinding.userProfileShimmer.hideShimmer();
+        mBinding.userProfileLoadingView.setVisibility(View.GONE);
+        mBinding.clUserProfile.setVisibility(View.GONE);
+        mBinding.userProfileScrollView.setVisibility(View.VISIBLE);
 
     }
     private void selectImage(){
@@ -297,11 +312,11 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
 
     }
     private void saveUser() {
-        Engineer dummyUser;
+        User dummyUser;
         isDataValid = true;
         InputValidationhelper inputValidationhelper = new InputValidationhelper();
         if (mUser != null) {
-            dummyUser = (Engineer) mUser;
+            dummyUser =  mUser;
             if (inputValidationhelper.validate(mBinding.etUserProfileAddress,
                     InputValidationhelper.TYPE_TEXT))
                 dummyUser.setAddress(mBinding.etUserProfileAddress.getText().toString());
@@ -322,13 +337,13 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
 
         } else {
             showMessage("User not found");
-            dummyUser = new Engineer("No Name");
+            dummyUser = new User("No Name");
              isDataValid = false;
         }
         if (isDataValid){
             mUser = dummyUser;
         mPresenter.saveUserData(mUser);
-        setUserDetails((Engineer)mUser);
+        setUserDetails(mUser);
         disableEditMode();
         mBinding.btUserProfileEditButton.setText("Edit");
     }
@@ -367,7 +382,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
 
     @Override
     public void onWorkAdded(Work work) {
-        ((Engineer)mUser).addWork(work);
+        mUser.addWork(work);
         showMessage("Work added");
         mAddWorkDetailsFragment = null;
         mBinding.frameUserProfileAddWork.setVisibility(View.GONE);

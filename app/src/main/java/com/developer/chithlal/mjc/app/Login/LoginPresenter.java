@@ -1,5 +1,6 @@
 package com.developer.chithlal.mjc.app.Login;
 
+import android.app.Activity;
 import android.app.Application;
 
 import com.developer.chithlal.mjc.app.engineer.User;
@@ -32,9 +33,9 @@ public class LoginPresenter implements LoginContract.Presenter {
         mAccountManager = new AccountManager(mLoginView.getCurrentContext());
         mAccountManager.loginUser(user);
         mAccountManager.saveUser(user);
-        ((App)mLoginView.getCurrentContext()).setAccountManager(mAccountManager);
+        ((App)((Activity)mLoginView.getCurrentContext()).getApplication()).setAccountManager(mAccountManager);
 
-        mLoginView.onLoginSuccess();
+        mLoginView.onLoginSuccess(user);
 
     }
 

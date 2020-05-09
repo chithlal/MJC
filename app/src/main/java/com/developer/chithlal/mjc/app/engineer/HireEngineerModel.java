@@ -21,11 +21,11 @@ public class HireEngineerModel implements HireEngineerContract.Model {
     }
 
     @Override
-    public List<Engineer> getEngineersList() {
+    public List<User> getEngineersList() {
 
-        List<Engineer> engineerList = new ArrayList<>();
+        List<User> engineerList = new ArrayList<>();
 
-        Engineer engineer1 = new Engineer("Chithlal");
+        User engineer1 = new User("Chithlal");
         engineer1.setAge("24");
         engineer1.setFeePerHour(200);
         engineer1.setAddress("Bellandur, Bengaluru");
@@ -35,7 +35,7 @@ public class HireEngineerModel implements HireEngineerContract.Model {
         engineer1.setPhone("8714136584");
         engineer1.setEmail("chithlalkrishna@gmail.com");
 
-        Engineer engineer2 = new Engineer("Chithlal");
+        User engineer2 = new User("Chithlal");
         engineer2.setAge("24");
         engineer2.setFeePerHour(200);
         engineer2.setAddress("Bellandur, Bengaluru");
