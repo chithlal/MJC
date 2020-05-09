@@ -8,7 +8,7 @@ public interface LoginContract {
     interface View{
         LoginEvent getLoginData();
         void showValidationMessage(String userNameMessage,String passwordMessage);
-        void onLoginSuccess();
+        void onLoginSuccess(User user);
         void onLoginFailure(String mMessage);
         Context getCurrentContext();
     }

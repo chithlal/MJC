@@ -94,4 +94,5 @@
     <dimen name="pf_setting_icon_margin">10dp</dimen>
     <dimen name="pf_text_size">20sp</dimen>
     <dimen name="pf_setting_card_margin">5dp</dimen>
+    <dimen name="loading_view_size">250dp</dimen>
 </resources>

@@ -2,10 +2,9 @@ package com.developer.chithlal.mjc.root;
 
 import android.app.Application;
 
-import com.developer.chithlal.mjc.app.engineer.Engineer;
+
 import com.developer.chithlal.mjc.app.engineer.User;
 import com.developer.chithlal.mjc.root.account_manager.AccountManagerInterface;
-import com.developer.chithlal.mjc.root.di.AddWorkModule;
 import com.developer.chithlal.mjc.root.di.AppComponent;
 import com.developer.chithlal.mjc.root.di.AppModule;
 import com.developer.chithlal.mjc.root.di.DaggerAppComponent;
@@ -56,15 +55,7 @@ public class App extends Application {
     }
     public User getUser(){
         //nullable
-        if (mUser!=null){
-            if (mUser.isUserMode())
-                return mUser;
-            else {
-                /*TODO:this code should be replaced with engineer objects*/
-                Engineer engineer = new Engineer(mUser.getName());
-                engineer.setPhone(mUser.getPhone());
-            }
-        }
+
         if (mUser!=null)
         return mUser;
         else return null;

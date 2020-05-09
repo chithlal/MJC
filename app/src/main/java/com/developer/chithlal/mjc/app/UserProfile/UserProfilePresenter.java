@@ -2,7 +2,7 @@ package com.developer.chithlal.mjc.app.UserProfile;
 
 import android.content.Context;
 
-import com.developer.chithlal.mjc.app.engineer.Engineer;
+
 import com.developer.chithlal.mjc.app.engineer.User;
 
 import java.util.ArrayList;
@@ -22,14 +22,15 @@ public class UserProfilePresenter implements UserProfileContract.Presenter {
         mView =view;
         mModel.getUser();
         mView.setUser(mView.getUser());
-        if (!mView.getUser().isUserMode())
-        setupPreviousWorkImage((Engineer)mView.getUser());
+        if (!mView.getUser().isUserMode()&&!mView.getUser().isEditable())
+        setupPreviousWorkImage(mView.getUser());
 
     }
 
-    private void setupPreviousWorkImage(Engineer user) {
+    private void setupPreviousWorkImage(User user) {
         List<SliderItem> slideList = new ArrayList<>();
         int i=0;
+        if (user.getAllPreviousWorks()!=null)
         for(Work work:user.getAllPreviousWorks()){
 
             if (work.getImages().size()!=0 && work.getImages()!=null){

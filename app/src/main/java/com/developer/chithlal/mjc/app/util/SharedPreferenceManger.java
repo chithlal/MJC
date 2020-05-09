@@ -7,7 +7,7 @@ import static com.developer.chithlal.mjc.app.util.Constants.user_details_shared_
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.developer.chithlal.mjc.app.engineer.Engineer;
+
 import com.developer.chithlal.mjc.app.engineer.User;
 
 public class SharedPreferenceManger {

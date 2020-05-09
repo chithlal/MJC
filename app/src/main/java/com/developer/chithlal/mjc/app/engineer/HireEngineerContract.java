@@ -8,7 +8,7 @@ public interface HireEngineerContract  {
 
     interface View{
 
-        void updateList(List<Engineer> engineerList);
+        void updateList(List<User> engineerList);
         void showMessage(String message);
 
     }
@@ -19,7 +19,7 @@ public interface HireEngineerContract  {
     }
     interface Model{
         void setContext(Context context);
-        List<Engineer> getEngineersList();
+        List<User> getEngineersList();
 
     }
 }

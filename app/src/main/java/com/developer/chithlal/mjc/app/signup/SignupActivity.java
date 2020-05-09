@@ -1,10 +1,13 @@
 package com.developer.chithlal.mjc.app.signup;
 
+import static com.developer.chithlal.mjc.app.util.Constants.KEY_USER_TYPE;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.SyncStateContract;
 import android.view.View;
@@ -29,10 +32,16 @@ public class  SignupActivity extends AppCompatActivity implements SignUpContract
     private EditText mPhone;
     private Toolbar mToolBar;
     private SignupPresenter mSignupPresenter;
+
+    private int userMode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        Intent intent = getIntent();
+        userMode = intent.getIntExtra(KEY_USER_TYPE,0);
+
 
         //view initialization
 
@@ -111,5 +120,11 @@ public class  SignupActivity extends AppCompatActivity implements SignUpContract
     @Override
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        finish();
+        return true;
     }
 }

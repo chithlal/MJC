@@ -16,9 +16,9 @@ import java.util.List;
 
 public class EngineersListAdapter extends RecyclerView.Adapter<EngineersViewHolder> {
     private final Context mContext;
-    private final List<Engineer> mEngineerList;
+    private final List<User> mEngineerList;
 
-    public EngineersListAdapter(Context context, List<Engineer> engineerList) {
+    public EngineersListAdapter(Context context, List<User> engineerList) {
         mContext = context;
         mEngineerList = engineerList;
     }
@@ -33,21 +33,21 @@ public class EngineersListAdapter extends RecyclerView.Adapter<EngineersViewHold
 
     @Override
     public void onBindViewHolder(@NonNull EngineersViewHolder holder, int position) {
-            Engineer engineer = mEngineerList.get(position);
+            User user = mEngineerList.get(position);
             /*TODO: replace static image with url and use glide instead of imageview loading*/
             holder.profilePic.setImageResource(R.drawable.chithlal_photo);
-        holder.name.setText(engineer.getName());
-        holder.profession.setText(engineer.getProfession());
-        String expString  = engineer.getWorks()+" Works";
+        holder.name.setText(user.getName());
+        holder.profession.setText(user.getProfession());
+        String expString  = user.getWorks()+" Works";
         holder.experience.setText(expString);
-        String feeString = engineer.getFeePerHour()+"$/Hr";
+        String feeString = user.getFeePerHour()+"$/Hr";
         holder.fee.setText(feeString);
-        holder.mRatingBar.setRating(engineer.getRating());
+        holder.mRatingBar.setRating(user.getRating());
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, UserProfileActivity.class);
-                intent.putExtra("USER",engineer);
+                intent.putExtra("USER",user);
                 mContext.startActivity(intent);
 
             }

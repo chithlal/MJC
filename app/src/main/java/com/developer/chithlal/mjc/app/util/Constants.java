@@ -41,5 +41,11 @@ public  class Constants {
     public static final String IS_USER_ENGINEER = "IS_CONSUMER";
     public static final int SUCCESS_MESSAGE = 100;
 
+    public static final int CONSUMER_MODE = 111;
+    public static final int ENGINEER_MODE = 112;
+    public static final String KEY_USER_TYPE = "USER_TYPE";
+
+
+
 
 }

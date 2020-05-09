@@ -55,7 +55,7 @@ public class HireEngineer extends AppCompatActivity implements HireEngineerContr
     }
 
     @Override
-    public void updateList(List<Engineer> engineerList) {
+    public void updateList(List<User> engineerList) {
         mEngineersListAdapter = new EngineersListAdapter(this,engineerList);
         mBinding.rvHireEngineer.setAdapter(mEngineersListAdapter);
 
