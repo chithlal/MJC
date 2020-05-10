@@ -294,6 +294,8 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
                 Glide.with(this)
                         .load(selectedImage)
                         .centerCrop()
+                        .placeholder(R.drawable.ic_image_black_24dp)
+                        .error(R.drawable.ic_broken_image_black_24dp)
                         .into(mBinding.ivUserProfileIdProofImage);
                /* mBinding.ivUserProfileIdProofImage.setImageURI(selectedImage);*/
                 mBinding.tvBsUpload.setVisibility(View.GONE);
