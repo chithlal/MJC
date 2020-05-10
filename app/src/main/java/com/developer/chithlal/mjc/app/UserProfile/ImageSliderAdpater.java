@@ -58,16 +58,25 @@ public class ImageSliderAdpater extends RecyclerView.Adapter<SliderVH> {
     public void onBindViewHolder(SliderVH viewHolder, int position) {
         SliderItem sliderItem = mSliderItems.get(position);
 
+        if (mSliderItems.size()==0){
+            viewHolder.mImageView.setImageResource(R.drawable.ic_image_black_24dp);
+            viewHolder.mImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        }
+        else
         Glide.with(viewHolder.itemView)
                 .load(sliderItem.getImageUrl())
                 .fitCenter()
+                .placeholder(R.drawable.ic_image_black_24dp)
+                .error(R.drawable.ic_broken_image_black_24dp)
                 .into(viewHolder.mImageView);
 
     }
 
     @Override
     public int getItemCount() {
+        if (mSliderItems.size()!=0)
         return mSliderItems.size();
+        else return 1;
     }
 
 

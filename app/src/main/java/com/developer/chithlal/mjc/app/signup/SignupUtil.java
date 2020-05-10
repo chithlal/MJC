@@ -39,6 +39,7 @@ public class SignupUtil {
     }
 
     public void trySignup(SignUpEvent signUpEvent) {
+
         mAuth.createUserWithEmailAndPassword(signUpEvent.getEmail(), signUpEvent.getPassword())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override

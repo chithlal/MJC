@@ -13,6 +13,7 @@ public class LoginModel implements LoginContract.Model {
     public String login(LoginEvent mLoginEvent) {
         User user = new User("Chithlal");
         user.setPhone("8714236584");
+        user.setUserMode(true);
         mMLoginPresenter.onLoginSuccess(user);
         return "Success";
     }

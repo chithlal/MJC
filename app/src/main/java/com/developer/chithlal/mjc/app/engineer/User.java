@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class User implements Serializable {
-
+    private String userId;
     private String name;
     private String email;
     private String phone;
