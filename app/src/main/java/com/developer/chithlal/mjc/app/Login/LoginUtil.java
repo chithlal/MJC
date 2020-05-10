@@ -18,6 +18,8 @@ import static androidx.core.content.ContextCompat.startActivity;
 
 public class LoginUtil {
 
+    private LoginContract.Model mModel;
+    FirebaseAuth mAuth;
     public void  updateUI(FirebaseUser account){
         if(account != null){
             //Toast.makeText(this,"U Signed In successfully",Toast.LENGTH_LONG).show();
@@ -26,9 +28,11 @@ public class LoginUtil {
             //Toast.makeText(this,"U Didnt signed in",Toast.LENGTH_LONG).show();
         }
     }
-
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    public LoginUtil(String email,String password){
+    public LoginUtil(LoginContract.Model model) {
+        mModel = model;
+        mAuth = FirebaseAuth.getInstance();
+    }
+    public void tryLogin(String email,String password){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
