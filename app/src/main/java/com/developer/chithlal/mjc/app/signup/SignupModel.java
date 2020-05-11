@@ -20,8 +20,7 @@ public class SignupModel implements SignUpContract.Model {
     }
 
     @Override
-    public void onRegistrationSuccess(FirebaseUser firebaseUser) {
-        User user = new User(firebaseUser.getEmail());
+    public void onRegistrationSuccess(User user) {
         mMSignupPresenter.onRegistrationCompleted(user,"Registration successful!");
 
     }

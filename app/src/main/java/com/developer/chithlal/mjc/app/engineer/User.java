@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public class User implements Serializable {
+
+
     private String userId;
     private String name;
     private String email;
@@ -151,5 +153,12 @@ public class User implements Serializable {
 
     public void setAllPreviousWorks(List<Work> previousWorks) {
         this.previousWorks = previousWorks;
+    }
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

@@ -1,5 +1,6 @@
 package com.developer.chithlal.mjc.app.signup;
 
+import static com.developer.chithlal.mjc.app.util.Constants.CONSUMER_MODE;
 import static com.developer.chithlal.mjc.app.util.Constants.KEY_USER_TYPE;
 
 import androidx.appcompat.app.ActionBar;
@@ -89,6 +90,14 @@ public class  SignupActivity extends AppCompatActivity implements SignUpContract
         }
         if(mEmail!=null){
             mSignupEvent.setEmail(mEmail.getText().toString());
+        }
+        if (userMode!= 0){
+            if (userMode == CONSUMER_MODE){
+                mSignupEvent.setUserType(true);
+            }
+            else {
+                mSignupEvent.setUserType(false);
+            }
         }
         return mSignupEvent;
     }

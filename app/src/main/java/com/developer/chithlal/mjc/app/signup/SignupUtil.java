@@ -6,6 +6,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.util.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,7 +31,7 @@ public class SignupUtil {
     private FirebaseFirestore fStore;
     String userID;
 
-    public void updateUI(FirebaseUser account) {
+    public void updateUI(User account) {
         if (account != null) {
             //Toast.makeText(this,"U Signed In successfully",Toast.LENGTH_LONG).show();
 
@@ -55,28 +57,12 @@ public class SignupUtil {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
+                            Log.d("FIREBASE", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             userID = mAuth.getCurrentUser().getUid();
                             //DocumentReference documentReference = fStore.collection("Users").document(userID);
-                            Map<String,Object> storeUser = new HashMap<>();
-                            storeUser.put("Name",signUpEvent.getUsername());
-                            storeUser.put("Email",signUpEvent.getEmail());
-                            storeUser.put("Phone",signUpEvent.getPhone());
-                            storeUser.put("UserType",signUpEvent.getUserType());
-                            fStore.collection("users").add(storeUser).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                @Override
-                                public void onSuccess(DocumentReference documentReference) {
-                                    Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w(TAG, "Error adding document", e);
-                                }
-                            });;
-                            updateUI(user);
+                           saveDetails(signUpEvent,user);
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -85,6 +71,33 @@ public class SignupUtil {
                         }
                     }
                 });
+
+    }
+    public void saveDetails(SignUpEvent signUpEvent,FirebaseUser user){
+
+        User newUser = new User(signUpEvent.getUsername());
+        newUser.setEmail(signUpEvent.getEmail());
+        newUser.setPhone(signUpEvent.getPhone());
+        newUser.setUserMode(signUpEvent.getUserType());
+
+        fStore.collection("/App/root_app/users").document(user.getUid()).set(newUser)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("FIREBASE", "DocumentSnapshot successfully written!");
+                newUser.setUserId(user.getUid());
+                updateUI(newUser);
+
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("FIREBASE", "Error writing document", e);
+                        mModel.onRegistrationFailed("Something went wrong try again!");
+                    }
+                });
+
 
     }
 }
