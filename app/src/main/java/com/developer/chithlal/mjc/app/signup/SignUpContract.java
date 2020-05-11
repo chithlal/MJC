@@ -24,7 +24,7 @@ public interface SignUpContract {
 
     interface Model{
         void registerUser(SignUpEvent signUpEvent);
-        void onRegistrationSuccess(FirebaseUser firebaseUser);
+        void onRegistrationSuccess(User user);
         void onRegistrationFailed(String message);
 
     }
