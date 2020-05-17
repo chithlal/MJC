@@ -121,6 +121,7 @@ public class MoreDetailsActivity extends AppCompatActivity implements MoreDetail
 
     @Override
     public void onRegistrationFinished() {
+        showMessage("Registration completed,Login to continue!");
         finish();
     }
 
@@ -167,7 +168,8 @@ public class MoreDetailsActivity extends AppCompatActivity implements MoreDetail
 
     @Override
     public void onAddWorkSkipped() {
-
+        showMessage("Registration completed,Login to continue!");
+        finish();
     }
 
 }

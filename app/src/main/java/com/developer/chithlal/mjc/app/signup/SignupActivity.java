@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.developer.chithlal.mjc.R;
 import com.developer.chithlal.mjc.app.Login.LoginConstants;
 import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.user_details.ConsumerDetailsActivity;
 import com.developer.chithlal.mjc.app.user_details.MoreDetailsActivity;
 import com.developer.chithlal.mjc.app.util.Constants;
 import com.developer.chithlal.mjc.app.util.ProgressViewUtil;
@@ -134,7 +135,11 @@ public class  SignupActivity extends AppCompatActivity implements SignUpContract
         mProgressViewUtil.showSuccess("Account created");
         mProgressViewUtil.cancel();
         showMessage("Registration successful!");
-        Intent intent = new Intent(this, MoreDetailsActivity.class);
+        Intent intent;
+        if (user.isUserMode())
+           intent = new Intent(this, ConsumerDetailsActivity.class);
+        else
+         intent = new Intent(this, MoreDetailsActivity.class);
         intent.putExtra(USER_OBJECT,user);
         startActivity(intent);
         finish();
