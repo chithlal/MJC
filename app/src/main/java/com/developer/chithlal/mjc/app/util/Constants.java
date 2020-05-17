@@ -44,6 +44,13 @@ public  class Constants {
     public static final int CONSUMER_MODE = 111;
     public static final int ENGINEER_MODE = 112;
     public static final String KEY_USER_TYPE = "USER_TYPE";
+    public static final String USER_OBJECT = "USER";
+
+
+    //upload
+    public static final String UPLOAD_TYPE_USER_PROFILE_IMAGE = "profile_";
+    public static final String UPLOAD_TYPE_WORK_IMAGE = "work_";
+    public static final String UPLOAD_TYPE_USER_ID_PROOF = "id_proof_";
 
 
 

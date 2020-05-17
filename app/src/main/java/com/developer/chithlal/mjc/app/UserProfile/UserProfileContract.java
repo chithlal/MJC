@@ -1,6 +1,5 @@
 package com.developer.chithlal.mjc.app.UserProfile;
 
-import android.app.slice.Slice;
 import android.content.Context;
 
 import com.developer.chithlal.mjc.app.engineer.User;
@@ -28,7 +27,7 @@ public interface UserProfileContract {
         void saveUserData(User user);
     }
 
-    interface Model{
+    interface Model  {
         void setContext(Context context);
         User getUser();
         void setUser(User user);

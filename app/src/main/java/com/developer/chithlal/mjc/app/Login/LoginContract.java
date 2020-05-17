@@ -21,8 +21,10 @@ public interface LoginContract {
 
     }
 
-    interface Model{
+    interface Model {
         String login(LoginEvent mLoginEvent);
+        void onLoginSuccess(User user);
+        void onLoginFailure(String message);
 
     }
 

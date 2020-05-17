@@ -66,4 +66,12 @@
     <string name="profile_string_privacy_policy">Privacy policy</string>
     <string name="profie_string_about_us">About us</string>
     <string name="profile_string_logout">Logout</string>
+    <string name="text_continue">Continue</string>
+    <string name="hint_proffesion">Profession</string>
+    <string name="hint_construction_type">Construction type</string>
+    <string name="hint_numberofworkers">Number of workers needed</string>
+    <string name="hint_rate_per_swurefeet">Rate / sq.ft</string>
+    <string name="text_id_card">ID Card</string>
+    <string name="text_skip">Skip</string>
+    <string name="text_add_more_work">Add more works</string>
 </resources>

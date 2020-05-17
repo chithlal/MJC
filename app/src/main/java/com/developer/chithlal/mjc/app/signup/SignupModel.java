@@ -1,7 +1,7 @@
 package com.developer.chithlal.mjc.app.signup;
 
 import com.developer.chithlal.mjc.app.engineer.User;
-import com.google.firebase.auth.FirebaseUser;
+import com.developer.chithlal.mjc.app.firebase.SignupUtil;
 
 public class SignupModel implements SignUpContract.Model {
     private SignUpContract.Presenter mMSignupPresenter;
@@ -13,8 +13,11 @@ public class SignupModel implements SignUpContract.Model {
 
     @Override
     public void registerUser(SignUpEvent signUpEvent) {
+
+       /* TODO: Testing code need to be replaced*/
         mSignupUtil = new SignupUtil(this);
         mSignupUtil.trySignup(signUpEvent);
+       //onRegistrationSuccess(new User("Test"));
 
 
     }

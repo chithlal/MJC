@@ -20,10 +20,16 @@ public class User implements Serializable {
     private String IDProof;
     private int rating;
     private int works;
+    private int numberOfWorkers;
+    private List<String> buildingType;
     private float feePerHour;
     private List<Work> previousWorks;
+    private List<String> workRef;
     private boolean userMode; //true if its normal user false if it is engineer
     private boolean editable = false;
+
+    public User() {
+    }
 
     public String getPhoto() {
         return photo;
@@ -160,5 +166,29 @@ public class User implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public List<String> getWorkRef() {
+        return workRef;
+    }
+
+    public void setWorkRef(List<String> workRef) {
+        this.workRef = workRef;
+    }
+
+    public int getNumberOfWorkers() {
+        return numberOfWorkers;
+    }
+
+    public void setNumberOfWorkers(int numberOfWorkers) {
+        this.numberOfWorkers = numberOfWorkers;
+    }
+
+    public List<String> getBuildingType() {
+        return buildingType;
+    }
+
+    public void setBuildingType(List<String> buildingType) {
+        this.buildingType = buildingType;
     }
 }

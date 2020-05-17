@@ -35,4 +35,6 @@ public class UserProfileModel implements UserProfileContract.Model {
         professionList.add("Contractor");
         return professionList;
     }
+
+
 }

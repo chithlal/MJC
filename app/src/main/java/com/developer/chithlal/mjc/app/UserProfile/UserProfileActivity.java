@@ -232,7 +232,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
 
     @Override
     public void setProfessionList(List<String> professionList) {
-        mOptionItemAdapter = new OptionItemAdapter(this,professionList,this::onItemSelected);
+        mOptionItemAdapter = new OptionItemAdapter(this,professionList,this,false);
         mBinding.rvProfessionList.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
         mBinding.rvProfessionList.setAdapter(mOptionItemAdapter);
     }
@@ -313,6 +313,12 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         mBinding.tvUserProfileProfessionEdit.setText(profession);
 
     }
+
+    @Override
+    public void onItemRemoved(String item) {
+
+    }
+
     private void saveUser() {
         User dummyUser;
         isDataValid = true;
@@ -391,8 +397,13 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         mBinding.btAddWork.setText("Add works");
     }
 
+    @Override
+    public void onAddWorkSkipped() {
 
-   void enableEditButton(boolean enable){
+    }
+
+
+    void enableEditButton(boolean enable){
         if (enable)
         mBinding.btUserProfileEditButton.setVisibility(View.VISIBLE);
         else mBinding.btUserProfileEditButton.setVisibility(View.GONE);

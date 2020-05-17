@@ -18,7 +18,7 @@ public interface AddworkContract {
         void onSaveClicked(Work work);
     }
 
-    interface Model{
+    interface Model {
         List<String> getWorkTypeOptions();
         void updateWork();
     }

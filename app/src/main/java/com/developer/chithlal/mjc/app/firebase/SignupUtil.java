@@ -1,4 +1,4 @@
-package com.developer.chithlal.mjc.app.signup;
+package com.developer.chithlal.mjc.app.firebase;
 
 import android.content.Intent;
 import android.util.Log;
@@ -7,6 +7,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.signup.SignUpContract;
+import com.developer.chithlal.mjc.app.signup.SignUpEvent;
 import com.developer.chithlal.mjc.app.util.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

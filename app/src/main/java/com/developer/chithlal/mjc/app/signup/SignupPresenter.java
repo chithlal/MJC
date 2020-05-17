@@ -28,7 +28,7 @@ public class SignupPresenter implements SignUpContract.Presenter {
 
     @Override
     public void onRegistrationCompleted(User user, String message) {
-        mMSingupView.onRegistrationCompleted(SUCCESS_MESSAGE);
+        mMSingupView.onRegistrationCompleted(SUCCESS_MESSAGE,user);
         mMSingupView.showMessage(message);
     }
 

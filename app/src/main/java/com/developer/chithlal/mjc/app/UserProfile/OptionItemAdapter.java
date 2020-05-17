@@ -7,32 +7,37 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.developer.chithlal.mjc.R;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OptionItemAdapter extends RecyclerView.Adapter<OptionItemAdapter.ProfessionVH> {
     private Context mContext;
-    private List<String> professionList;
-    private onItemSelectListener mProfessionSelectListener;
+    private List<String> itemList;
+    private onItemSelectListener mOnItemSelectListener;
+    private boolean mMultipleOptionSelection;
     private int layoutId = -1;
+    private Map<Integer,String> selectedItems = new HashMap<>();
 
-    public OptionItemAdapter(Context context, List<String> professionList,
-            onItemSelectListener professionSelectListener, int layoutId) {
+    public OptionItemAdapter(Context context, List<String> itemList,
+            onItemSelectListener onItemSelectListener, int layoutId,boolean multipleOptionSelection) {
         mContext = context;
-        this.professionList = professionList;
-        mProfessionSelectListener = professionSelectListener;
+        this.itemList = itemList;
+        mOnItemSelectListener = onItemSelectListener;
         this.layoutId = layoutId;
+        mMultipleOptionSelection = multipleOptionSelection;
     }
 
-    public OptionItemAdapter(Context context, List<String> professionList,
-            onItemSelectListener onItemSelectListener) {
+    public OptionItemAdapter(Context context, List<String> itemList,
+            onItemSelectListener onItemSelectListener,boolean multipleOptionSelection) {
         mContext = context;
-        this.professionList = professionList;
-        mProfessionSelectListener = onItemSelectListener;
+        this.itemList = itemList;
+        mOnItemSelectListener = onItemSelectListener;
+        mMultipleOptionSelection = multipleOptionSelection;
     }
 
     @NonNull
@@ -48,19 +53,40 @@ public class OptionItemAdapter extends RecyclerView.Adapter<OptionItemAdapter.Pr
 
     @Override
     public void onBindViewHolder(@NonNull ProfessionVH holder, int position) {
-        holder.mTextView.setText(professionList.get(position));
+        holder.mTextView.setText(itemList.get(position));
+        if(!mMultipleOptionSelection)
         holder.mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProfessionSelectListener.onItemSelected(professionList.get(position));
+                mOnItemSelectListener.onItemSelected(itemList.get(position));
             }
         });
+        else {
+            holder.mTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (selectedItems.containsKey(position)){
+                        selectedItems.remove(position);
+                        holder.mTextView.setBackground(mContext.getResources().getDrawable(R.drawable.app_edit_text_bg_filled));
+                        mOnItemSelectListener.onItemRemoved(itemList.get(position));
+                    }
+
+                    else{
+                        selectedItems.put(position,itemList.get(position));
+                        holder.mTextView.setBackground(mContext.getResources().getDrawable(R.drawable.app_edit_text_bg_filled_green));
+                        mOnItemSelectListener.onItemSelected(itemList.get(position));
+                    }
+
+
+                }
+            });
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return professionList.size();
+        return itemList.size();
     }
 
     public class ProfessionVH extends RecyclerView.ViewHolder {
@@ -71,7 +97,8 @@ public class OptionItemAdapter extends RecyclerView.Adapter<OptionItemAdapter.Pr
         }
     }
     public interface onItemSelectListener {
-        void onItemSelected(String profession);
+        void onItemSelected(String item);
+        void onItemRemoved(String item);
     }
 
 
