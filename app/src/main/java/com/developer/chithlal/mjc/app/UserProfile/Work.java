@@ -13,6 +13,9 @@ public class Work implements Serializable {
     private String description;
     private List<String> images;
 
+    private String fireStoreRef;
+    private String engineerId;
+
     public Work() {
     }
 
@@ -70,5 +73,21 @@ public class Work implements Serializable {
 
     public void setImages(List<String> images) {
         this.images = images;
+    }
+
+    public String getFireStoreRef() {
+        return fireStoreRef;
+    }
+
+    public void setFireStoreRef(String fireStoreRef) {
+        this.fireStoreRef = fireStoreRef;
+    }
+
+    public String getEngineerId() {
+        return engineerId;
+    }
+
+    public void setEngineerId(String engineerId) {
+        this.engineerId = engineerId;
     }
 }

@@ -1,7 +1,10 @@
 package com.developer.chithlal.mjc.app.signup;
 
+import static com.developer.chithlal.mjc.app.Login.LoginConstants.INVALID_CRED;
+import static com.developer.chithlal.mjc.app.Login.LoginConstants.VALID_CRED;
 import static com.developer.chithlal.mjc.app.util.Constants.CONSUMER_MODE;
 import static com.developer.chithlal.mjc.app.util.Constants.KEY_USER_TYPE;
+import static com.developer.chithlal.mjc.app.util.Constants.USER_OBJECT;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +20,10 @@ import android.widget.Toast;
 
 import com.developer.chithlal.mjc.R;
 import com.developer.chithlal.mjc.app.Login.LoginConstants;
+import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.user_details.MoreDetailsActivity;
 import com.developer.chithlal.mjc.app.util.Constants;
+import com.developer.chithlal.mjc.app.util.ProgressViewUtil;
 import com.google.firebase.FirebaseApp;
 
 
@@ -33,6 +39,7 @@ public class  SignupActivity extends AppCompatActivity implements SignUpContract
     private EditText mPhone;
     private Toolbar mToolBar;
     private SignupPresenter mSignupPresenter;
+    ProgressViewUtil mProgressViewUtil;
 
     private int userMode;
     @Override
@@ -43,7 +50,7 @@ public class  SignupActivity extends AppCompatActivity implements SignUpContract
         Intent intent = getIntent();
         userMode = intent.getIntExtra(KEY_USER_TYPE,0);
 
-
+        mProgressViewUtil = new ProgressViewUtil(this); //Initializing loading progress view
         //view initialization
 
         mSignupButton = findViewById(R.id.signup_cv_signup_bt);
@@ -52,6 +59,8 @@ public class  SignupActivity extends AppCompatActivity implements SignUpContract
         mPhone = findViewById(R.id.et_signup_phone);
         mPassword = findViewById(R.id.et_signup_password);
         mToolBar = findViewById(R.id.signup_toolbar);
+
+
 
         //intilize toolbar
 
@@ -69,6 +78,8 @@ public class  SignupActivity extends AppCompatActivity implements SignUpContract
         mSignupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                mProgressViewUtil.showLoading("Creating account please wait..");
                 mSignupPresenter.tryRegister();
 
             }
@@ -113,16 +124,26 @@ public class  SignupActivity extends AppCompatActivity implements SignUpContract
             mPhone.setError(errorMessage.getPhoneError());
         if(!errorMessage.getPasswordError().equals( Constants.NO_ERROR))
             mPassword.setError(errorMessage.getPasswordError());
+
+        if (mProgressViewUtil!=null&&(errorMessage.isCredValid()==INVALID_CRED))
+        mProgressViewUtil.cancel();
     }
 
     @Override
-    public void onRegistrationCompleted(int status) {
+    public void onRegistrationCompleted(int status, User user) {
+        mProgressViewUtil.showSuccess("Account created");
+        mProgressViewUtil.cancel();
+        showMessage("Registration successful!");
+        Intent intent = new Intent(this, MoreDetailsActivity.class);
+        intent.putExtra(USER_OBJECT,user);
+        startActivity(intent);
         finish();
     }
 
     @Override
     public void onRegistrationFailed(String errorMessage) {
         Toast.makeText(this,errorMessage,Toast.LENGTH_LONG).show();
+        mProgressViewUtil.cancel();
 
     }
 

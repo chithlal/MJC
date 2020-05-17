@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".app.construction_history.ConstructionHistory"></activity>
+        <activity android:name=".app.user_details.MoreDetailsActivity"></activity>
+        <activity android:name=".app.construction_history.ConstructionHistory" />
         <activity android:name=".app.UserProfile.UserProfileActivity" />
         <activity android:name=".app.engineer.HireEngineer" />
         <activity android:name=".app.BuildingSpec.BuildingSpecActivity" />
@@ -32,7 +33,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".app.IntroActivity.IntroActivity">
             <meta-data

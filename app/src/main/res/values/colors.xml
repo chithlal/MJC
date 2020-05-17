@@ -13,4 +13,7 @@
     <color name="color_light_black">#514E4E</color>
     <color name="color_purple">#9c27b0</color>
     <color name="color_light_blue">#039be5</color>
+    <color name="app_teal">#00bfa5</color>
+    <color name="app_dark_teal">#004d40</color>
+    <color name="half_transparent">#00ffffff</color>
 </resources>

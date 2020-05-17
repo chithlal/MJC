@@ -17,7 +17,7 @@ public interface HireEngineerContract  {
 
 
     }
-    interface Model{
+    interface Model  {
         void setContext(Context context);
         List<User> getEngineersList();
 

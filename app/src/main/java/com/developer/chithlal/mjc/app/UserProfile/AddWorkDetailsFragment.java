@@ -25,6 +25,7 @@ import com.developer.chithlal.mjc.databinding.FragmentAddWorkDetailsBinding;
 import com.developer.chithlal.mjc.root.App;
 import com.developer.chithlal.mjc.root.di.ObjectFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -38,6 +39,7 @@ public class AddWorkDetailsFragment extends Fragment implements ImageUploderAdap
     OptionItemAdapter mOptionItemAdapter;
     FragmentAddWorkDetailsBinding mFragmentAddWorkDetailsBinding;
     private ImageUploderAdapter mImageUploderAdapter;
+    private List<String> selectedImagesList = new ArrayList<>();
 
     List<Uri> mImageList;
     private AddWorkListener mAddWorkListener;
@@ -109,8 +111,10 @@ public class AddWorkDetailsFragment extends Fragment implements ImageUploderAdap
                 }
 
 
-                if (i==6)
+                if (i==6) {
+                    work.setImages(selectedImagesList);
                     mAddWorkPresenter.onSaveClicked(work);
+                }
 
 
             }
@@ -119,12 +123,19 @@ public class AddWorkDetailsFragment extends Fragment implements ImageUploderAdap
 
         mFragmentAddWorkDetailsBinding.rvAddWorkAddImage.setLayoutManager(new GridLayoutManager(getContext(),3));
         mFragmentAddWorkDetailsBinding.rvAddWorkAddImage.setAdapter(mImageUploderAdapter);
+
+        mFragmentAddWorkDetailsBinding.btAddWorkSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAddWorkListener.onAddWorkSkipped();
+            }
+        });
     }
 
     @Override
     public void setWorkTypeOptions(List<String> workTypeOptions) {
 
-        mOptionItemAdapter = new OptionItemAdapter(getContext(),workTypeOptions,this,R.layout.card_option_item);
+        mOptionItemAdapter = new OptionItemAdapter(getContext(),workTypeOptions,this,R.layout.card_option_item,false);
         mFragmentAddWorkDetailsBinding.rvAddWorkWorkType.setLayoutManager(new LinearLayoutManager(getContext(),
                 RecyclerView.HORIZONTAL,false));
         mFragmentAddWorkDetailsBinding.rvAddWorkWorkType.setAdapter(mOptionItemAdapter);
@@ -146,6 +157,11 @@ public class AddWorkDetailsFragment extends Fragment implements ImageUploderAdap
     @Override
     public void onItemSelected(String profession) {
         mFragmentAddWorkDetailsBinding.tvAddWorkWorkType.setText(profession);
+
+    }
+
+    @Override
+    public void onItemRemoved(String item) {
 
     }
 
@@ -183,14 +199,18 @@ public class AddWorkDetailsFragment extends Fragment implements ImageUploderAdap
             if (data!=null) {
                 Uri selectedImage = data.getData();
                 mImageUploderAdapter.addImage(selectedImage);
+                if (selectedImage!=null)
+                selectedImagesList.add(selectedImage.toString());
+
             }
             else setMessage("Please select a photo");
 
         }
     }
 
-    interface AddWorkListener{
+    public interface AddWorkListener{
         void onWorkAdded(Work work);
+        void onAddWorkSkipped();
     }
 
 }

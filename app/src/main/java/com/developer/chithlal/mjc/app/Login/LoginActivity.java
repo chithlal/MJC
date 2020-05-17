@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.developer.chithlal.mjc.app.Base.BaseActivity;
 import com.developer.chithlal.mjc.app.IntroActivity.IntroActivity;
 import com.developer.chithlal.mjc.app.engineer.User;
 import com.developer.chithlal.mjc.app.signup.SignupActivity;
+import com.developer.chithlal.mjc.app.util.ProgressViewUtil;
 import com.developer.chithlal.mjc.root.App;
 import com.developer.chithlal.mjc.root.account_manager.AccountManager;
 
@@ -41,6 +43,9 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     //presenter
     LoginPresenter mLoginPresenter;
+
+    //progress view
+    ProgressViewUtil mProgressViewUtil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +58,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         mToolbar = findViewById(R.id.login_toolbar);
         mCardPassword = findViewById(R.id.login_cv_password);
         mCardUserName = findViewById(R.id.login_cv_username);
+
+        mProgressViewUtil = new ProgressViewUtil(this);
 
         //Toolbar setup
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
@@ -69,6 +76,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgressViewUtil.showLoading("Please wait..!");
                 mLoginPresenter.tryLogin();
             }
         });
@@ -100,6 +108,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     public void showValidationMessage(String userNameMessage,String passwordMessage) {
         if(!userNameMessage.equals(LoginConstants.NO_ERROR)){
             mUserName.setError(userNameMessage);
+            mProgressViewUtil.cancel();
 
 
         }
@@ -107,6 +116,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             mPassword.setError(passwordMessage);
             mErrorText.setText("");
             mErrorText.setText(passwordMessage);
+            mProgressViewUtil.cancel();
         }
 
     }
@@ -114,13 +124,21 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Override
     public void onLoginSuccess(User user) {
         postLogin(user);
-        Intent intent = new Intent(this, BaseActivity.class);
-        startActivity(intent);
+        mProgressViewUtil.showSuccess("Welcome back!");
+
+                mProgressViewUtil.cancel();
+                Intent intent = new Intent(getApplicationContext(), BaseActivity.class);
+                startActivity(intent);
+
+
+
+
     }
 
     @Override
     public void onLoginFailure(String mMessage) {
-        mErrorText.setText("");
+        mProgressViewUtil.showFailure(mMessage);
+        mProgressViewUtil.cancel();
         mErrorText.setText(mMessage);
 
     }
