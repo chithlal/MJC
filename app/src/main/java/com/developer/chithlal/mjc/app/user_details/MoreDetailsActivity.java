@@ -14,8 +14,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.developer.chithlal.mjc.R;
-import com.developer.chithlal.mjc.app.UserProfile.AddWorkDetailsFragment;
-import com.developer.chithlal.mjc.app.UserProfile.Work;
+import com.developer.chithlal.mjc.app.work.AddWorkDetailsFragment;
+import com.developer.chithlal.mjc.app.work.Work;
 import com.developer.chithlal.mjc.app.engineer.User;
 import com.developer.chithlal.mjc.app.util.ProgressViewUtil;
 import com.developer.chithlal.mjc.databinding.ActivityMoreDetailsBinding;

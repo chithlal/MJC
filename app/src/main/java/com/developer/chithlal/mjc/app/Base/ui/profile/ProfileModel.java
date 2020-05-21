@@ -19,8 +19,8 @@ public class ProfileModel implements ProfileContract.Model {
 
     @Override
     public User getUserDetails() {
-
-        return ((App)((Activity)mContext).getApplication()).getUser();
+        User user = ((App)((Activity)mContext).getApplication()).getUser();
+        return user;
     }
 
     @Override

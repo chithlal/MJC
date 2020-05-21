@@ -94,7 +94,7 @@
     <dimen name="pf_setting_icon_margin">10dp</dimen>
     <dimen name="pf_text_size">20sp</dimen>
     <dimen name="pf_setting_card_margin">5dp</dimen>
-    <dimen name="loading_view_size">250dp</dimen>
+    <dimen name="loading_view_size">150dp</dimen>
     <dimen name="more_details_text_padding">8dp</dimen>
     <dimen name="more_details_margin_top" >15dp</dimen>
     <dimen name="text_size_more_details">20sp</dimen>

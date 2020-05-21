@@ -1,7 +1,7 @@
 package com.developer.chithlal.mjc.root.di;
 
 import com.developer.chithlal.mjc.app.Base.ui.profile.ProfileFragment;
-import com.developer.chithlal.mjc.app.UserProfile.AddWorkDetailsFragment;
+import com.developer.chithlal.mjc.app.work.AddWorkDetailsFragment;
 
 import javax.inject.Singleton;
 

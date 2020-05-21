@@ -1,6 +1,5 @@
 package com.developer.chithlal.mjc.root.di;
 
-import com.developer.chithlal.mjc.app.UserProfile.AddWorkDetailsFragment;
 import com.developer.chithlal.mjc.app.UserProfile.UserProfileActivity;
 import com.developer.chithlal.mjc.app.engineer.HireEngineer;
 import com.developer.chithlal.mjc.app.user_details.MoreDetailsActivity;

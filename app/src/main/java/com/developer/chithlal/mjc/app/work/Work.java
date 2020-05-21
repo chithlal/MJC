@@ -1,4 +1,4 @@
-package com.developer.chithlal.mjc.app.UserProfile;
+package com.developer.chithlal.mjc.app.work;
 
 import java.io.Serializable;
 import java.util.List;

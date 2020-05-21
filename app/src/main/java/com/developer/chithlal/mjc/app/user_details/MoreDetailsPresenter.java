@@ -5,17 +5,13 @@ import static com.developer.chithlal.mjc.app.util.Constants.UPLOAD_TYPE_WORK_IMA
 import static com.smarteist.autoimageslider.SliderView.TAG;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 
-import com.developer.chithlal.mjc.app.UserProfile.Work;
+import com.developer.chithlal.mjc.app.work.Work;
 import com.developer.chithlal.mjc.app.engineer.User;
 import com.developer.chithlal.mjc.app.firebase.UpdateDataUtil;
 import com.developer.chithlal.mjc.app.firebase.UploadUtil;
 import com.google.firebase.storage.StorageReference;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MoreDetailsPresenter implements MoreDetailContract.Presenter, UpdateDataUtil.firebaseDataUpdateListener,UploadUtil.UploadProgressListener {
 

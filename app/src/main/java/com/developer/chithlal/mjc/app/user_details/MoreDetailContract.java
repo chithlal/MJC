@@ -3,7 +3,6 @@ package com.developer.chithlal.mjc.app.user_details;
 import android.content.Context;
 import android.net.Uri;
 
-import com.developer.chithlal.mjc.app.UserProfile.Work;
 import com.developer.chithlal.mjc.app.engineer.User;
 
 public interface MoreDetailContract {

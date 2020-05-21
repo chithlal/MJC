@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,6 +82,7 @@ public class SignupUtil {
         newUser.setEmail(signUpEvent.getEmail());
         newUser.setPhone(signUpEvent.getPhone());
         newUser.setUserMode(signUpEvent.getUserType());
+        newUser.setDoj(getCurrentDate());
 
         fStore.collection("/App/root_app/users").document(user.getUid()).set(newUser)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -101,5 +103,12 @@ public class SignupUtil {
                 });
 
 
+    }
+    private String getCurrentDate(){
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        return  day+"-"+month+"-"+year;
     }
 }

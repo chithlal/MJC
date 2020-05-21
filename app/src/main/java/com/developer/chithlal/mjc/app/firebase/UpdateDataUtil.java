@@ -8,7 +8,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.developer.chithlal.mjc.app.UserProfile.Work;
+import com.developer.chithlal.mjc.app.work.Work;
 import com.developer.chithlal.mjc.app.engineer.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -153,8 +153,8 @@ public class UpdateDataUtil implements UploadUtil.UploadProgressListener{
     public void updateWork(Work work){
         if (work!=null){
             if (work.getFireStoreRef()!=null) {
-                mFirestore.collection("").document(work.getFireStoreRef())
-                        .set(work, SetOptions.merge())
+                DocumentReference documentReference = mFirestore.document(work.getFireStoreRef());
+               documentReference.set(work, SetOptions.merge())
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {

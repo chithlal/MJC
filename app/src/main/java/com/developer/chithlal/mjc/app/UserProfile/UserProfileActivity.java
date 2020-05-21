@@ -22,6 +22,8 @@ import com.bumptech.glide.Glide;
 import com.developer.chithlal.mjc.R;
 import com.developer.chithlal.mjc.app.engineer.User;
 import com.developer.chithlal.mjc.app.util.InputValidationhelper;
+import com.developer.chithlal.mjc.app.work.AddWorkDetailsFragment;
+import com.developer.chithlal.mjc.app.work.Work;
 import com.developer.chithlal.mjc.databinding.ActivityUserProfileBinding;
 import com.developer.chithlal.mjc.root.App;
 
@@ -53,6 +55,12 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         Intent userIntent=getIntent();
         if (userIntent!=null){
             mUser = (User)userIntent.getSerializableExtra("USER");
+        }
+        if(mUser == null){
+            User localUser = getLocalUser();
+            if (localUser!=null){
+                mUser = localUser;
+            }
         }
         if (mUser.isEditable())
             enableEditButton(true);
@@ -118,6 +126,11 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
             }
         });
 
+    }
+
+    private User getLocalUser() {
+
+      return   ((App)getApplication()).getUser();
     }
 
     private void enbaleEditMode() {
@@ -240,17 +253,18 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
     private void setUserDetails(User user){
 
         if (!user.isUserMode()){
+            if (!user.isEditable())
             mBinding.btUserProfileHireMe.setVisibility(View.VISIBLE);
             mBinding.llUserProfileRatingRow.setVisibility(View.VISIBLE);
             mBinding.tvUserProfilePayment.setVisibility(View.VISIBLE);
             mBinding.tvUserProfilePreivousWorkText.setVisibility(View.VISIBLE);
             mBinding.slider.setVisibility(View.VISIBLE);
             mBinding.rbUserProfileRatingStar.setVisibility(View.VISIBLE);
-            /*TODO: Add glide api call to set ID Proof image*/
-            /*Glide.with(this)
+
+            Glide.with(this)
                     .load(user.getIDProof())
                     .centerCrop()
-                    .into(mBinding.ivUserProfileIdProofImage);*/
+                    .into(mBinding.ivUserProfileIdProofImage);
             mBinding.tvUserProfilePayment.setText(String.valueOf((int)user.getFeePerHour()));
             mBinding.tvUserProfileRating.setText(String.valueOf(user.getRating()));
             mBinding.tvUserProfileWorksCount.setText(String.valueOf(user.getWorks()));
@@ -392,7 +406,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
     public void onWorkAdded(Work work) {
         mUser.addWork(work);
         showMessage("Work added");
-        mAddWorkDetailsFragment = null;
+       // mAddWorkDetailsFragment = null;
         mBinding.frameUserProfileAddWork.setVisibility(View.GONE);
         mBinding.btAddWork.setText("Add works");
     }

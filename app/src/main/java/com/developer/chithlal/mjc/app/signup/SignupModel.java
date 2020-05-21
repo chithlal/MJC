@@ -14,7 +14,6 @@ public class SignupModel implements SignUpContract.Model {
     @Override
     public void registerUser(SignUpEvent signUpEvent) {
 
-       /* TODO: Testing code need to be replaced*/
         mSignupUtil = new SignupUtil(this);
         mSignupUtil.trySignup(signUpEvent);
        //onRegistrationSuccess(new User("Test"));

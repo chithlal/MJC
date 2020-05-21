@@ -25,10 +25,12 @@ public interface UserProfileContract {
         void onHireMeClick();
         void onEditEnabled();
         void saveUserData(User user);
+        void onUserDataUpdateInServer(User user);
     }
 
     interface Model  {
         void setContext(Context context);
+        void setPresenter(UserProfileContract.Presenter presenter);
         User getUser();
         void setUser(User user);
         List<String> getProfessionList();
