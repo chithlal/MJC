@@ -1,6 +1,6 @@
 package com.developer.chithlal.mjc.app.engineer;
 
-import com.developer.chithlal.mjc.app.UserProfile.Work;
+import com.developer.chithlal.mjc.app.work.Work;
 
 import java.io.Serializable;
 import java.util.List;

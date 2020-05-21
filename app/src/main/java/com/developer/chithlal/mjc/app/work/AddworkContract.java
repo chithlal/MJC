@@ -1,4 +1,4 @@
-package com.developer.chithlal.mjc.app.UserProfile;
+package com.developer.chithlal.mjc.app.work;
 
 import android.content.Context;
 
@@ -16,10 +16,13 @@ public interface AddworkContract {
     interface Presenter{
         void setUi(AddworkContract.View view, Context context);
         void onSaveClicked(Work work);
+        void onWorkDataUploadSuccess(Work work);
+        void onWorkDataUploadFailed(String message);
     }
 
     interface Model {
         List<String> getWorkTypeOptions();
-        void updateWork();
+        void setPresenter(AddworkContract.Presenter presenter);
+        void updateWork(Work work);
     }
 }

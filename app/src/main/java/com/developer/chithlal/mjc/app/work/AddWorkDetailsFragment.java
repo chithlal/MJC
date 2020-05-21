@@ -1,4 +1,4 @@
-package com.developer.chithlal.mjc.app.UserProfile;
+package com.developer.chithlal.mjc.app.work;
 
 import static com.developer.chithlal.mjc.app.util.Constants.GALLERY_REQUEST_CODE;
 
@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,14 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.developer.chithlal.mjc.R;
+import com.developer.chithlal.mjc.app.UserProfile.ImageUploderAdapter;
+import com.developer.chithlal.mjc.app.UserProfile.OptionItemAdapter;
+import com.developer.chithlal.mjc.app.date_picker.DatePickerFragment;
 import com.developer.chithlal.mjc.app.util.InputValidationhelper;
 import com.developer.chithlal.mjc.databinding.FragmentAddWorkDetailsBinding;
-import com.developer.chithlal.mjc.root.App;
 import com.developer.chithlal.mjc.root.di.ObjectFactory;
 
 import java.util.ArrayList;
@@ -31,7 +33,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 
-public class AddWorkDetailsFragment extends Fragment implements ImageUploderAdapter.AddButtonClickListener, AddworkContract.View,OptionItemAdapter.onItemSelectListener{
+public class AddWorkDetailsFragment extends Fragment implements
+        ImageUploderAdapter.AddButtonClickListener, AddworkContract.View,
+        OptionItemAdapter.onItemSelectListener,DatePickerFragment.DateSelectionListener {
 
     @Inject
     AddworkContract.Presenter mAddWorkPresenter;
@@ -72,6 +76,16 @@ public class AddWorkDetailsFragment extends Fragment implements ImageUploderAdap
         super.onActivityCreated(savedInstanceState);
         mAddWorkPresenter.setUi(this,getContext());
         InputValidationhelper inputValidationhelper = new InputValidationhelper();
+
+        //Picking date for the work
+        mFragmentAddWorkDetailsBinding.etAddWorkDateOfCompletion.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showDatePickerDialog();
+                    }
+                });
+
         mFragmentAddWorkDetailsBinding.btAddWorkSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -208,9 +222,26 @@ public class AddWorkDetailsFragment extends Fragment implements ImageUploderAdap
         }
     }
 
+    @Override
+    public void onDateSet(String date) {
+        mFragmentAddWorkDetailsBinding.etAddWorkDateOfCompletion.setText(date);
+
+    }
+
+    @Override
+    public void onDateSetFailed(String message) {
+
+    }
+
     public interface AddWorkListener{
         void onWorkAdded(Work work);
         void onAddWorkSkipped();
     }
+
+     void showDatePickerDialog() {
+        DialogFragment newFragment = new DatePickerFragment(this);
+        newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+    }
+
 
 }

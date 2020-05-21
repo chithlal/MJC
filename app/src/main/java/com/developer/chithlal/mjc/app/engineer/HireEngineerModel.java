@@ -2,7 +2,7 @@ package com.developer.chithlal.mjc.app.engineer;
 
 import android.content.Context;
 
-import com.developer.chithlal.mjc.app.UserProfile.Work;
+import com.developer.chithlal.mjc.app.work.Work;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/login_icon_padding"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".app.UserProfile.AddWorkDetailsFragment">
+    tools:context=".app.work.AddWorkDetailsFragment">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,12 +79,11 @@
         android:layout_margin="@dimen/add_work_frag_edittext_margin"
         android:padding="@dimen/add_work_frag_edittext_padding"
         android:textSize="@dimen/add_work_fragment_text_size"/>
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/et_add_work_date_of_completion"
         android:hint="@string/hint_date_of_completion"
-        android:cursorVisible="true"
         android:maxLines="1"
         android:textColor="@color/app_black"
         android:background="@drawable/app_edit_text_bg_blue"

@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.developer.chithlal.mjc.R;
-import com.developer.chithlal.mjc.app.UserProfile.Work;
+import com.developer.chithlal.mjc.app.work.Work;
 import com.developer.chithlal.mjc.app.engineer.User;
 import com.developer.chithlal.mjc.app.firebase.UpdateDataUtil;
 import com.developer.chithlal.mjc.app.firebase.UploadUtil;

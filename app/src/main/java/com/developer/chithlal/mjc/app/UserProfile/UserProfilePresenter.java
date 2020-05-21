@@ -4,6 +4,7 @@ import android.content.Context;
 
 
 import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.work.Work;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class UserProfilePresenter implements UserProfileContract.Presenter {
     private Context mContext;
     public UserProfilePresenter(UserProfileContract.Model model) {
         mModel = model;
+        mModel.setPresenter(this);
     }
 
     @Override
@@ -22,7 +24,7 @@ public class UserProfilePresenter implements UserProfileContract.Presenter {
         mView =view;
         mModel.getUser();
         mView.setUser(mView.getUser());
-        if (!mView.getUser().isUserMode()&&!mView.getUser().isEditable())
+        if (!mView.getUser().isUserMode())
         setupPreviousWorkImage(mView.getUser());
 
     }
@@ -63,6 +65,12 @@ public class UserProfilePresenter implements UserProfileContract.Presenter {
 
     @Override
     public void saveUserData(User user) {
+        mModel.setUser(user);
+    }
 
+    @Override
+    public void onUserDataUpdateInServer(User user) {
+        mView.setUser(user);
+        mView.showMessage("Data updated successfully!");
     }
 }

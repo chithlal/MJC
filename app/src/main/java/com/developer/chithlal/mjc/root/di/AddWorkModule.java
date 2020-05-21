@@ -1,9 +1,9 @@
 package com.developer.chithlal.mjc.root.di;
 
 
-import com.developer.chithlal.mjc.app.UserProfile.AddWorkPresenter;
-import com.developer.chithlal.mjc.app.UserProfile.AddworkContract;
-import com.developer.chithlal.mjc.app.UserProfile.AddworkModel;
+import com.developer.chithlal.mjc.app.work.AddWorkPresenter;
+import com.developer.chithlal.mjc.app.work.AddworkContract;
+import com.developer.chithlal.mjc.app.work.AddworkModel;
 
 import dagger.Module;
 import dagger.Provides;

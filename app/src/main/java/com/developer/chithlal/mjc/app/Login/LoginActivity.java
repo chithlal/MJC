@@ -10,9 +10,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.developer.chithlal.mjc.R;
@@ -21,13 +23,17 @@ import com.developer.chithlal.mjc.R;
 import com.developer.chithlal.mjc.app.Base.BaseActivity;
 import com.developer.chithlal.mjc.app.IntroActivity.IntroActivity;
 import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.firebase.ParseUser;
 import com.developer.chithlal.mjc.app.signup.SignupActivity;
+import com.developer.chithlal.mjc.app.util.ConnectivityUtil;
 import com.developer.chithlal.mjc.app.util.ProgressViewUtil;
 import com.developer.chithlal.mjc.root.App;
 import com.developer.chithlal.mjc.root.account_manager.AccountManager;
 
-public class LoginActivity extends AppCompatActivity implements LoginContract.View {
+public class LoginActivity extends AppCompatActivity implements LoginContract.View,
+        ParseUser.ParseListener {
 
+    private static final String TAG = "LoginActivity";
     //USER_TYPE
     private int USER_TYPE;
 
@@ -40,12 +46,14 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     private CardView mCardUserName;
     private CardView mCardPassword;
 
-
+    private ParseUser mParseUser;
     //presenter
     LoginPresenter mLoginPresenter;
 
     //progress view
     ProgressViewUtil mProgressViewUtil;
+    private User mUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,13 +79,19 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         mActionBar.setDisplayHomeAsUpEnabled(true);
         //initiate presenter with view context
         mLoginPresenter = new LoginPresenter(this);
+        //Network status check
+        ConnectivityUtil connectivityUtil =  new ConnectivityUtil(this);
 
         //Listener for login action
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgressViewUtil.showLoading("Please wait..!");
-                mLoginPresenter.tryLogin();
+                if (connectivityUtil.isNetworkConnected()) {
+                    mProgressViewUtil.showLoading("Please wait..!");
+                    mLoginPresenter.tryLogin();
+                } else {
+                    Toast.makeText(LoginActivity.this, "No network Connected!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         mRegister.setOnClickListener(new View.OnClickListener() {
@@ -123,15 +137,21 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void onLoginSuccess(User user) {
-        postLogin(user);
+        mUser = user;
+        if (!user.isUserMode()){
+            mParseUser = new ParseUser(user, this);
         mProgressViewUtil.showSuccess("Welcome back!");
-
-                mProgressViewUtil.cancel();
-                Intent intent = new Intent(getApplicationContext(), BaseActivity.class);
-                startActivity(intent);
-
-
-
+        mParseUser.parse();
+         }
+        else {
+            mProgressViewUtil.showSuccess("Welcome back!");
+            mProgressViewUtil.cancel();
+            postLogin(user);
+            mProgressViewUtil.cancel();
+            Log.d(TAG, "onLoginSuccess: Login success");
+            Intent intent = new Intent(getApplicationContext(), BaseActivity.class);
+            startActivity(intent);
+        }
 
     }
 
@@ -147,14 +167,35 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     public Context getCurrentContext() {
         return this;
     }
+
     void postLogin(User user){
         AccountManager accountManager = new AccountManager(this); //Setting the user  for the entire app session
         accountManager.loginUser(user);
         ((App)getApplication()).setAccountManager(accountManager);
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void onParsedDataArrived(User parsedUser) {
+        Log.d(TAG, "onParsedDataArrived: data arrived"+parsedUser.getUserId());
+        mUser = parsedUser;
+        postLogin(parsedUser);
+        mProgressViewUtil.cancel();
+        Intent intent = new Intent(getApplicationContext(), BaseActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onParseError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+       postLogin(mUser);
+        mProgressViewUtil.cancel();
+        Intent intent = new Intent(getApplicationContext(), BaseActivity.class);
+        startActivity(intent);
     }
 }

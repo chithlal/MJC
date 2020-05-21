@@ -28,7 +28,7 @@ public class SharedPreferenceManger {
     }
 
     public void writeUserDetails(User user){
-        mEditor.putString(user_details_shared_pref_USER_ID,user.getPhone());
+        mEditor.putString(user_details_shared_pref_USER_ID,user.getUserId());
         mEditor.putBoolean(IS_USER_ENGINEER,user.isUserMode());
         mEditor.commit();
 
