@@ -14,12 +14,15 @@ public interface HireEngineerContract  {
     }
     interface Presenter{
         void setUpUi(Context context,HireEngineerContract.View view);
+        void onEngineersListArrived(List<User> engineersList);
+        void onEngineerListUpdateFailed(String message);
 
 
     }
     interface Model  {
         void setContext(Context context);
-        List<User> getEngineersList();
+        void setPresenter(HireEngineerContract.Presenter presenter);
+        void getEngineersList();
 
     }
 }
