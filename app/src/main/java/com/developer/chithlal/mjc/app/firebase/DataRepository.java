@@ -21,9 +21,15 @@ public class DataRepository {
     FirebaseFirestore mFirestore;
     FirebaseStorage mFirebaseStorage;
     private workUpdateListener mWorkUpdateListener;
+    private EngineersListUpdateListener mEngineersListUpdateListener;
 
     public DataRepository(workUpdateListener workUpdateListener) {
         mWorkUpdateListener = workUpdateListener;
+        mFirebaseStorage = FirebaseStorage.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
+    }
+    public DataRepository(EngineersListUpdateListener engineersListUpdateListener) {
+        mEngineersListUpdateListener = engineersListUpdateListener;
         mFirebaseStorage = FirebaseStorage.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
     }
@@ -53,7 +59,28 @@ public class DataRepository {
 
 
     }
+    //This method fetches all engineers in the database No Sorting and filtering applied
     public void getAllEngineers(){
+        List<User> engineerList = new ArrayList<>();
+        CollectionReference engineerReference = mFirestore.collection("/App/root_app/users");
+
+        Query query = engineerReference.whereEqualTo("userMode",false);
+
+        query.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for(QueryDocumentSnapshot doc: task.getResult()){
+                                engineerList.add(doc.toObject(User.class));
+                                mEngineersListUpdateListener.onEngineersListUpdated(engineerList);
+
+                            }
+
+                        }
+                        else mEngineersListUpdateListener.onEngineersListUpdateFailed("Sorry..unable to fetch details!");
+                    }
+                });
 
     }
 
@@ -66,4 +93,5 @@ public class DataRepository {
         void onEngineersListUpdated(List<User> engineersList);
         void onEngineersListUpdateFailed(String message);
     }
+
 }

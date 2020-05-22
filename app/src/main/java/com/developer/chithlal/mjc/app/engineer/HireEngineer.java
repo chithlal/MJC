@@ -1,6 +1,7 @@
 package com.developer.chithlal.mjc.app.engineer;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.developer.chithlal.mjc.R;
+import com.developer.chithlal.mjc.app.util.ProgressViewUtil;
 import com.developer.chithlal.mjc.databinding.ActivityHireEngineerBinding;
 import com.developer.chithlal.mjc.root.App;
 
@@ -24,6 +26,7 @@ public class HireEngineer extends AppCompatActivity implements HireEngineerContr
     @Inject
     HireEngineerContract.Presenter mHireEngineerPresenter;
     private EngineersListAdapter mEngineersListAdapter;
+    private ProgressViewUtil mProgressViewUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,8 @@ public class HireEngineer extends AppCompatActivity implements HireEngineerContr
         setContentView(mBinding.getRoot());
 
         ((App)getApplication()).getAppComponent().inject(this);
+
+        mProgressViewUtil = new ProgressViewUtil(this);
 
         mToolbar=mBinding.hireEngToolbar;
 
@@ -50,6 +55,7 @@ public class HireEngineer extends AppCompatActivity implements HireEngineerContr
     @Override
     protected void onResume() {
         super.onResume();
+        mProgressViewUtil.showLoading("Hold on,Searching for engineers..");
         mHireEngineerPresenter.setUpUi(this,this);
 
     }
@@ -58,16 +64,18 @@ public class HireEngineer extends AppCompatActivity implements HireEngineerContr
     public void updateList(List<User> engineerList) {
         mEngineersListAdapter = new EngineersListAdapter(this,engineerList);
         mBinding.rvHireEngineer.setAdapter(mEngineersListAdapter);
+        mProgressViewUtil.cancel();
 
     }
 
     @Override
     public void showMessage(String message) {
-
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+
 }

@@ -74,9 +74,8 @@ public class ImageSliderAdpater extends RecyclerView.Adapter<SliderVH> {
 
     @Override
     public int getItemCount() {
-        if (mSliderItems.size()!=0)
+
         return mSliderItems.size();
-        else return 1;
     }
 
 
