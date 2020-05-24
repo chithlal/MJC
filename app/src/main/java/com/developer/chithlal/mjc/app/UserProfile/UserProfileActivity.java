@@ -1,6 +1,7 @@
 package com.developer.chithlal.mjc.app.UserProfile;
 
 import static com.developer.chithlal.mjc.app.util.Constants.GALLERY_REQUEST_CODE;
+import static com.developer.chithlal.mjc.app.util.Constants.PROFILE_IMAGE_REQUEST;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -85,7 +86,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: upload");
-                selectImage();
+                selectImage(GALLERY_REQUEST_CODE);
             }
         });
         mBinding.btUserProfileEditButton.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +124,14 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
 
                 }
 
+            }
+        });
+        mBinding.userProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isEditEnabled){
+                    selectImage(PROFILE_IMAGE_REQUEST);
+                }
             }
         });
 
@@ -287,7 +296,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         mBinding.userProfileScrollView.setVisibility(View.VISIBLE);
 
     }
-    private void selectImage(){
+    private void selectImage(int REQ_CODE){
         Intent intent=new Intent(Intent.ACTION_PICK);
         // Sets the type as image/*. This ensures only components of type image are selected
         intent.setType("image/*");
@@ -295,7 +304,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         String[] mimeTypes = {"image/jpeg", "image/png"};
         intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
         // Launching the Intent
-        startActivityForResult(intent,GALLERY_REQUEST_CODE);
+        startActivityForResult(intent,REQ_CODE);
     }
 
     @Override
@@ -313,10 +322,27 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
                         .into(mBinding.ivUserProfileIdProofImage);
                /* mBinding.ivUserProfileIdProofImage.setImageURI(selectedImage);*/
                 mBinding.tvBsUpload.setVisibility(View.GONE);
+                mPresenter.uploadIdCard(selectedImage,mUser.getUserId());
             }
             else {
                 showMessage("Please select a photo!");
             }
+        }
+        if (requestCode == PROFILE_IMAGE_REQUEST){
+            if (data!= null) {
+                Uri selectedProfileImage = data.getData();
+                Glide.with(this)
+                        .load(selectedProfileImage)
+                        .centerCrop()
+                        .placeholder(R.drawable.ic_user_profile)
+                        .error(R.drawable.ic_user_profile)
+                        .into(mBinding.userProfileImage);
+                mPresenter.uploadIdCard(selectedProfileImage,mUser.getUserId());
+            }
+            else {
+                showMessage("Please select a photo!");
+            }
+
         }
     }
 
@@ -338,7 +364,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         isDataValid = true;
         InputValidationhelper inputValidationhelper = new InputValidationhelper();
         if (mUser != null) {
-            dummyUser =  mUser;
+            dummyUser = mUser;
             if (inputValidationhelper.validate(mBinding.etUserProfileAddress,
                     InputValidationhelper.TYPE_TEXT))
                 dummyUser.setAddress(mBinding.etUserProfileAddress.getText().toString());
@@ -350,11 +376,13 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
             if (!mBinding.etUserProfileAddress.getText().toString().isEmpty())
                 dummyUser.setProfession(mBinding.tvUserProfileProfessionEdit.getText().toString());
             else isDataValid = false;
-            if (inputValidationhelper.validate(mBinding.etUserProfileFee,
-                    InputValidationhelper.TYPE_DIGIT)&&!mUser.isUserMode())
-                dummyUser.setFeePerHour(
-                        Integer.parseInt(mBinding.etUserProfileFee.getText().toString()));
-            else isDataValid = false;
+            if (!mUser.isUserMode()){
+                if (inputValidationhelper.validate(mBinding.etUserProfileFee,
+                        InputValidationhelper.TYPE_DIGIT))
+                    dummyUser.setFeePerHour(
+                            Integer.parseInt(mBinding.etUserProfileFee.getText().toString()));
+                else isDataValid = false;
+            }
 
 
         } else {

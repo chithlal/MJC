@@ -67,7 +67,7 @@ public class ImageSliderAdpater extends RecyclerView.Adapter<SliderVH> {
                 .load(sliderItem.getImageUrl())
                 .fitCenter()
                 .placeholder(R.drawable.ic_image_black_24dp)
-                .error(R.drawable.ic_broken_image_black_24dp)
+                .error(R.drawable.ic_broken_image_black_24dp )
                 .into(viewHolder.mImageView);
 
     }

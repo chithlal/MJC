@@ -1,6 +1,7 @@
 package com.developer.chithlal.mjc.app.UserProfile;
 
 import android.content.Context;
+import android.net.Uri;
 
 import com.developer.chithlal.mjc.app.engineer.User;
 
@@ -26,6 +27,12 @@ public interface UserProfileContract {
         void onEditEnabled();
         void saveUserData(User user);
         void onUserDataUpdateInServer(User user);
+        void uploadIdCard(Uri imageUri,String userId);
+        void onIdCardUploadSuccess(String message);
+        void onIdCardUploadFailed(String message);
+        void uploadProfileImage(Uri profileUri,String userId);
+        void onProfileImageUploadSuccess(String message);
+        void onProfileUploadFailed(String message);
     }
 
     interface Model  {
@@ -34,5 +41,8 @@ public interface UserProfileContract {
         User getUser();
         void setUser(User user);
         List<String> getProfessionList();
+        void uploadIdCard(Uri imageUri,String userId);
+        void uploadProfileImage(Uri profileUri,String userId);
+
     }
 }

@@ -32,10 +32,15 @@ public class UpdateDataUtil implements UploadUtil.UploadProgressListener{
      private UploadUtil mUploadUtil;
      private Work mWork;
     private List<String> workImageList = new ArrayList<>();
+    private FieldUpdateListener mFieldUpdateListener;
 
 
     public UpdateDataUtil(firebaseDataUpdateListener UpdateListener) {
         mUpdateListener = UpdateListener;
+        mFirestore = FirebaseFirestore.getInstance();
+    }
+    public UpdateDataUtil(FieldUpdateListener fieldUpdateListener) {
+        mFieldUpdateListener = fieldUpdateListener;
         mFirestore = FirebaseFirestore.getInstance();
     }
 
@@ -220,6 +225,27 @@ public class UpdateDataUtil implements UploadUtil.UploadProgressListener{
         for (Uri uri:imageUri){
             mUploadUtil.uploadFile(uri,work.getEngineerId(),UPLOAD_TYPE_WORK_IMAGE,null);
         }
+    }
+   public void updateUserField(String userId,String fieldName,Object value){
+        mFirestore.collection("/App/root_app/users").document(userId)
+                .update(fieldName,value)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        mFieldUpdateListener.onFieldUpdateSuccess(fieldName,"Update completed!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        mFieldUpdateListener.onFieldUpdateFailed("Update failed !");
+                        Log.d(TAG, "onFailure: "+e.getLocalizedMessage());
+                    }
+                });
+    }
+    public interface FieldUpdateListener{
+        void onFieldUpdateSuccess(String field,String message);
+        void onFieldUpdateFailed(String message);
     }
 
 

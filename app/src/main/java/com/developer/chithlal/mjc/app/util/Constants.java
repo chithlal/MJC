@@ -28,6 +28,7 @@ public  class Constants {
 
     //Profile user constants
     public static final int GALLERY_REQUEST_CODE = 1023;
+    public static final int PROFILE_IMAGE_REQUEST = 1024;
 
 
     public static final String ADD_IMAGE_BUTTON = "add_image_button";
@@ -51,6 +52,11 @@ public  class Constants {
     public static final String UPLOAD_TYPE_USER_PROFILE_IMAGE = "profile_";
     public static final String UPLOAD_TYPE_WORK_IMAGE = "work_";
     public static final String UPLOAD_TYPE_USER_ID_PROOF = "id_proof_";
+
+
+    //FireBase Field constants
+    public static final String FB_FIELD_ID_PROOF = "idproof";
+    public static final String FB_FIELD_PROFILE_IMAGE  = "photo";
 
 
 
