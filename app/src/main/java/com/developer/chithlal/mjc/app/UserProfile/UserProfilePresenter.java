@@ -1,6 +1,7 @@
 package com.developer.chithlal.mjc.app.UserProfile;
 
 import android.content.Context;
+import android.net.Uri;
 
 
 import com.developer.chithlal.mjc.app.engineer.User;
@@ -72,5 +73,38 @@ public class UserProfilePresenter implements UserProfileContract.Presenter {
     public void onUserDataUpdateInServer(User user) {
         mView.setUser(user);
         mView.showMessage("Data updated successfully!");
+    }
+
+    @Override
+    public void uploadIdCard(Uri imageUri,String userId) {
+        mModel.uploadIdCard(imageUri,userId);
+
+    }
+
+    @Override
+    public void onIdCardUploadSuccess(String message) {
+        mView.showMessage(message);
+    }
+
+    @Override
+    public void onIdCardUploadFailed(String message) {
+        mView.showMessage(message);
+    }
+
+    @Override
+    public void uploadProfileImage(Uri profileUri,String userId) {
+        mModel.uploadProfileImage(profileUri,userId);
+
+    }
+
+    @Override
+    public void onProfileImageUploadSuccess(String message) {
+            mView.showMessage(message);
+    }
+
+    @Override
+    public void onProfileUploadFailed(String message) {
+        mView.showMessage(message);
+
     }
 }

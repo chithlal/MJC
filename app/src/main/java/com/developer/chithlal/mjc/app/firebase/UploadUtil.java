@@ -42,6 +42,9 @@ public class UploadUtil {
         mContext = context;
     }
 
+    /*Upload Files to firebase (Uri:file - uri of the file to be uploaded ,String dir_name - only for work images
+                              String upload_type- constant specifying type of upload ,String userId - id of user )*/
+
     public void uploadFile(Uri file, @Nullable String dir_name,String upload_type,@Nullable String userId){
         StorageReference uploadRef = null;
         int limit = 99999999;
@@ -54,7 +57,7 @@ public class UploadUtil {
             actual = "_"+split[split.length-1];
         }
         if (upload_type.equals(UPLOAD_TYPE_USER_PROFILE_IMAGE)) {
-            file_name = UPLOAD_TYPE_USER_PROFILE_IMAGE+random_name+actual;
+            file_name = UPLOAD_TYPE_USER_PROFILE_IMAGE+random_name+"_"+userId+"_"+actual;
            uploadRef = rootRef.child("/app/users/profile/"+file_name);
 
         }
