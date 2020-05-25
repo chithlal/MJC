@@ -205,6 +205,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
     @Override
     protected void onPause() {
         super.onPause();
+        ((App)getApplication()).updateUser();
         mBinding.userProfileLoadingView.setVisibility(View.GONE);
         mBinding.clUserProfile.setVisibility(View.GONE);
     }
@@ -270,15 +271,21 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
             mBinding.slider.setVisibility(View.VISIBLE);
             mBinding.rbUserProfileRatingStar.setVisibility(View.VISIBLE);
 
-            Glide.with(this)
-                    .load(user.getIDProof())
-                    .centerCrop()
-                    .into(mBinding.ivUserProfileIdProofImage);
+
             mBinding.tvUserProfilePayment.setText(String.valueOf((int)user.getFeePerHour()));
             mBinding.tvUserProfileRating.setText(String.valueOf(user.getRating()));
             mBinding.tvUserProfileWorksCount.setText(String.valueOf(user.getWorks()));
             mBinding.rbUserProfileRatingStar.setRating(user.getRating());
         }
+        Glide.with(this)
+                .load(user.getIDProof())
+                .centerCrop()
+                .into(mBinding.ivUserProfileIdProofImage);
+        Glide.with(this)
+                .load(user.getPhoto())
+                .centerCrop()
+                .placeholder(R.drawable.ic_user_profile)
+                .into(mBinding.userProfileImage);
         mBinding.tvUserProfileAddress.setText(user.getAddress());
         mBinding.tvUserProfileAge.setText(user.getAge());
         String since_string = " Member since"+user.getDoj();
@@ -337,7 +344,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
                         .placeholder(R.drawable.ic_user_profile)
                         .error(R.drawable.ic_user_profile)
                         .into(mBinding.userProfileImage);
-                mPresenter.uploadIdCard(selectedProfileImage,mUser.getUserId());
+                mPresenter.uploadProfileImage(selectedProfileImage,mUser.getUserId());
             }
             else {
                 showMessage("Please select a photo!");

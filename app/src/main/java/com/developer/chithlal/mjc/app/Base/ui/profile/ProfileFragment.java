@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.developer.chithlal.mjc.R;
 import com.developer.chithlal.mjc.app.UserProfile.UserProfileActivity;
 
 import com.developer.chithlal.mjc.app.engineer.User;
@@ -73,6 +75,11 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
             mBinding.tvPfUserProfileProfession.setText(user.getProfession());
 
         }
+        Glide.with(this)
+                .load(user.getPhoto())
+                .centerCrop()
+                .placeholder(R.drawable.ic_user_profile)
+                .into(mBinding.pfProfileImage);
 
 
 

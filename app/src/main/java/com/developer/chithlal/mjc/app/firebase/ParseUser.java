@@ -33,7 +33,7 @@ public class ParseUser implements DataRepository.workUpdateListener  {
                 }
                 else{
                     mUser.setAllPreviousWorks(null);
-                    parse();
+
                 }
             }
             else {

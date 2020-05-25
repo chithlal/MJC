@@ -1,5 +1,7 @@
 package com.developer.chithlal.mjc.app.UserProfile;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 import static com.developer.chithlal.mjc.app.util.Constants.FB_FIELD_ID_PROOF;
 import static com.developer.chithlal.mjc.app.util.Constants.FB_FIELD_PROFILE_IMAGE;
 import static com.developer.chithlal.mjc.app.util.Constants.UPLOAD_TYPE_USER_ID_PROOF;
@@ -7,6 +9,7 @@ import static com.developer.chithlal.mjc.app.util.Constants.UPLOAD_TYPE_USER_PRO
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 
 import com.developer.chithlal.mjc.app.engineer.User;
 import com.developer.chithlal.mjc.app.firebase.UpdateDataUtil;
@@ -116,10 +119,12 @@ public class UserProfileModel implements UserProfileContract.Model,UpdateDataUti
         UpdateDataUtil mUpdateUtil = new UpdateDataUtil(fieldUpdateListener);
             if (UPLOAD_TYPE.equals(UPLOAD_TYPE_USER_PROFILE_IMAGE)){
                 mUpdateUtil.updateUserField(getUserId(),FB_FIELD_PROFILE_IMAGE,url);
+                Log.d(TAG, "onUploadCompleted: Profile Pic updated "+url);
 
             }
             else if (UPLOAD_TYPE.equals(UPLOAD_TYPE_USER_ID_PROOF)){
                 mUpdateUtil.updateUserField(getUserId(),FB_FIELD_ID_PROOF,url);
+                Log.d(TAG, "onUploadCompleted: ID proof Pic updated "+url);
 
             }
     }

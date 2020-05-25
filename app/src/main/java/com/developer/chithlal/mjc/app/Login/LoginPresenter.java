@@ -36,12 +36,14 @@ public class LoginPresenter implements LoginContract.Presenter {
         ((App)((Activity)mLoginView.getCurrentContext()).getApplication()).setAccountManager(mAccountManager);
 
         mLoginView.onLoginSuccess(user);
+        mLoginView.showMessage("Login success!");
 
     }
 
     @Override
     public void onLoginFailure(String message) {
         mLoginView.onLoginFailure(message);
+        mLoginView.showMessage(message);
     }
 
     @Override
@@ -56,14 +58,15 @@ public class LoginPresenter implements LoginContract.Presenter {
                     userNameStatus = LoginConstants.EMPTY_INPUT_ERROR ;
 
             }
-            if(!mLoginEvent.getPassword().isEmpty()){
-                    if(!mLoginEvent.getPassword().matches(passwordRegex)){
+            if(mLoginEvent.getPassword().isEmpty()){
+                    /*if(!mLoginEvent.getPassword().matches(passwordRegex)){
                         passwordStatus = LoginConstants.PASSWORD_ERROR;
-                    }
-            }
-            else{
+                    }*/
                 passwordStatus = LoginConstants.EMPTY_INPUT_ERROR ;
             }
+           /* else{
+                passwordStatus = LoginConstants.EMPTY_INPUT_ERROR ;
+            }*/
         }
         mLoginView.showValidationMessage(userNameStatus,passwordStatus);
         if(userNameStatus.equals(LoginConstants.NO_ERROR) && (passwordStatus.equals(LoginConstants.NO_ERROR))){

@@ -14,7 +14,7 @@ public class ConnectivityUtil {
 
     public ConnectivityUtil(Context context) {
         mContext = context;
-        checkNetworkStatus();
+
     }
 
     private void checkNetworkStatus(){
@@ -37,6 +37,7 @@ public class ConnectivityUtil {
     }
 
     public boolean isNetworkConnected(){
+        checkNetworkStatus();
         return isMobileConn||isWifiConn;
     }
 }
