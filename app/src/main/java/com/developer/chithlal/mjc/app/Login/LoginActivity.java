@@ -142,6 +142,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             mParseUser = new ParseUser(user, this);
         mProgressViewUtil.showSuccess("Welcome back!");
         mParseUser.parse();
+            Intent intent = new Intent(getApplicationContext(), BaseActivity.class);
+            startActivity(intent);
          }
         else {
             mProgressViewUtil.showSuccess("Welcome back!");
@@ -166,6 +168,11 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Override
     public Context getCurrentContext() {
         return this;
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     void postLogin(User user){

@@ -4,6 +4,7 @@ import android.app.Application;
 
 
 import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.firebase.DataRepository;
 import com.developer.chithlal.mjc.app.util.TypefaceUtil;
 import com.developer.chithlal.mjc.root.account_manager.AccountManagerInterface;
 import com.developer.chithlal.mjc.root.di.AppComponent;
@@ -60,9 +61,14 @@ public class App extends Application {
     public User getUser(){
         //nullable
 
-        if (mUser!=null)
-        return mUser;
+        if (mAccountManager!=null)
+        return mAccountManager.getUser();
         else return null;
     }
+    //method to update the user details for the app. Can be accessed till the application is running
+   public void updateUser(){
+        if (mAccountManager!=null)
+            mAccountManager.updateUser();
+   }
 
 }

@@ -2,11 +2,17 @@ package com.developer.chithlal.mjc.app.firebase;
 
 import androidx.annotation.NonNull;
 
+import com.developer.chithlal.mjc.app.UserProfile.UserProfilePresenter;
 import com.developer.chithlal.mjc.app.work.Work;
 import com.developer.chithlal.mjc.app.engineer.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -23,6 +29,8 @@ public class DataRepository {
     private workUpdateListener mWorkUpdateListener;
     private EngineersListUpdateListener mEngineersListUpdateListener;
 
+
+
     public DataRepository(workUpdateListener workUpdateListener) {
         mWorkUpdateListener = workUpdateListener;
         mFirebaseStorage = FirebaseStorage.getInstance();
@@ -33,6 +41,8 @@ public class DataRepository {
         mFirebaseStorage = FirebaseStorage.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
     }
+
+
 
     public void getWorks(String userId){
         List<Work> workList = new ArrayList<>();
@@ -84,6 +94,8 @@ public class DataRepository {
 
     }
 
+
+
     public interface workUpdateListener{
         void onWorksFetched(List<Work> workList);
         void onWorkFetchFailed(String message);
@@ -93,5 +105,6 @@ public class DataRepository {
         void onEngineersListUpdated(List<User> engineersList);
         void onEngineersListUpdateFailed(String message);
     }
+
 
 }

@@ -63,7 +63,9 @@ public class LoginUtil {
                             // Toast.makeText(LoginActivity.this,"Authentication failed.",Toast.LENGTH_SHORT).show();
                             String message;
                             try {
-                                message    = task.getException().getMessage();
+                                if (task.getException()!=null)
+                                message    = task.getException().getLocalizedMessage();
+                                else message = "Error login..try again";
                             }
                             catch (NullPointerException e){
                                 message = "Something went wrong!";
@@ -77,7 +79,7 @@ public class LoginUtil {
         .addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                updateUI(null,"Something went wrong!");
+                updateUI(null,e.getLocalizedMessage());
             }
         });
     }

@@ -11,6 +11,7 @@ public interface LoginContract {
         void onLoginSuccess(User user);
         void onLoginFailure(String mMessage);
         Context getCurrentContext();
+        void showMessage(String message);
     }
 
     interface Presenter{
