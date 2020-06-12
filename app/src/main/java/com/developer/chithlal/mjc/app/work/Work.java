@@ -1,7 +1,12 @@
 package com.developer.chithlal.mjc.app.work;
 
+import com.developer.chithlal.mjc.app.database.RealmWork;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.RealmList;
 
 public class Work implements Serializable {
 
@@ -12,11 +17,25 @@ public class Work implements Serializable {
     private String ownerName;
     private String description;
     private List<String> images;
-
+    private String workId;
     private String fireStoreRef;
     private String engineerId;
 
     public Work() {
+    }
+    public Work(RealmWork work){
+        this.workName = work.getWorkName();
+        this.workType = work.getWorkType();
+        this.constructionArea = work.getConstructionArea();
+        this.finishingDate = work.getFinishingDate();
+        this.ownerName = work.getOwnerName();
+        this.description = work.getDescription();
+        if (work.getImages()!=null) {
+            this.images = new ArrayList<>();
+            images.addAll(work.getImages());
+        }
+        this.fireStoreRef = work.getFireStoreRef();
+        this.engineerId = work.getEngineerId();
     }
 
     public String getWorkName() {
@@ -89,5 +108,13 @@ public class Work implements Serializable {
 
     public void setEngineerId(String engineerId) {
         this.engineerId = engineerId;
+    }
+
+    public String getWorkId() {
+        return workId;
+    }
+
+    public void setWorkId(String workId) {
+        this.workId = workId;
     }
 }

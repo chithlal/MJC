@@ -25,6 +25,7 @@ import com.developer.chithlal.mjc.app.user_details.ConsumerDetailsActivity;
 import com.developer.chithlal.mjc.app.user_details.MoreDetailsActivity;
 import com.developer.chithlal.mjc.app.util.Constants;
 import com.developer.chithlal.mjc.app.util.ProgressViewUtil;
+import com.developer.chithlal.mjc.root.account_manager.AccountManager;
 import com.google.firebase.FirebaseApp;
 
 
@@ -67,7 +68,7 @@ public class  SignupActivity extends AppCompatActivity implements SignUpContract
         //intilize toolbar
 
         mToolBar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-        mToolBar.setTitle("");
+        mToolBar.setTitle("Signup");
         mToolBar.setEnabled(true);
         setSupportActionBar(mToolBar);
         ActionBar mActionBar = getSupportActionBar();
@@ -153,9 +154,12 @@ public class  SignupActivity extends AppCompatActivity implements SignUpContract
 
     }
 
+
     @Override
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        if (mProgressViewUtil!=null)
+            mProgressViewUtil.cancel();
     }
     @Override
     public boolean onSupportNavigateUp() {

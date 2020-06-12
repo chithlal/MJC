@@ -92,11 +92,13 @@ public class ExtraDetailsFragment extends Fragment implements OptionItemAdapter.
             public void onClick(View v) {
                 if (!isOptionsOpened) {
                     mBinding.rvMoreDetailsBuildingType.setVisibility(View.VISIBLE);
+                    mBinding.tvExtraDetailsWorkTypeTitle.setVisibility(View.VISIBLE);
                     setupBuildingOptions();
                     isOptionsOpened = true;
                 }
                 else {
                     mBinding.rvMoreDetailsBuildingType.setVisibility(View.GONE);
+                    mBinding.tvExtraDetailsWorkTypeTitle.setVisibility(View.GONE);
                     isOptionsOpened = false;
                 }
             }
@@ -121,7 +123,7 @@ public class ExtraDetailsFragment extends Fragment implements OptionItemAdapter.
         buildingTypeOption.add("Home");
         buildingTypeOption.add("Auditorium");
         buildingTypeOption.add("Bridge");
-        buildingTypeOption.add("Shopping");
+        buildingTypeOption.add("Shopping Mall");
         buildingTypeOption.add("Tunnel");
         buildingTypeOption.add("Stadium");
 
@@ -157,12 +159,12 @@ public class ExtraDetailsFragment extends Fragment implements OptionItemAdapter.
         }
         else isDataValid = false;
 
-            if (imageUri==null){
+            /*if (imageUri==null){
                 mBinding.tvMoreDetailsIdProofText.setError("Please select ID proof");
 
                 isDataValid = false;
             }
-            else isDataValid = true;
+            else isDataValid = true;*/
         }
 
 

@@ -12,19 +12,24 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.firebase.ParseUser;
 import com.developer.chithlal.mjc.app.firebase.UpdateDataUtil;
 import com.developer.chithlal.mjc.app.firebase.UploadUtil;
+import com.developer.chithlal.mjc.app.firebase.UserRepository;
 import com.developer.chithlal.mjc.app.work.Work;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserProfileModel implements UserProfileContract.Model,UpdateDataUtil.firebaseDataUpdateListener,UploadUtil.UploadProgressListener,UpdateDataUtil.FieldUpdateListener {
+public class UserProfileModel implements UserProfileContract.Model,
+        UpdateDataUtil.firebaseDataUpdateListener,UploadUtil.UploadProgressListener,UpdateDataUtil.FieldUpdateListener,
+        UserRepository.UserUpdateListener, ParseUser.ParseListener {
     Context mContext;
     private UpdateDataUtil mUpdateDataUtil;
     private UserProfileContract.Presenter mPresenter;
     private String userId;
+    private boolean isWorkDataParsing = false;
 
 
     @Override
@@ -40,8 +45,9 @@ public class UserProfileModel implements UserProfileContract.Model,UpdateDataUti
     }
 
     @Override
-    public User getUser() {
-        return null;
+    public void getUser(String userId) {
+        UserRepository userRepository = new UserRepository(this);
+        userRepository.getUserObject(userId);
     }
 
     @Override
@@ -79,6 +85,12 @@ public class UserProfileModel implements UserProfileContract.Model,UpdateDataUti
         uploadUtil.uploadFile(profileUri,null,UPLOAD_TYPE_USER_PROFILE_IMAGE,userId);
     }
 
+    @Override
+    public void resolveWorkData(User user) {
+        isWorkDataParsing = true;
+        ParseUser parseUser = new ParseUser(user,this);
+        parseUser.parse();
+    }
 
 
     @Override
@@ -150,6 +162,31 @@ public class UserProfileModel implements UserProfileContract.Model,UpdateDataUti
 
     @Override
     public void onFieldUpdateFailed(String message) {
+        mPresenter.onMessageArrived(message);
+    }
 
+    @Override
+    public void onUserDataCollected(User user) {
+        mPresenter.onUserDataUpdateInServer(user);
+    }
+
+    @Override
+    public void onUserUpdateFailed(String message) {
+
+    }
+
+    @Override
+    public void onParsedDataArrived(User parsedUser) {
+        if (isWorkDataParsing){
+            mPresenter.onWorkDataResolved(parsedUser);
+        }
+
+     isWorkDataParsing = false;
+    }
+
+    @Override
+    public void onParseError(String message) {
+        mPresenter.onMessageArrived("Unable to get work details!");
+        isWorkDataParsing = false;
     }
 }

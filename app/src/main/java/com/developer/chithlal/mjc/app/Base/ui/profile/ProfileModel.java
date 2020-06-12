@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.developer.chithlal.mjc.app.engineer.User;
 import com.developer.chithlal.mjc.root.App;
+import com.developer.chithlal.mjc.root.account_manager.AccountManager;
 
 public class ProfileModel implements ProfileContract.Model {
     private Context mContext;
@@ -19,8 +20,8 @@ public class ProfileModel implements ProfileContract.Model {
 
     @Override
     public User getUserDetails() {
-        User user = ((App)((Activity)mContext).getApplication()).getUser();
-        return user;
+        AccountManager accountManager = new AccountManager(mContext);
+        return accountManager.getUser();
     }
 
     @Override

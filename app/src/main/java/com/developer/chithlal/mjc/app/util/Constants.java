@@ -59,6 +59,11 @@ public  class Constants {
     public static final String FB_FIELD_PROFILE_IMAGE  = "photo";
 
 
+    //Resource
+    public static final String NO_IMAGE_AVAILABLE_URL = "https://firebasestorage.googleapis.com/v0/b/mjc-5256d.appspot.com/o/app%2Fresourse%2Fimages%2Fno_works_added.png?alt=media&token=8c15d694-ea0e-4496-a319-7488d8dd23c2";
 
+
+    public static final String RUPEE_SIGN = "₹";
+    public static final String RATE_PER_SQRFT_STRING = "₹/Sq.Ft";
 
 }

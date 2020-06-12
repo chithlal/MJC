@@ -32,7 +32,7 @@ public class UserRepository implements ParseUser.ParseListener {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
 
                 User user = documentSnapshot.toObject(User.class);
-
+                user.setAllPreviousWorks(null);
                 ParseUser parseUser = new ParseUser(user,mParseListener);
                 parseUser.parse();
             }

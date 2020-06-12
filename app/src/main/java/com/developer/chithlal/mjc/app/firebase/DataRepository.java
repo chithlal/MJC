@@ -28,7 +28,8 @@ public class DataRepository {
     FirebaseStorage mFirebaseStorage;
     private workUpdateListener mWorkUpdateListener;
     private EngineersListUpdateListener mEngineersListUpdateListener;
-
+    private DocumentSnapshot lastVisibleDocument = null;
+    private boolean isEndOfList = false;
 
 
     public DataRepository(workUpdateListener workUpdateListener) {
@@ -57,10 +58,10 @@ public class DataRepository {
                         if (task.isSuccessful()){
                             for(QueryDocumentSnapshot doc: task.getResult()){
                                 workList.add(doc.toObject(Work.class));
-                                mWorkUpdateListener.onWorksFetched(workList);
+
 
                             }
-
+                            mWorkUpdateListener.onWorksFetched(workList);
                         }
                         else mWorkUpdateListener.onWorkFetchFailed("Sorry..works not updated!");
                     }
@@ -70,27 +71,75 @@ public class DataRepository {
 
     }
     //This method fetches all engineers in the database No Sorting and filtering applied
-    public void getAllEngineers(){
+    public void getAllEngineers(int pageNumber){
+        int pageSize = 50;
+
+        ParseUser parseUser = new ParseUser();
         List<User> engineerList = new ArrayList<>();
         CollectionReference engineerReference = mFirestore.collection("/App/root_app/users");
 
-        Query query = engineerReference.whereEqualTo("userMode",false);
 
-        query.get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            for(QueryDocumentSnapshot doc: task.getResult()){
-                                engineerList.add(doc.toObject(User.class));
-                                mEngineersListUpdateListener.onEngineersListUpdated(engineerList);
 
-                            }
+        if (lastVisibleDocument==null&&pageNumber  == 1&& !isEndOfList) {
+            Query query = engineerReference.whereEqualTo("userMode",false)
+                    .limit(pageSize);
+            query.get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()&&task.getResult()!=null) {
+                                for (QueryDocumentSnapshot doc : task.getResult()) {
+                                    User user = doc.toObject(User.class);
+                                    engineerList.add(user);
+                                }
 
+                                mEngineersListUpdateListener.onEngineersListUpdated(engineerList,pageNumber);
+                            } else mEngineersListUpdateListener.onEngineersListUpdateFailed(
+                                    "Sorry..unable to fetch details!");
                         }
-                        else mEngineersListUpdateListener.onEngineersListUpdateFailed("Sorry..unable to fetch details!");
-                    }
-                });
+                    })
+            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    lastVisibleDocument = queryDocumentSnapshots.getDocuments()
+                            .get(queryDocumentSnapshots.size() -1);
+                }
+            });
+        }
+        else if (lastVisibleDocument!=null&& !isEndOfList){
+            Query query = engineerReference.whereEqualTo("userMode",false)
+                    .startAfter(lastVisibleDocument)
+                    .limit(pageSize);
+            query.get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()&&task.getResult()!=null) {
+
+                                for (QueryDocumentSnapshot doc : task.getResult()) {
+                                    User user = doc.toObject(User.class);
+                                    engineerList.add(user);
+
+
+                                }
+                                mEngineersListUpdateListener.onEngineersListUpdated(engineerList,pageNumber);
+                            } else mEngineersListUpdateListener.onEngineersListUpdateFailed(
+                                    "Sorry..unable to fetch details!");
+                        }
+                    })
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            if (queryDocumentSnapshots!=null&&queryDocumentSnapshots.getDocuments().size()!=0) {
+                                lastVisibleDocument = queryDocumentSnapshots.getDocuments()
+                                        .get(queryDocumentSnapshots.size() - 1);
+                            }
+                            else {
+                                isEndOfList = true;
+                            }
+                        }
+                    });
+        }
 
     }
 
@@ -102,7 +151,7 @@ public class DataRepository {
     }
 
     public interface EngineersListUpdateListener{
-        void onEngineersListUpdated(List<User> engineersList);
+        void onEngineersListUpdated(List<User> engineersList,int pageNumber);
         void onEngineersListUpdateFailed(String message);
     }
 

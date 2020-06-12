@@ -12,8 +12,10 @@ public class HireEngineerModel implements HireEngineerContract.Model,
         DataRepository.EngineersListUpdateListener {
     private Context mContext;
     private HireEngineerContract.Presenter mPresenter;
+    private DataRepository dataRepository;
 
     public HireEngineerModel(){
+         dataRepository = new DataRepository(this);
     }
 
 
@@ -32,19 +34,19 @@ public class HireEngineerModel implements HireEngineerContract.Model,
     /* Calling DataRepository to get the list of engineers , Light weight
       Filters and sorting can do here if needed*/
     @Override
-    public void getEngineersList() {
+    public void getEngineersList(int pageNumber) {
 
-        DataRepository dataRepository = new DataRepository(this);
-            dataRepository.getAllEngineers();
+
+            dataRepository.getAllEngineers(pageNumber);
 
 
 
     }
 
     @Override
-    public void onEngineersListUpdated(List<User> engineersList) {
+    public void onEngineersListUpdated(List<User> engineersList,int pageNumber) {
 
-        mPresenter.onEngineersListArrived(engineersList);
+        mPresenter.onEngineersListArrived(engineersList,pageNumber);
     }
 
     @Override

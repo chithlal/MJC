@@ -61,14 +61,17 @@ public class ImageSliderAdpater extends RecyclerView.Adapter<SliderVH> {
         if (mSliderItems.size()==0){
             viewHolder.mImageView.setImageResource(R.drawable.ic_image_black_24dp);
             viewHolder.mImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+
         }
-        else
-        Glide.with(viewHolder.itemView)
-                .load(sliderItem.getImageUrl())
-                .fitCenter()
-                .placeholder(R.drawable.ic_image_black_24dp)
-                .error(R.drawable.ic_broken_image_black_24dp )
-                .into(viewHolder.mImageView);
+        else {
+            Glide.with(viewHolder.itemView)
+                    .load(sliderItem.getImageUrl())
+                    .fitCenter()
+                    .placeholder(R.drawable.ic_image_black_24dp)
+                    .error(R.drawable.ic_broken_image_black_24dp)
+                    .into(viewHolder.mImageView);
+            viewHolder.mTextView.setText(sliderItem.getDescription());
+        }
 
     }
 

@@ -47,10 +47,8 @@
     <string name="add_previous_work">Add works</string>
     <string name="age_string">Age</string>
     <string name="hint_address">Address</string>
-    <string name="hint_fee_p_h">"Fee per hour "</string>
+    <string name="hint_fee_p_h">"Rate/Sq.ft (Minimum)"</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hint_work_name">Work Name</string>
     <string name="hint_desceiption">Description</string>
     <string name="hint_date_of_completion">Date of completion</string>
@@ -74,4 +72,14 @@
     <string name="text_id_card">ID Card</string>
     <string name="text_skip">Skip</string>
     <string name="text_add_more_work">Add more works</string>
+    <string name="text_select_work_type">Select work type</string>
+    <string name="text_my_customers">My customers</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="select_building_type">Select building types</string>
+    <string name="title_activity">Activities</string>
+    <string name="text_select_picture">Add photo</string>
+    <string name="select_building">Choose building type</string>
+    <string name="text_coming_soon">Coming soon...</string>
 </resources>

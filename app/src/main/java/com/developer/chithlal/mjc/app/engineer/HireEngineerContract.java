@@ -8,13 +8,14 @@ public interface HireEngineerContract  {
 
     interface View{
 
-        void updateList(List<User> engineerList);
+        void updateList(List<User> engineerList,int pageNumber);
         void showMessage(String message);
 
     }
     interface Presenter{
         void setUpUi(Context context,HireEngineerContract.View view);
-        void onEngineersListArrived(List<User> engineersList);
+        void onEngineersListArrived(List<User> engineersList,int pageNumber);
+        void getNextPageOfList(int pageNumber);
         void onEngineerListUpdateFailed(String message);
 
 
@@ -22,7 +23,7 @@ public interface HireEngineerContract  {
     interface Model  {
         void setContext(Context context);
         void setPresenter(HireEngineerContract.Presenter presenter);
-        void getEngineersList();
+        void getEngineersList(int pageNumber);
 
     }
 }

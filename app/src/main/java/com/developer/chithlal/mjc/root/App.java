@@ -12,25 +12,35 @@ import com.developer.chithlal.mjc.root.di.AppModule;
 import com.developer.chithlal.mjc.root.di.DaggerAppComponent;
 import com.developer.chithlal.mjc.root.di.EngineerListModule;
 import com.developer.chithlal.mjc.root.di.MoreDetailPresenterModule;
+import com.developer.chithlal.mjc.root.di.StartupActivityModule;
 import com.developer.chithlal.mjc.root.di.UserProfileModule;
 import com.google.firebase.FirebaseApp;
 
-public class App extends Application {
-    private User mUser;
 
-    AccountManagerInterface mAccountManager;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
+public class App extends Application {
+
+
+
     private AppComponent mAppComponent;
     @Override
     public void onCreate() {
         super.onCreate();
         FirebaseApp.initializeApp(getApplicationContext());
-        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "font/app_font_nu.ttf");
+        TypefaceUtil.overrideFont(getApplicationContext(), "SANS", "font/open_sans_regular.ttf");
         mAppComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .engineerListModule(new EngineerListModule())
                 .userProfileModule(new UserProfileModule())
                 .moreDetailPresenterModule(new MoreDetailPresenterModule())
+                .startupActivityModule(new StartupActivityModule())
                 .build();
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder().name("mjc.realm.db").build();
+        Realm.setDefaultConfiguration(config);
+
     }
 
     @Override
@@ -47,28 +57,8 @@ public class App extends Application {
         return mAppComponent;
     }
 
-    //setup after login and logout
-    public void setAccountManager(AccountManagerInterface accountManager){
-        this.mAccountManager = accountManager;
-        setUser(mAccountManager.getUser());
-    }
-
-    private void setUser(User user){
-        mUser = user;
 
 
-    }
-    public User getUser(){
-        //nullable
 
-        if (mAccountManager!=null)
-        return mAccountManager.getUser();
-        else return null;
-    }
-    //method to update the user details for the app. Can be accessed till the application is running
-   public void updateUser(){
-        if (mAccountManager!=null)
-            mAccountManager.updateUser();
-   }
 
 }

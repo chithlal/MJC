@@ -21,8 +21,9 @@
                 android:layout_height="@dimen/eng_user_prof_imagesize"
                 android:maxWidth="@dimen/eng_user_prof_imagesize"
                 android:minWidth="@dimen/eng_user_prof_imagesize"
-                android:id="@+id/eng_iv_card_profile_image"
+                android:src="@drawable/ic_baseline_person_24"
                 android:layout_margin="@dimen/eng_profile_margin"
+                android:id="@+id/eng_iv_card_profile_image"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -33,7 +34,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:layout_weight="1.2"
+                android:layout_weight="1.4"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
@@ -42,13 +43,15 @@
                     android:textSize="@dimen/eng_card_name_text_size"
                     tools:text="Chithlal Krishna"
                     android:layout_gravity="left"
-                    android:textStyle="bold"
+                    android:textColor="@color/app_black"
+                    android:textStyle="normal"
                     android:layout_marginStart="@dimen/eng_card_tv_margin"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/eng_tv_card_prof_quili"
                     android:layout_gravity="left"
+                    android:maxLines="1"
                     android:textSize="@dimen/eng_card_prof_text_size"
                     tools:text="Civil Engineer"
                     android:layout_margin="@dimen/eng_card_tv_margin"/>
@@ -67,13 +70,13 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:layout_margin="@dimen/margin_home_item_text"
-                android:layout_weight=".8"
+                android:layout_weight=".6"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/eng_tv_card_feeperhour"
-                    android:textSize="@dimen/eng_card_name_text_size"
+                    android:textSize="@dimen/eng_card_fee_text_size"
                     tools:text="1000$/Hr"
                     android:layout_gravity="top|end"
                     android:textStyle="bold"

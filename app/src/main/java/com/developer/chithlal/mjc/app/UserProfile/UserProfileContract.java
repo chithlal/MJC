@@ -18,6 +18,8 @@ public interface UserProfileContract {
         void setPreviousWorkImages(List<SliderItem> images);
         void setProfessionList(List<String> professionList);
 
+        void refreshIdCardImage();
+
     }
 
     interface Presenter{
@@ -33,16 +35,21 @@ public interface UserProfileContract {
         void uploadProfileImage(Uri profileUri,String userId);
         void onProfileImageUploadSuccess(String message);
         void onProfileUploadFailed(String message);
+        void updateUserObject(String uid);
+        void onMessageArrived(String message);
+        void onWorkDataResolved(User user);
     }
 
     interface Model  {
         void setContext(Context context);
         void setPresenter(UserProfileContract.Presenter presenter);
-        User getUser();
+        void getUser(String userId);
         void setUser(User user);
         List<String> getProfessionList();
         void uploadIdCard(Uri imageUri,String userId);
         void uploadProfileImage(Uri profileUri,String userId);
+        void resolveWorkData(User user);
+
 
     }
 }

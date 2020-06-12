@@ -106,7 +106,7 @@ public class InputValidationhelper {
                     }
                 }
                 else if (inputType.equals(TYPE_DATE)){
-                    String dateRegex = "^[0-9]{2}-[0-9]{2}-[0-9]{4}$";
+                    String dateRegex = "^[0-9]+-[0-9]+-[0-9]{4}$";
                     if (!text.matches(dateRegex)) {
                         showError(INVALID_DATE);
                         isValid = false;

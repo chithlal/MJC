@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.developer.chithlal.mjc.R;
+import com.developer.chithlal.mjc.app.dialogs.ImageSelectorUtil;
 import com.developer.chithlal.mjc.app.engineer.HireEngineer;
 import com.developer.chithlal.mjc.app.util.Constants;
 import com.developer.chithlal.mjc.databinding.ActivityBuildingSpecsBinding;
@@ -25,7 +26,7 @@ import com.developer.chithlal.mjc.databinding.ActivityBuildingSpecsBinding;
 import java.util.List;
 
 
-public class BuildingSpecActivity extends AppCompatActivity implements BuildingSpecContract.View{
+public class BuildingSpecActivity extends AppCompatActivity implements BuildingSpecContract.View,ImageSelectorUtil.PhotoSelectorInterface{
     private Toolbar mToolbar;
     ActivityBuildingSpecsBinding mBBinding;
     MaterialAdapter mMaterialAdapter;
@@ -33,7 +34,7 @@ public class BuildingSpecActivity extends AppCompatActivity implements BuildingS
     private ConstructionType mConstructionType;
     private boolean isAddMeasurementOpen = false; // to keep track the state of measurement layout
     private boolean isBuyMaterialIsOpen = false; // to keep track of buy material state
-
+    private ImageSelectorUtil mImageSelectorUtil; // Util class to select image from device or camera
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mBBinding = ActivityBuildingSpecsBinding.inflate(getLayoutInflater());
@@ -42,9 +43,11 @@ public class BuildingSpecActivity extends AppCompatActivity implements BuildingS
         mToolbar = mBBinding.specToolbar;
 
 
+
+
         //Toolbar setup
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-        mToolbar.setTitle("");
+        mToolbar.setTitle("Building specs");
         mToolbar.setEnabled(true);
         setSupportActionBar(mToolbar);
         ActionBar mActionBar = getSupportActionBar();
@@ -212,39 +215,36 @@ public class BuildingSpecActivity extends AppCompatActivity implements BuildingS
         return true;
     }
     private void selectImage(){
-        Intent intent=new Intent(Intent.ACTION_PICK);
-        // Sets the type as image/*. This ensures only components of type image are selected
-        intent.setType("image/*");
-        //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
-        String[] mimeTypes = {"image/jpeg", "image/png"};
-        intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
-        // Launching the Intent
-        startActivityForResult(intent,GALLERY_REQUEST_CODE);
+        mImageSelectorUtil = new ImageSelectorUtil(this,GALLERY_REQUEST_CODE,this);
+        mImageSelectorUtil.openSelector();
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GALLERY_REQUEST_CODE){
-            if(data!=null) {
-                Uri selectedImage = data.getData();
-                mBBinding.tvBsUpload.setVisibility(View.GONE);
-                Glide.with(this)
-                        .load(selectedImage)
-                        .centerCrop()
-                        .into(mBBinding.ivBsPlanPlaceHolder);
-                /* mBinding.ivUserProfileIdProofImage.setImageURI(selectedImage);*/
-                mBBinding.tvBsUpload.setVisibility(View.GONE);
-                mBBinding.ivBsPlanPlaceHolder.setVisibility(View.VISIBLE);
-            }
-            else {
-                showMessage("Please select a photo!");
-            }
-        }
-    }
+
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void onPhotoSelected(Uri uri, int reqCode) {
+        if (reqCode == GALLERY_REQUEST_CODE){
+
+            mBBinding.tvBsUpload.setVisibility(View.GONE);
+            mBBinding.ivBsPlanPlaceHolder.setVisibility(View.VISIBLE);
+                Glide.with(this)
+                        .load(uri)
+                        .centerCrop()
+                        .into(mBBinding.ivBsPlanPlaceHolder);
+                /* mBinding.ivUserProfileIdProofImage.setImageURI(selectedImage);*/
+
+
+
+        }
+    }
+
+    @Override
+    public void onPhotoSelectionError(String message) {
+        showMessage("Please select a photo!");
     }
 }

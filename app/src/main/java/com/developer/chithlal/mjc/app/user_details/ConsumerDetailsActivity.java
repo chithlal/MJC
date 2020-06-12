@@ -15,18 +15,21 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.developer.chithlal.mjc.R;
+import com.developer.chithlal.mjc.app.Base.BaseActivity;
+import com.developer.chithlal.mjc.app.dialogs.ImageSelectorUtil;
 import com.developer.chithlal.mjc.app.work.Work;
 import com.developer.chithlal.mjc.app.engineer.User;
 import com.developer.chithlal.mjc.app.firebase.UpdateDataUtil;
 import com.developer.chithlal.mjc.app.firebase.UploadUtil;
 import com.developer.chithlal.mjc.app.util.ProgressViewUtil;
 import com.developer.chithlal.mjc.databinding.ActivityConsumerDetailsBinding;
+import com.developer.chithlal.mjc.root.account_manager.AccountManager;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.shape.CornerFamily;
 import com.google.firebase.storage.StorageReference;
 
 public class ConsumerDetailsActivity extends AppCompatActivity
-        implements UpdateDataUtil.firebaseDataUpdateListener,UploadUtil.UploadProgressListener {
+        implements UpdateDataUtil.firebaseDataUpdateListener,UploadUtil.UploadProgressListener,ImageSelectorUtil.PhotoSelectorInterface {
 
     private ActivityConsumerDetailsBinding mBinding;
     private User mUser;
@@ -69,6 +72,10 @@ public class ConsumerDetailsActivity extends AppCompatActivity
         mBinding.btSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mUser!=null)
+                postLogin(mUser);
+                Intent intent = new Intent(getApplicationContext(), BaseActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -83,39 +90,11 @@ public class ConsumerDetailsActivity extends AppCompatActivity
     }
 
     private void selectImage() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        // Sets the type as image/*. This ensures only components of type image are selected
-        intent.setType("image/*");
-        //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
-        String[] mimeTypes = {"image/jpeg", "image/png"};
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-        // Launching the Intent
-        startActivityForResult(intent, GALLERY_REQUEST_CODE);
+        ImageSelectorUtil imageSelectorUtil = new ImageSelectorUtil(this,GALLERY_REQUEST_CODE,this);
+        imageSelectorUtil.openSelector();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GALLERY_REQUEST_CODE) {
-            if (data != null) {
-                Uri selectedImage = data.getData();
-                mBinding.tvMoreDetailsIdUpload.setVisibility(View.GONE);
-                customCardView(mBinding.moreDetailsIdImageCard);
-                mBinding.moreDetailsIdImageCard.setVisibility(View.VISIBLE);
-                Glide.with(this)
-                        .load(selectedImage)
-                        .centerCrop()
-                        .placeholder(R.drawable.ic_image_black_24dp)
-                        .error(R.drawable.ic_broken_image_black_24dp)
-                        .into(mBinding.ivMoreDetailsIdImage);
-                /* mBinding.ivUserProfileIdProofImage.setImageURI(selectedImage);*/
-                imageUri = selectedImage;
 
-            } else {
-                showMessage("Please select a photo!");
-            }
-        }
-    }
     void showMessage(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
@@ -133,6 +112,7 @@ public class ConsumerDetailsActivity extends AppCompatActivity
 
     @Override
     public void onUserUpdateCompleted(User user) {
+        mUser = user;
         mProgressViewUtil.cancel();
         showMessage("Data updated!");
         showMessage("Registration completed,Login to continue!");
@@ -186,5 +166,35 @@ public class ConsumerDetailsActivity extends AppCompatActivity
     @Override
     public void onError(String message) {
             showMessage("Something went wrong!, Upload failed");
+    }
+
+    @Override
+    public void onPhotoSelected(Uri uri, int reqCode) {
+        if (reqCode == GALLERY_REQUEST_CODE) {
+
+            mBinding.tvMoreDetailsIdUpload.setVisibility(View.GONE);
+                customCardView(mBinding.moreDetailsIdImageCard);
+                mBinding.moreDetailsIdImageCard.setVisibility(View.VISIBLE);
+                Glide.with(this)
+                        .load(uri)
+                        .centerCrop()
+                        .placeholder(R.drawable.ic_image_black_24dp)
+                        .error(R.drawable.ic_broken_image_black_24dp)
+                        .into(mBinding.ivMoreDetailsIdImage);
+                /* mBinding.ivUserProfileIdProofImage.setImageURI(selectedImage);*/
+                imageUri = uri;
+
+            } else {
+                showMessage("Please select a photo!");
+            }
+    }
+    void postLogin(User user) {
+        AccountManager accountManager = new AccountManager(
+                this); //Setting the user  for the entire app session
+        accountManager.loginUser(user);
+    }
+    @Override
+    public void onPhotoSelectionError(String message) {
+        showMessage("Please select a photo!");
     }
 }

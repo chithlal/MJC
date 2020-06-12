@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
         //Toolbar setup
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-        mToolbar.setTitle("");
+        mToolbar.setTitle("Login");
         mToolbar.setEnabled(true);
         setSupportActionBar(mToolbar);
         ActionBar mActionBar = getSupportActionBar();
@@ -140,10 +140,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         mUser = user;
         if (!user.isUserMode()){
             mParseUser = new ParseUser(user, this);
-        mProgressViewUtil.showSuccess("Welcome back!");
-        mParseUser.parse();
-            Intent intent = new Intent(getApplicationContext(), BaseActivity.class);
-            startActivity(intent);
+            mParseUser.parse();
+            mProgressViewUtil.showSuccess("Welcome back!");
+
+
          }
         else {
             mProgressViewUtil.showSuccess("Welcome back!");
@@ -153,6 +153,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             Log.d(TAG, "onLoginSuccess: Login success");
             Intent intent = new Intent(getApplicationContext(), BaseActivity.class);
             startActivity(intent);
+            finish();
         }
 
     }
@@ -178,7 +179,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     void postLogin(User user){
         AccountManager accountManager = new AccountManager(this); //Setting the user  for the entire app session
         accountManager.loginUser(user);
-        ((App)getApplication()).setAccountManager(accountManager);
+
     }
 
     @Override
