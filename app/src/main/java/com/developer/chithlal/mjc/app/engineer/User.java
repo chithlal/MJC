@@ -1,9 +1,14 @@
 package com.developer.chithlal.mjc.app.engineer;
 
+import com.developer.chithlal.mjc.app.database.RealmUser;
+import com.developer.chithlal.mjc.app.database.RealmWork;
 import com.developer.chithlal.mjc.app.work.Work;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.RealmList;
 
 public class User implements Serializable {
 
@@ -30,7 +35,38 @@ public class User implements Serializable {
 
     public User() {
     }
-
+    public User(RealmUser user){
+        this.userId = user.getUserId();
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.phone = user.getPhone();
+        this.age = user.getAge();
+        this.address = user.getAddress();
+        this.doj = user.getDoj();
+        this.photo = user.getPhoto();
+        this.Profession = user.getProfession();
+        this.IDProof = user.getIDProof();
+        this.rating = user.getRating();
+        this.works = user.getWorks();
+        this.numberOfWorkers = user.getNumberOfWorkers();
+        if (user.getBuildingType()!=null) {
+            this.buildingType = new ArrayList<>();
+            this.buildingType.addAll(user.getBuildingType());
+        }
+        this.feePerHour = user.getFeePerHour();
+        if (user.getAllPreviousWorks()!=null) {
+            this.previousWorks = new ArrayList<>();
+            for (RealmWork work : user.getAllPreviousWorks()) {
+                this.previousWorks.add(new Work(work));
+            }
+        }
+        if (user.getWorkRef()!=null) {
+            this.workRef = new ArrayList<>();
+            this.workRef.addAll(user.getWorkRef());
+        }
+        this.userMode = user.isUserMode();
+        this.editable = user.isEditable();
+    }
     public String getPhoto() {
         return photo;
     }
@@ -48,6 +84,10 @@ public class User implements Serializable {
     }
 
     public void setName(String name) {
+        if (name.length()!=0){
+
+        name = name.substring(0,1).toUpperCase()+name.substring(1);
+        }
         this.name = name;
     }
 

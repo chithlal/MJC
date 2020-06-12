@@ -24,17 +24,24 @@ public class HireEngineerPresenter implements HireEngineerContract.Presenter {
         mContext = context;
         mHireEngineerModel.setContext(context);
         mHireEngineerModel.setPresenter(this);
-        mHireEngineerModel.getEngineersList();
+        mHireEngineerModel.getEngineersList(1);
 
 
 
     }
 
     @Override
-    public void onEngineersListArrived(List<User> engineersList) {
-        mView.updateList(engineersList);
+    public void onEngineersListArrived(List<User> engineersList, int pageNumber) {
+
+        mView.updateList(engineersList,pageNumber);
 
     }
+
+    @Override
+    public void getNextPageOfList(int pageNumber) {
+            mHireEngineerModel.getEngineersList(pageNumber);
+    }
+
 
     @Override
     public void onEngineerListUpdateFailed(String message) {

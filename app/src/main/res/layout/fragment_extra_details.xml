@@ -69,7 +69,16 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/select_building_type"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:visibility="gone"
+                android:id="@+id/tv_extra_details_work_type_title"
+                android:layout_margin="@dimen/more_details_margin_top"
+                />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_more_details_building_type"
                 android:layout_width="match_parent"
@@ -258,22 +267,27 @@
     <LinearLayout
         android:id="@+id/signup_cv_signup_bt"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/intro_cardview_height"
+        android:layout_height="@dimen/height_extradetails_button_layout"
         android:layout_marginTop="65dp"
         android:layout_gravity="bottom"
+        android:layout_margin="@dimen/margin_extra_details_skip_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:orientation="horizontal"
         android:weightSum="2"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/signup_cv_password">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/text_skip"
-            android:gravity="center|left"
+            android:gravity="center"
             android:textSize="@dimen/text_size_more_details"
             android:id="@+id/bt_skip"
             android:padding="@dimen/more_details_text_padding"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_extra_details_skip_button"
+            android:background="@drawable/bs_worktype_card_background"
             android:textColor="@color/app_black"
             android:layout_weight="1"
             android:textStyle="normal"
@@ -285,7 +299,9 @@
             android:id="@+id/bt_continue"
             android:text="@string/text_continue"
             android:padding="@dimen/more_details_text_padding"
-            android:gravity="center|right"
+            android:layout_margin="@dimen/margin_extra_details_skip_button"
+            android:background="@drawable/bs_worktype_card_background"
+            android:gravity="center"
             android:textSize="@dimen/text_size_more_details"
             android:textColor="@color/color_light_blue"
             android:textStyle="normal"

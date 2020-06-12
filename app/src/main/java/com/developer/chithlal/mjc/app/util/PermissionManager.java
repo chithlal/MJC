@@ -38,5 +38,40 @@ public class PermissionManager {
 
         return 0;
     }
+    int requestPermission(String[] PERMISSION_ID){
 
+        ActivityCompat.requestPermissions(mMActivity,
+               PERMISSION_ID,
+                PERMISSION_REQ_CODE);
+
+
+        return 0;
+    }
+    public void checkAndRequestMultiplePermission(String[] permissions){
+        String[] temp_perm_array=new String[5];
+        if (permissions!=null){
+            int i=0;
+            for (String permission:permissions){
+
+                        if (ActivityCompat.checkSelfPermission(mMActivity, permission) != PackageManager.PERMISSION_GRANTED) {
+                            temp_perm_array[i]=permission;
+                            i++;
+                        }
+            }
+
+        }
+        if (temp_perm_array.length!=0){
+            requestPermission(temp_perm_array);
+        }
+    }
+public boolean checkPermission(String[] permissions){
+    if (mMActivity != null && permissions != null) {
+        for (String permission : permissions) {
+            if (ActivityCompat.checkSelfPermission(mMActivity, permission) != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 }

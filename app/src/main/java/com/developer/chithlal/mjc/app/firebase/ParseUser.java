@@ -11,10 +11,17 @@ public class ParseUser implements DataRepository.workUpdateListener  {
     private User parsedUser;
     private DataRepository mDataRepository;
 
+    public ParseUser() {
+
+    }
+
     public ParseUser(User user,ParseListener parseListener) {
         mUser = user;
         mParseListener = parseListener;
         mDataRepository = new DataRepository(this);
+    }
+    public void setUser(User user){
+        mUser = user;
     }
 
     public User getParsedUser() {
@@ -33,6 +40,7 @@ public class ParseUser implements DataRepository.workUpdateListener  {
                 }
                 else{
                     mUser.setAllPreviousWorks(null);
+                    mParseListener.onParsedDataArrived(mUser);
 
                 }
             }

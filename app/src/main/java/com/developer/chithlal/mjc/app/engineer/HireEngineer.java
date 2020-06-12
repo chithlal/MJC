@@ -1,6 +1,8 @@
 package com.developer.chithlal.mjc.app.engineer;
 
 import android.os.Bundle;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -14,6 +16,7 @@ import com.developer.chithlal.mjc.app.util.ProgressViewUtil;
 import com.developer.chithlal.mjc.databinding.ActivityHireEngineerBinding;
 import com.developer.chithlal.mjc.root.App;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,6 +30,9 @@ public class HireEngineer extends AppCompatActivity implements HireEngineerContr
     HireEngineerContract.Presenter mHireEngineerPresenter;
     private EngineersListAdapter mEngineersListAdapter;
     private ProgressViewUtil mProgressViewUtil;
+    private boolean isListLoadedOnce = false;
+    private List<User> listEngineers = new ArrayList<>();
+    private int pageNumber = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +47,7 @@ public class HireEngineer extends AppCompatActivity implements HireEngineerContr
         mToolbar=mBinding.hireEngToolbar;
 
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-        mToolbar.setTitle("");
+        mToolbar.setTitle("Engineers");
         mToolbar.setEnabled(true);
         setSupportActionBar(mToolbar);
         ActionBar mActionBar = getSupportActionBar();
@@ -50,32 +56,57 @@ public class HireEngineer extends AppCompatActivity implements HireEngineerContr
        // mHireEngineerPresenter = new HireEngineerPresenter(this,this);
        // mHireEngineerPresenter.setUpUi();
         mBinding.rvHireEngineer.setLayoutManager(new LinearLayoutManager(this));
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_anim_fall_down);
+        mBinding.rvHireEngineer.setLayoutAnimation(animation);
+        mEngineersListAdapter = new EngineersListAdapter(this,listEngineers);
+        mBinding.rvHireEngineer.setAdapter(mEngineersListAdapter);
+        mEngineersListAdapter.setListPositionListener(new ListPositionListener() {
+            @Override
+            public void onListEndReached(int position) {
+                if (mEngineersListAdapter!=null)
+                {   pageNumber++;
+                    mHireEngineerPresenter.getNextPageOfList(pageNumber);
+                }
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mProgressViewUtil.showLoading("Hold on,Searching for engineers..");
-        mHireEngineerPresenter.setUpUi(this,this);
+        if (!isListLoadedOnce) {
+            mProgressViewUtil.showLoading("Hold on,Searching for engineers..");
+
+            mHireEngineerPresenter.setUpUi(this, this);
+        }
 
     }
 
     @Override
-    public void updateList(List<User> engineerList) {
-        mEngineersListAdapter = new EngineersListAdapter(this,engineerList);
-        mBinding.rvHireEngineer.setAdapter(mEngineersListAdapter);
+    public void updateList(List<User> engineerList,int pageNumber) {
+
+
+            mEngineersListAdapter.updateList(engineerList);
+
+
         mProgressViewUtil.cancel();
+        isListLoadedOnce = true;
 
     }
 
     @Override
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        mProgressViewUtil.cancel();
     }
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    public interface ListPositionListener{
+        void onListEndReached(int position);
     }
 
 }

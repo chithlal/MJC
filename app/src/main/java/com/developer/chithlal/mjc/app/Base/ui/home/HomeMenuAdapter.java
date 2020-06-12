@@ -13,15 +13,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.developer.chithlal.mjc.R;
 import com.developer.chithlal.mjc.app.BuildingSpec.BuildingSpecActivity;
-import com.developer.chithlal.mjc.app.construction_history.ConstructionHistory;
 import com.developer.chithlal.mjc.app.engineer.User;
 import com.developer.chithlal.mjc.root.App;
+import com.developer.chithlal.mjc.root.account_manager.AccountManager;
 
 import java.util.List;
 
@@ -54,7 +53,8 @@ public class HomeMenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         holder.menuImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               User user =  ((App)((Activity)mMContext).getApplication()).getUser();
+                AccountManager accountManager = new AccountManager(mMContext);
+               User user =  accountManager.getUser();
                if(user == null)
                {
                    Toast.makeText(mMContext, "Something went wrong! User not available", Toast.LENGTH_SHORT).show();
@@ -63,10 +63,6 @@ public class HomeMenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
                else {
                    if (user.isUserMode()) {
                        Intent menuIntent = new Intent(mMContext, BuildingSpecActivity.class);
-                       menuIntent.putExtra(BUILDING_TYPE, mBuildingType);
-                       mMContext.startActivity(menuIntent);
-                   } else {
-                       Intent menuIntent = new Intent(mMContext, ConstructionHistory.class);
                        menuIntent.putExtra(BUILDING_TYPE, mBuildingType);
                        mMContext.startActivity(menuIntent);
                    }

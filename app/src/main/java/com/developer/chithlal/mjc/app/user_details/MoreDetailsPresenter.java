@@ -47,8 +47,10 @@ public class MoreDetailsPresenter implements MoreDetailContract.Presenter, Updat
     }
 
     private void uploadIDCard(User user) {
-
+        if (mView.getIdProofUri()!=null)
         mUploadUtil.uploadFile(mView.getIdProofUri(),null,UPLOAD_TYPE_USER_ID_PROOF,user.getUserId());
+        else
+            mView.showWorkDetailFragment();
     }
 
     @Override
@@ -89,7 +91,7 @@ public class MoreDetailsPresenter implements MoreDetailContract.Presenter, Updat
         {
                 mView.dismissDialog();
                 uploadIDCard(user);
-                mView.showMessage("Uploading Data please wait!");
+               /* mView.showMessage("Uploading Data please wait!");*/
 
             }
             else {

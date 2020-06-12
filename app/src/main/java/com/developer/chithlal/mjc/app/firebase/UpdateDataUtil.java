@@ -109,7 +109,7 @@ public class UpdateDataUtil implements UploadUtil.UploadProgressListener{
                             public void onSuccess(DocumentReference documentReference) {
                                 Log.d(TAG, "onSuccess: getId():"+documentReference.getId()+" Path:"+documentReference.getPath());
                                 work.setFireStoreRef(documentReference.getPath());
-
+                                work.setWorkId(documentReference.getId());
                                 updateWork(work);
                                 Log.d(TAG, "onSuccess: work updated");
                             }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.developer.chithlal.mjc.root.App;
+import com.developer.chithlal.mjc.root.account_manager.AccountManager;
 
 public class AddWorkPresenter implements AddworkContract.Presenter {
     AddworkContract.Model mAddworkModel;
@@ -26,7 +27,8 @@ public class AddWorkPresenter implements AddworkContract.Presenter {
 
     @Override
     public void onSaveClicked(Work work) {
-        String uid = ((App)((Activity)(mContext)).getApplication()).getUser().getUserId();
+        AccountManager accountManager = new AccountManager(mContext);
+        String uid = accountManager.getUserId();
         work.setEngineerId(uid);
         mAddworkModel.updateWork(work);
 

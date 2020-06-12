@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:typeface">serif</item>
+        <item name="android:typeface">sans</item>
     </style>
     <style name="AppShadow" parent="Theme.MaterialComponents.Light">
         <item name="android:translationY">0dp</item>
@@ -32,5 +32,11 @@
         <item name="cornerSizeTopLeft">0dp</item>
         <item name="cornerSizeBottomRight">28dp</item>
         <item name="cornerSizeBottomLeft">28dp</item>
+    </style>
+    <!--DatePicker theme-->
+    <style name="DialogTheme" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorAccent">@color/color_light_blue</item>
+        <item name="colorPrimary">@color/color_light_blue</item>
+        <item name="colorPrimaryDark">@color/app_black</item>
     </style>
 </resources>

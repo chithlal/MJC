@@ -14,12 +14,14 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.developer.chithlal.mjc.R;
+import com.developer.chithlal.mjc.app.Base.BaseActivity;
 import com.developer.chithlal.mjc.app.work.AddWorkDetailsFragment;
 import com.developer.chithlal.mjc.app.work.Work;
 import com.developer.chithlal.mjc.app.engineer.User;
 import com.developer.chithlal.mjc.app.util.ProgressViewUtil;
 import com.developer.chithlal.mjc.databinding.ActivityMoreDetailsBinding;
 import com.developer.chithlal.mjc.root.App;
+import com.developer.chithlal.mjc.root.account_manager.AccountManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,6 +101,7 @@ public class MoreDetailsActivity extends AppCompatActivity implements MoreDetail
 
     @Override
     public void showWorkDetailFragment() {
+        mToolbar.setTitle("Add your works");
         mBinding.moreDetailsFragmentFrame.setVisibility(View.VISIBLE);
         mFragmentManager = getSupportFragmentManager();
         mFragmentManager.beginTransaction()
@@ -121,7 +124,9 @@ public class MoreDetailsActivity extends AppCompatActivity implements MoreDetail
 
     @Override
     public void onRegistrationFinished() {
-        showMessage("Registration completed,Login to continue!");
+        showMessage("Registration completed,Welcome!");
+        Intent intent =  new Intent(this, BaseActivity.class);
+        startActivity(intent);
         finish();
     }
 
@@ -169,7 +174,15 @@ public class MoreDetailsActivity extends AppCompatActivity implements MoreDetail
     @Override
     public void onAddWorkSkipped() {
         showMessage("Registration completed,Login to continue!");
+        Intent intent = new Intent(this,BaseActivity.class);
+        startActivity(intent);
+        if (mUser!=null)
+        postLogin(mUser);
+        else
+            showMessage("No user available!");
         finish();
     }
-
+    void postLogin(User user){
+        AccountManager accountManager = new AccountManager(this); //Setting the user  for the entire app session
+        accountManager.loginUser(user);}
 }

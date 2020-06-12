@@ -91,9 +91,16 @@ public class LoginUtil {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-                User user = documentSnapshot.toObject(User.class);
+                try {
 
-                updateUI(user,"null");
+                    User user = documentSnapshot.toObject(User.class);
+                    user.setAllPreviousWorks(null);
+                    updateUI(user, "null");
+                }
+                catch (RuntimeException e){
+                    Log.d(TAG, "onSuccess: error" );
+                    updateUI(null,"Something went wrong! Will get back to you");
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

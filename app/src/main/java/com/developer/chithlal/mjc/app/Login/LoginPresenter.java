@@ -30,11 +30,6 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void onLoginSuccess(User user) {
-        mAccountManager = new AccountManager(mLoginView.getCurrentContext());
-        mAccountManager.loginUser(user);
-        mAccountManager.saveUser(user);
-        ((App)((Activity)mLoginView.getCurrentContext()).getApplication()).setAccountManager(mAccountManager);
-
         mLoginView.onLoginSuccess(user);
         mLoginView.showMessage("Login success!");
 

@@ -34,14 +34,14 @@ public class SignupUtil {
     private FirebaseFirestore fStore;
     String userID;
 
-    public void updateUI(User account) {
+    public void updateUI(User account,String message) {
         if (account != null) {
             //Toast.makeText(this,"U Signed In successfully",Toast.LENGTH_LONG).show();
 
             if (mModel != null)
                 mModel.onRegistrationSuccess(account);
         } else {
-            mModel.onRegistrationFailed("Something went wrong! try again");
+            mModel.onRegistrationFailed(message);
         }
     }
 
@@ -62,14 +62,16 @@ public class SignupUtil {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("FIREBASE", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            userID = mAuth.getCurrentUser().getUid();
+                            /*userID = mAuth.getCurrentUser().getUid();*/
                             //DocumentReference documentReference = fStore.collection("Users").document(userID);
+                            if (user!=null)
                            saveDetails(signUpEvent,user);
 
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            updateUI(null);
+                            if (task.getException()!=null)
+                            updateUI(null,task.getException().getLocalizedMessage());
 
                         }
                     }
@@ -83,14 +85,15 @@ public class SignupUtil {
         newUser.setPhone(signUpEvent.getPhone());
         newUser.setUserMode(signUpEvent.getUserType());
         newUser.setDoj(getCurrentDate());
+        newUser.setUserId(user.getUid());
 
         fStore.collection("/App/root_app/users").document(user.getUid()).set(newUser)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.d("FIREBASE", "DocumentSnapshot successfully written!");
-                newUser.setUserId(user.getUid());
-                updateUI(newUser);
+
+                updateUI(newUser,"Account created!");
 
             }
         })
@@ -98,7 +101,7 @@ public class SignupUtil {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w("FIREBASE", "Error writing document", e);
-                        mModel.onRegistrationFailed("Something went wrong try again!");
+                        mModel.onRegistrationFailed(e.getLocalizedMessage());
                     }
                 });
 
