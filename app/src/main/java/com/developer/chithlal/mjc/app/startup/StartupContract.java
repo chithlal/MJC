@@ -2,7 +2,7 @@ package com.developer.chithlal.mjc.app.startup;
 
 import android.content.Context;
 
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 
 public interface StartupContract {
     interface View{

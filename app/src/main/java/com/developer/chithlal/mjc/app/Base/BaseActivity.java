@@ -1,9 +1,7 @@
 package com.developer.chithlal.mjc.app.Base;
 
-import static com.developer.chithlal.mjc.app.util.Constants.PERMISSION_CAMERA;
 import static com.developer.chithlal.mjc.app.util.Constants.PERMISSION_COARSE_LOCATION;
 import static com.developer.chithlal.mjc.app.util.Constants.PERMISSION_REQ_CODE;
-import static com.developer.chithlal.mjc.app.util.Constants.PERMISSION_STORAGE_WRITE;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -11,10 +9,9 @@ import android.widget.Toast;
 
 
 import com.developer.chithlal.mjc.R;
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.developer.chithlal.mjc.app.util.PermissionManager;
 import com.developer.chithlal.mjc.databinding.ActivityBaseBinding;
-import com.developer.chithlal.mjc.root.App;
 import com.developer.chithlal.mjc.root.account_manager.AccountManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,7 +22,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
 import androidx.navigation.NavInflater;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;

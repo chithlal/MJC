@@ -3,10 +3,9 @@ package com.developer.chithlal.mjc.app.database;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.developer.chithlal.mjc.app.util.Constants;
 import com.developer.chithlal.mjc.app.util.SharedPreferenceManger;
 

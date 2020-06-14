@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -22,12 +20,10 @@ import com.developer.chithlal.mjc.R;
 
 import com.developer.chithlal.mjc.app.Base.BaseActivity;
 import com.developer.chithlal.mjc.app.IntroActivity.IntroActivity;
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.developer.chithlal.mjc.app.firebase.ParseUser;
-import com.developer.chithlal.mjc.app.signup.SignupActivity;
 import com.developer.chithlal.mjc.app.util.ConnectivityUtil;
 import com.developer.chithlal.mjc.app.util.ProgressViewUtil;
-import com.developer.chithlal.mjc.root.App;
 import com.developer.chithlal.mjc.root.account_manager.AccountManager;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View,

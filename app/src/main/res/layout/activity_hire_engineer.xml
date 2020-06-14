@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.engineer.HireEngineer">
+    tools:context=".app.engineers_list.EngineersListActivity">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
@@ -18,6 +18,18 @@
         android:id="@+id/rv_hire_engineer"
         android:layout_marginTop="@dimen/toolbar_height"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_emptyEngineerList_text"
+        android:text="@string/text_empty_engineers_list"
+        android:textSize="@dimen/text_size_home_item"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_hire_engineer"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hire_eng_toolbar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

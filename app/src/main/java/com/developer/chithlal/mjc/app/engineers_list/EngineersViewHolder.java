@@ -1,4 +1,4 @@
-package com.developer.chithlal.mjc.app.engineer;
+package com.developer.chithlal.mjc.app.engineers_list;
 
 import android.view.View;
 import android.widget.RatingBar;

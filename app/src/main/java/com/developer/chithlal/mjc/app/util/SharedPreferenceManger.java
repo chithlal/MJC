@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 
 public class SharedPreferenceManger {
 

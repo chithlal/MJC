@@ -4,7 +4,6 @@ import static com.developer.chithlal.mjc.app.util.Constants.GALLERY_REQUEST_CODE
 import static com.developer.chithlal.mjc.app.util.Constants.UPLOAD_TYPE_USER_ID_PROOF;
 import static com.developer.chithlal.mjc.app.util.Constants.USER_OBJECT;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,7 +17,7 @@ import com.developer.chithlal.mjc.R;
 import com.developer.chithlal.mjc.app.Base.BaseActivity;
 import com.developer.chithlal.mjc.app.dialogs.ImageSelectorUtil;
 import com.developer.chithlal.mjc.app.work.Work;
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.developer.chithlal.mjc.app.firebase.UpdateDataUtil;
 import com.developer.chithlal.mjc.app.firebase.UploadUtil;
 import com.developer.chithlal.mjc.app.util.ProgressViewUtil;

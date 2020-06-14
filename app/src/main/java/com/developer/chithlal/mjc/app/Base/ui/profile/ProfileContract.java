@@ -2,7 +2,7 @@ package com.developer.chithlal.mjc.app.Base.ui.profile;
 
 import android.content.Context;
 
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 
 public interface ProfileContract {
 

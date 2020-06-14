@@ -1,7 +1,6 @@
 package com.developer.chithlal.mjc.app.signup;
 
 import static com.developer.chithlal.mjc.app.Login.LoginConstants.INVALID_CRED;
-import static com.developer.chithlal.mjc.app.Login.LoginConstants.VALID_CRED;
 import static com.developer.chithlal.mjc.app.util.Constants.CONSUMER_MODE;
 import static com.developer.chithlal.mjc.app.util.Constants.KEY_USER_TYPE;
 import static com.developer.chithlal.mjc.app.util.Constants.USER_OBJECT;
@@ -13,24 +12,16 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.SyncStateContract;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.developer.chithlal.mjc.R;
-import com.developer.chithlal.mjc.app.Login.LoginConstants;
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.developer.chithlal.mjc.app.user_details.ConsumerDetailsActivity;
 import com.developer.chithlal.mjc.app.user_details.MoreDetailsActivity;
 import com.developer.chithlal.mjc.app.util.Constants;
 import com.developer.chithlal.mjc.app.util.ProgressViewUtil;
-import com.developer.chithlal.mjc.root.account_manager.AccountManager;
-import com.google.firebase.FirebaseApp;
-
-
-import java.util.Calendar;
-import java.util.List;
 
 public class  SignupActivity extends AppCompatActivity implements SignUpContract.View{
 

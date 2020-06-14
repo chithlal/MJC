@@ -32,7 +32,7 @@
         <activity android:name=".app.user_details.ConsumerDetailsActivity" />
         <activity android:name=".app.user_details.MoreDetailsActivity" />
         <activity android:name=".app.UserProfile.UserProfileActivity" />
-        <activity android:name=".app.engineer.HireEngineer" />
+        <activity android:name=".app.engineers_list.EngineersListActivity" />
         <activity android:name=".app.BuildingSpec.BuildingSpecActivity" />
         <activity
             android:name=".app.Base.BaseActivity"

@@ -1,6 +1,6 @@
 package com.developer.chithlal.mjc.app.Login;
 
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.developer.chithlal.mjc.app.firebase.LoginUtil;
 
 public class LoginModel implements LoginContract.Model {

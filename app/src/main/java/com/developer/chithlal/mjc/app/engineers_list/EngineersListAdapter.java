@@ -1,4 +1,4 @@
-package com.developer.chithlal.mjc.app.engineer;
+package com.developer.chithlal.mjc.app.engineers_list;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.developer.chithlal.mjc.R;
 import com.developer.chithlal.mjc.app.UserProfile.UserProfileActivity;
-import com.developer.chithlal.mjc.app.util.Constants.*;
 
 import java.util.List;
 
@@ -23,14 +22,15 @@ public class EngineersListAdapter extends RecyclerView.Adapter<EngineersViewHold
     public static final String RATE_PER_SQRFT_STRING = "₹";
 
 
-    private HireEngineer.ListPositionListener mListPositionListener;
+    private EngineersListActivity.ListPositionListener mListPositionListener;
+    private String mBuildingType;
 
     public EngineersListAdapter(Context context, List<User> engineerList) {
         mContext = context;
         mEngineerList = engineerList;
     }
     public void setListPositionListener(
-            HireEngineer.ListPositionListener listPositionListener) {
+            EngineersListActivity.ListPositionListener listPositionListener) {
         mListPositionListener = listPositionListener;
     }
     @NonNull
@@ -89,5 +89,9 @@ public class EngineersListAdapter extends RecyclerView.Adapter<EngineersViewHold
     public void updateList(List<User> updatedList){
         mEngineerList.addAll(updatedList);
         notifyItemRangeChanged(lastPosition,updatedList.size());
+    }
+    public void setBuildingType(String buildingType){
+
+        mBuildingType = buildingType;
     }
 }

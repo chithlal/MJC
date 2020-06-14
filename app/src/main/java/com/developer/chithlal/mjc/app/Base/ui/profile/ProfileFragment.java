@@ -2,8 +2,6 @@ package com.developer.chithlal.mjc.app.Base.ui.profile;
 
 import static android.content.ContentValues.TAG;
 
-import android.app.Activity;
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,9 +19,8 @@ import com.developer.chithlal.mjc.R;
 import com.developer.chithlal.mjc.app.Login.LoginActivity;
 import com.developer.chithlal.mjc.app.UserProfile.UserProfileActivity;
 
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.developer.chithlal.mjc.databinding.FragmentProfileBinding;
-import com.developer.chithlal.mjc.root.App;
 import com.developer.chithlal.mjc.root.account_manager.AccountManager;
 import com.developer.chithlal.mjc.root.di.ObjectFactory;
 

@@ -1,7 +1,7 @@
 package com.developer.chithlal.mjc.app.firebase;
 
 import com.developer.chithlal.mjc.app.work.Work;
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 
 import java.util.List;
 
@@ -46,6 +46,7 @@ public class ParseUser implements DataRepository.workUpdateListener  {
             }
             else {
                 parsedUser = mUser;
+                mParseListener.onParsedDataArrived(mUser);
             }
         }
     }

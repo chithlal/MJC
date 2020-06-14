@@ -1,9 +1,8 @@
 package com.developer.chithlal.mjc.root.di;
 
-import com.developer.chithlal.mjc.app.engineer.HireEngineer;
-import com.developer.chithlal.mjc.app.engineer.HireEngineerContract;
-import com.developer.chithlal.mjc.app.engineer.HireEngineerModel;
-import com.developer.chithlal.mjc.app.engineer.HireEngineerPresenter;
+import com.developer.chithlal.mjc.app.engineers_list.HireEngineerContract;
+import com.developer.chithlal.mjc.app.engineers_list.HireEngineerModel;
+import com.developer.chithlal.mjc.app.engineers_list.HireEngineerPresenter;
 
 import dagger.Module;
 import dagger.Provides;
