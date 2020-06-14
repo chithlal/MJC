@@ -3,7 +3,7 @@ package com.developer.chithlal.mjc.app.UserProfile;
 import android.content.Context;
 import android.net.Uri;
 
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 
 import java.util.List;
 

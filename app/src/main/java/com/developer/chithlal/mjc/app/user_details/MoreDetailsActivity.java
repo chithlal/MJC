@@ -17,7 +17,7 @@ import com.developer.chithlal.mjc.R;
 import com.developer.chithlal.mjc.app.Base.BaseActivity;
 import com.developer.chithlal.mjc.app.work.AddWorkDetailsFragment;
 import com.developer.chithlal.mjc.app.work.Work;
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.developer.chithlal.mjc.app.util.ProgressViewUtil;
 import com.developer.chithlal.mjc.databinding.ActivityMoreDetailsBinding;
 import com.developer.chithlal.mjc.root.App;

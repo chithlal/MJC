@@ -1,10 +1,7 @@
 package com.developer.chithlal.mjc.app.database;
 
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.developer.chithlal.mjc.app.work.Work;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;

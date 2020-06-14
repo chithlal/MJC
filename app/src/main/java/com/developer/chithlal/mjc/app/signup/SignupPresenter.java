@@ -3,7 +3,7 @@ package com.developer.chithlal.mjc.app.signup;
 import static com.developer.chithlal.mjc.app.util.Constants.SUCCESS_MESSAGE;
 
 import com.developer.chithlal.mjc.app.Login.LoginConstants;
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.developer.chithlal.mjc.app.util.Constants;
 
 public class SignupPresenter implements SignUpContract.Presenter {

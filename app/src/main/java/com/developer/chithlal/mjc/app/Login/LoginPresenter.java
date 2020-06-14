@@ -1,10 +1,6 @@
 package com.developer.chithlal.mjc.app.Login;
 
-import android.app.Activity;
-import android.app.Application;
-
-import com.developer.chithlal.mjc.app.engineer.User;
-import com.developer.chithlal.mjc.root.App;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.developer.chithlal.mjc.root.account_manager.AccountManager;
 
 public class LoginPresenter implements LoginContract.Presenter {

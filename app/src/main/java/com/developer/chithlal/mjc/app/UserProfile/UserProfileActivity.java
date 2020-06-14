@@ -4,7 +4,6 @@ import static com.developer.chithlal.mjc.app.util.Constants.GALLERY_REQUEST_CODE
 import static com.developer.chithlal.mjc.app.util.Constants.PROFILE_IMAGE_REQUEST;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,9 +22,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.developer.chithlal.mjc.R;
-import com.developer.chithlal.mjc.app.dialogs.ImageSelectorDialog;
 import com.developer.chithlal.mjc.app.dialogs.ImageSelectorUtil;
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.developer.chithlal.mjc.app.util.InputValidationhelper;
 import com.developer.chithlal.mjc.app.work.AddWorkDetailsFragment;
 import com.developer.chithlal.mjc.app.work.Work;
@@ -65,20 +63,22 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
     AccountManager mAccountManager;
     AddWorkDetailsFragment mAddWorkDetailsFragment = null;
     private FragmentManager mFragmentManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mBinding = ActivityUserProfileBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(mBinding.getRoot());
-        Intent userIntent=getIntent();
+        Intent userIntent = getIntent();
         mAccountManager = new AccountManager(this);
-        ((App)getApplication()).getAppComponent().injectUserProfile(this); //inject presenter object
+        ((App) getApplication()).getAppComponent().injectUserProfile(
+                this); //inject presenter object
 
-        if (savedInstanceState!=null){
-            uid = (String)savedInstanceState.get(KEY_UID);
+        if (savedInstanceState != null) {
+            uid = (String) savedInstanceState.get(KEY_UID);
             mBinding.userProfileLoadingView.setVisibility(View.VISIBLE);
             mPresenter.updateUserObject(uid);
-        }else {
+        } else {
 
 
             if (userIntent != null) {
@@ -93,8 +93,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
                 if (localUser != null) {
                     uid = mAccountManager.getUserId();
                     mUser = localUser;
-                }
-                else {
+                } else {
                     showMessage("User not available!");
                 }
             }
@@ -106,8 +105,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
                     if (uid.equals(mUser.getUserId())) {
                         enableEditButton(true);
                         isCurrentUserProfile = true;
-                    }
-                    else {
+                    } else {
                         enableEditButton(false);
                         isCurrentUserProfile = false;
                     }
@@ -119,13 +117,13 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
 
         mAddWorkListener = this;
 
-        mToolbar=mBinding.userProfileToolbar;
+        mToolbar = mBinding.userProfileToolbar;
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 
         mToolbar.setEnabled(true);
         setSupportActionBar(mToolbar);
         ActionBar mActionBar = getSupportActionBar();
-        if (mActionBar!=null) {
+        if (mActionBar != null) {
             mActionBar.setDisplayHomeAsUpEnabled(true);
             mBinding.actionBarTitle.setText("Profile");
         }
@@ -143,12 +141,11 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         mBinding.btUserProfileEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mBinding.btUserProfileEditButton.getText().toString().equals("Edit"))
-                enableEditMode();
-                else {
+                if (mBinding.btUserProfileEditButton.getText().toString().equals("Edit")) {
+                    enableEditMode();
+                } else {
 
                     saveUser();
-
                 }
             }
         });
@@ -161,15 +158,14 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
                     mAddWorkDetailsFragment = new AddWorkDetailsFragment(mAddWorkListener);
                     mFragmentManager = getSupportFragmentManager();
                     mFragmentManager.beginTransaction()
-                            .add(R.id.frame_user_profile_add_work,mAddWorkDetailsFragment)
+                            .add(R.id.frame_user_profile_add_work, mAddWorkDetailsFragment)
                             .commit();
                     mBinding.frameUserProfileAddWork.requestFocus();
                     mBinding.userProfileScrollView.scrollTo(
                             mBinding.userProfileScrollView.getScrollX(),
                             mBinding.userProfileScrollView.getBottom());
                     mBinding.btAddWork.setText("Cancel");
-                }
-                else {
+                } else {
                     mBinding.btAddWork.setText("Add works");
                     mBinding.frameUserProfileAddWork.setVisibility(View.GONE);
                     mFragmentManager.beginTransaction().
@@ -183,7 +179,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         mBinding.userProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isEditEnabled){
+                if (isEditEnabled) {
                     selectImage(PROFILE_IMAGE_REQUEST);
                 }
             }
@@ -193,13 +189,13 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putString(KEY_UID,uid);
+        outState.putString(KEY_UID, uid);
         super.onSaveInstanceState(outState);
     }
 
     private User getLocalUser() {
 
-      return   mAccountManager.getUser();
+        return mAccountManager.getUser();
     }
 
     private void enableEditMode() {
@@ -214,17 +210,19 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         mBinding.cvUserProfileIdCard.setVisibility(View.GONE);
         mBinding.btUserProfileHireMe.setVisibility(View.GONE);
 
-        if (mUser.isUserMode())
-        mBinding.ivMemberSince.setVisibility(View.GONE);
+        if (mUser.isUserMode()) {
+            mBinding.ivMemberSince.setVisibility(View.GONE);
+        }
 
-       // mBinding.etUserProfilePhone.setVisibility(View.VISIBLE);
+        // mBinding.etUserProfilePhone.setVisibility(View.VISIBLE);
         mBinding.etUserProfileAddress.setText(mUser.getAddress());
         mBinding.etUserProfileAge.setText(mUser.getAge());
 
-        if (mUser.getProfession() != null && (mUser.getProfession().isEmpty()))
+        if (mUser.getProfession() != null && (mUser.getProfession().isEmpty())) {
             mBinding.tvUserProfileProfessionEdit.setText("Profession");
-        else
+        } else {
             mBinding.tvUserProfileProfession.setText(mUser.getProfession());
+        }
 
         mBinding.ivUserProfilePhone.setVisibility(View.GONE);
         mBinding.tvUserProfileProfessionEdit.setVisibility(View.VISIBLE);
@@ -236,8 +234,9 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         mBinding.ivEditProfession.setVisibility(View.VISIBLE);
         mBinding.ivUserProfileAddress.setVisibility(View.VISIBLE);
 
-        if (!mUser.isUserMode())
-        mBinding.cvUserProfileAddwork.setVisibility(View.VISIBLE);
+        if (!mUser.isUserMode()) {
+            mBinding.cvUserProfileAddwork.setVisibility(View.VISIBLE);
+        }
 
         mBinding.tvBsUpload.setVisibility(View.VISIBLE);
 
@@ -245,6 +244,9 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
             mBinding.etUserProfileFee.setText(String.valueOf(mUser.getFeePerHour()));
             mBinding.etUserProfileFee.setVisibility(View.VISIBLE);
             mBinding.ivMemberSince.setImageResource(R.drawable.ic_payment);
+            mBinding.userProfileLayoutNumberOfWorkers.setVisibility(View.VISIBLE);
+            mBinding.tvUserProfileNumberWorkers.setVisibility(View.GONE);
+            mBinding.etUserProfileNumberofWorkers.setVisibility(View.VISIBLE);
         }
 
 
@@ -259,7 +261,6 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         });
 
 
- 
         isEditEnabled = true;
     }
 
@@ -271,7 +272,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
             Log.d(TAG, "onResume: called");
             mPresenter.setUi(this);
         }
-        if(isCurrentUserProfile){
+        if (isCurrentUserProfile) {
             mUser = getLocalUser();
         }
 
@@ -280,7 +281,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
     @Override
     protected void onPause() {
         super.onPause();
-        mAccountManager.updateUser();
+
         mBinding.userProfileLoadingView.setVisibility(View.GONE);
         mBinding.clUserProfile.setVisibility(View.GONE);
     }
@@ -294,15 +295,14 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
     @Override
     public void setUser(User user) {
         mUser = user;
-        if (!isEditEnabled)
-        {
+        if (!isEditEnabled) {
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     setUserDetails(mUser);
                 }
-            },1000);
+            }, 1000);
         }
 
 
@@ -315,46 +315,48 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
 
     @Override
     public void showMessage(String message) {
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 
     }
 
     @Override
     public void setPreviousWorkImages(List<SliderItem> images) {
-        mBinding.slider.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false));
-        mBinding.slider.setAdapter(new ImageSliderAdpater(this,images));
-
+        mBinding.slider.setLayoutManager(
+                new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        mBinding.slider.setAdapter(new ImageSliderAdpater(this, images));
 
 
     }
 
     @Override
     public void setProfessionList(List<String> professionList) {
-        mOptionItemAdapter = new OptionItemAdapter(this,professionList,this,false);
-        mBinding.rvProfessionList.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
+        mOptionItemAdapter = new OptionItemAdapter(this, professionList, this, false);
+        mBinding.rvProfessionList.setLayoutManager(
+                new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         mBinding.rvProfessionList.setAdapter(mOptionItemAdapter);
     }
 
 
-
     @Override
     public void refreshIdCardImage() {
-        if (selectedIdProof!=null)
-        if (mBinding.ivUserProfileIdProofImage.getVisibility()==View.VISIBLE)
-            Glide.with(this)
-                    .load(selectedIdProof)
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_image_black_24dp)
-                    .into(mBinding.ivUserProfileIdProofImage);
+        if (selectedIdProof != null) {
+            if (mBinding.ivUserProfileIdProofImage.getVisibility() == View.VISIBLE) {
+                Glide.with(this)
+                        .load(selectedIdProof)
+                        .centerCrop()
+                        .placeholder(R.drawable.ic_image_black_24dp)
+                        .into(mBinding.ivUserProfileIdProofImage);
+            }
+        }
     }
 
-    private void setUserDetails(User user){
+    private void setUserDetails(User user) {
 
-        if (uid!=null&&user.getUserId()!=null){
+        if (uid != null && user.getUserId() != null) {
             mBinding.tvUserProfileAddress.setText(user.getAddress());
             mBinding.tvUserProfileAge.setText(user.getAge());
-            String since_string = " Member since "+user.getDoj();
-            mBinding.tvUserProfileMembership.setText( since_string);
+            String since_string = " Member since " + user.getDoj();
+            mBinding.tvUserProfileMembership.setText(since_string);
             mBinding.tvUserProfileName.setText(user.getName());
             mBinding.tvUserProfilePhone.setText(user.getPhone());
             mBinding.tvUserProfileProfession.setText(user.getProfession());
@@ -362,6 +364,13 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
             mBinding.userProfileLoadingView.setVisibility(View.GONE);
             mBinding.clUserProfile.setVisibility(View.GONE);
             mBinding.userProfileScrollView.setVisibility(View.VISIBLE);
+            String workersNeeded;
+            if (mUser.getNumberOfWorkers() != 0) {
+                workersNeeded = String.valueOf(mUser.getNumberOfWorkers()) + " Workers";
+            } else {
+                workersNeeded = "No workers added";
+            }
+            mBinding.tvUserProfileNumberWorkers.setText(workersNeeded);
             Glide.with(this)
                     .load(user.getIDProof())
                     .centerCrop()
@@ -375,11 +384,11 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
 
 
             //if its current user show all the details
-            if (uid.equals(user.getUserId())){
+            if (uid.equals(user.getUserId())) {
                 mBinding.btUserProfileHireMe.setVisibility(View.GONE);
-                if(user.isUserMode())
+                if (user.isUserMode()) {
                     mBinding.slider.setVisibility(View.GONE);
-                else {
+                } else {
                     mBinding.slider.setVisibility(View.VISIBLE);
                     mBinding.tvUserProfilePreivousWorkText.setVisibility(View.VISIBLE);
                     mBinding.llUserProfileRatingRow.setVisibility(View.VISIBLE);
@@ -389,12 +398,14 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
                     mBinding.tvUserProfilePayment.setText(String.valueOf(user.getFeePerHour()));
                     mBinding.tvUserProfileWorksCount.setText(String.valueOf(user.getWorks()));
                     mBinding.rbUserProfileRatingStar.setRating(user.getRating());
+                    mBinding.userProfileLayoutNumberOfWorkers.setVisibility(View.VISIBLE);
+                    mBinding.tvUserProfileNumberWorkers.setVisibility(View.VISIBLE);
+                    mBinding.etUserProfileNumberofWorkers.setVisibility(View.GONE);
                 }
 
-            }
-            else{
+            } else {
 
-                mBinding.tvUserProfilePayment.setText(String.valueOf((int)user.getFeePerHour()));
+                mBinding.tvUserProfilePayment.setText(String.valueOf((int) user.getFeePerHour()));
                 mBinding.tvUserProfileRating.setText(String.valueOf(user.getRating()));
                 mBinding.tvUserProfileWorksCount.setText(String.valueOf(user.getWorks()));
                 mBinding.rbUserProfileRatingStar.setRating(user.getRating());
@@ -411,6 +422,9 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
                 mBinding.cvUserProfileIdCard.setVisibility(View.GONE);
                 mBinding.tvUserProfileIdProofTitle.setVisibility(View.GONE);
                 mBinding.linUserProfileIdProofSeparator.setVisibility(View.GONE);
+                mBinding.userProfileLayoutNumberOfWorkers.setVisibility(View.VISIBLE);
+                mBinding.tvUserProfileNumberWorkers.setVisibility(View.VISIBLE);
+                mBinding.etUserProfileNumberofWorkers.setVisibility(View.GONE);
             }
             mBinding.userProfileLoadingView.setVisibility(View.GONE);
             mBinding.clUserProfile.setVisibility(View.GONE);
@@ -419,9 +433,10 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         }
         isUiLoaded = true;
     }
-    private void selectImage(int REQ_CODE){
-       ImageSelectorUtil imageSelectorUtil = new ImageSelectorUtil(this,REQ_CODE,this);
-       imageSelectorUtil.openSelector();
+
+    private void selectImage(int REQ_CODE) {
+        ImageSelectorUtil imageSelectorUtil = new ImageSelectorUtil(this, REQ_CODE, this);
+        imageSelectorUtil.openSelector();
     }
 /*
     @Override
@@ -484,49 +499,68 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         if (mUser != null) {
             dummyUser = mUser;
             if (inputValidationhelper.validate(mBinding.etUserProfileAddress,
-                    InputValidationhelper.TYPE_TEXT))
+                    InputValidationhelper.TYPE_TEXT)) {
                 dummyUser.setAddress(mBinding.etUserProfileAddress.getText().toString());
-            else isDataValid = false;
+            } else {
+                isDataValid = false;
+            }
             if (inputValidationhelper.validate(mBinding.etUserProfileAge,
-                    InputValidationhelper.TYPE_DIGIT))
+                    InputValidationhelper.TYPE_DIGIT)) {
                 dummyUser.setAge(mBinding.etUserProfileAge.getText().toString());
-            else isDataValid = false;
-            if (!mBinding.etUserProfileAddress.getText().toString().isEmpty())
+            } else {
+                isDataValid = false;
+            }
+            if (!mBinding.etUserProfileAddress.getText().toString().isEmpty()) {
                 dummyUser.setProfession(mBinding.tvUserProfileProfessionEdit.getText().toString());
-            else isDataValid = false;
-            if (!mUser.isUserMode()){
+            } else {
+                isDataValid = false;
+            }
+            if (!mUser.isUserMode()) {
                 if (inputValidationhelper.validate(mBinding.etUserProfileFee,
-                        InputValidationhelper.TYPE_DIGIT))
+                        InputValidationhelper.TYPE_DIGIT)) {
                     dummyUser.setFeePerHour(
                             Float.parseFloat(mBinding.etUserProfileFee.getText().toString()));
-                else isDataValid = false;
+                } else {
+                    isDataValid = false;
+                }
+
+                if (inputValidationhelper.validate(mBinding.etUserProfileNumberofWorkers,
+                        InputValidationhelper.TYPE_DIGIT)) {
+                    dummyUser.setNumberOfWorkers(Integer.parseInt(
+                            mBinding.etUserProfileNumberofWorkers.getText().toString()));
+                } else {
+                    isDataValid = false;
+                }
             }
 
 
         } else {
             showMessage("User not found");
             dummyUser = new User("No Name");
-             isDataValid = false;
+            isDataValid = false;
         }
-        if (isDataValid){
+        if (isDataValid) {
             mUser = dummyUser;
-        mPresenter.saveUserData(mUser);
-        //setUserDetails(mUser);
-        disableEditMode();
-        mBinding.btUserProfileEditButton.setText("Edit");
+            mPresenter.saveUserData(mUser);
+            //setUserDetails(mUser);
+            disableEditMode();
+            mBinding.btUserProfileEditButton.setText("Edit");
+        } else {
+            showMessage("Invalid data!");
+        }
     }
-         else
-        showMessage("Invalid data!");
-    }
-    void disableEditMode(){
+
+    void disableEditMode() {
         mBinding.tvUserProfilePhone.setVisibility(View.VISIBLE);
         mBinding.tvUserProfileMembership.setVisibility(View.VISIBLE);
         mBinding.tvUserProfileAge.setVisibility(View.VISIBLE);
         mBinding.tvUserProfileAddress.setVisibility(View.VISIBLE);
-        if (!mUser.isUserMode())
-        mBinding.tvUserProfilePreivousWorkText.setVisibility(View.VISIBLE);
-        if (!mUser.isUserMode())
-        mBinding.slider.setVisibility(View.VISIBLE);
+        if (!mUser.isUserMode()) {
+            mBinding.tvUserProfilePreivousWorkText.setVisibility(View.VISIBLE);
+        }
+        if (!mUser.isUserMode()) {
+            mBinding.slider.setVisibility(View.VISIBLE);
+        }
         mBinding.cvUserProfileIdCard.setVisibility(View.VISIBLE);
         mBinding.btUserProfileHireMe.setVisibility(View.GONE);
         mBinding.ivMemberSince.setVisibility(View.VISIBLE);
@@ -543,6 +577,11 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
         mBinding.tvBsUpload.setVisibility(View.GONE);
         mBinding.etUserProfileFee.setVisibility(View.GONE);
         mBinding.ivMemberSince.setImageResource(R.drawable.ic_member);
+        if (!mUser.isUserMode()) {
+            mBinding.userProfileLayoutNumberOfWorkers.setVisibility(View.VISIBLE);
+            mBinding.tvUserProfileNumberWorkers.setVisibility(View.VISIBLE);
+            mBinding.etUserProfileNumberofWorkers.setVisibility(View.GONE);
+        }
         isEditEnabled = false;
 
 
@@ -552,7 +591,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
     public void onWorkAdded(Work work) {
         mUser.addWork(work);
         showMessage("Work added");
-       // mAddWorkDetailsFragment = null;
+        // mAddWorkDetailsFragment = null;
         mBinding.frameUserProfileAddWork.setVisibility(View.GONE);
         mBinding.btAddWork.setText("Add works");
     }
@@ -563,18 +602,20 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
     }
 
 
-    void enableEditButton(boolean enable){
-        if (enable)
-        mBinding.btUserProfileEditButton.setVisibility(View.VISIBLE);
-        else mBinding.btUserProfileEditButton.setVisibility(View.GONE);
-   }
+    void enableEditButton(boolean enable) {
+        if (enable) {
+            mBinding.btUserProfileEditButton.setVisibility(View.VISIBLE);
+        } else {
+            mBinding.btUserProfileEditButton.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         if (!isEditEnabled) {
             onBackPressed();
             return true;
-        }
-        else {
+        } else {
             mBinding.btUserProfileEditButton.setText("Edit");
             disableEditMode();
             return false;
@@ -584,22 +625,21 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
 
     @Override
     public void onPhotoSelected(Uri uri, int reqCode) {
-        if (reqCode == GALLERY_REQUEST_CODE){
+        if (reqCode == GALLERY_REQUEST_CODE) {
 
-                Uri selectedImage = uri;
-                selectedIdProof = selectedImage;
-                mBinding.cvUserProfileIdCard.setVisibility(View.VISIBLE);
-                Glide.with(this)
-                        .load(selectedImage)
-                        .centerCrop()
-                        .placeholder(R.drawable.ic_image_black_24dp)
-                        .error(R.drawable.ic_broken_image_black_24dp)
-                        .into(mBinding.ivUserProfileIdProofImage);
-                /* mBinding.ivUserProfileIdProofImage.setImageURI(selectedImage);*/
-                mBinding.tvBsUpload.setVisibility(View.GONE);
-                mPresenter.uploadIdCard(selectedImage,mUser.getUserId());
-            }
-        else if (reqCode==PROFILE_IMAGE_REQUEST){
+            Uri selectedImage = uri;
+            selectedIdProof = selectedImage;
+            mBinding.cvUserProfileIdCard.setVisibility(View.VISIBLE);
+            Glide.with(this)
+                    .load(selectedImage)
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_image_black_24dp)
+                    .error(R.drawable.ic_broken_image_black_24dp)
+                    .into(mBinding.ivUserProfileIdProofImage);
+            /* mBinding.ivUserProfileIdProofImage.setImageURI(selectedImage);*/
+            mBinding.tvBsUpload.setVisibility(View.GONE);
+            mPresenter.uploadIdCard(selectedImage, mUser.getUserId());
+        } else if (reqCode == PROFILE_IMAGE_REQUEST) {
             Uri selectedProfileImage = uri;
             Glide.with(this)
                     .load(selectedProfileImage)
@@ -607,7 +647,7 @@ public class UserProfileActivity extends AppCompatActivity implements UserProfil
                     .placeholder(R.drawable.ic_user_profile)
                     .error(R.drawable.ic_user_profile)
                     .into(mBinding.userProfileImage);
-            mPresenter.uploadProfileImage(selectedProfileImage,mUser.getUserId());
+            mPresenter.uploadProfileImage(selectedProfileImage, mUser.getUserId());
         }
     }
 

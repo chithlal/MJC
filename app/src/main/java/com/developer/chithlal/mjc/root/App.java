@@ -3,10 +3,7 @@ package com.developer.chithlal.mjc.root;
 import android.app.Application;
 
 
-import com.developer.chithlal.mjc.app.engineer.User;
-import com.developer.chithlal.mjc.app.firebase.DataRepository;
 import com.developer.chithlal.mjc.app.util.TypefaceUtil;
-import com.developer.chithlal.mjc.root.account_manager.AccountManagerInterface;
 import com.developer.chithlal.mjc.root.di.AppComponent;
 import com.developer.chithlal.mjc.root.di.AppModule;
 import com.developer.chithlal.mjc.root.di.DaggerAppComponent;

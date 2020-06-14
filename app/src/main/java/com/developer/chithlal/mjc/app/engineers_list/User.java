@@ -1,4 +1,4 @@
-package com.developer.chithlal.mjc.app.engineer;
+package com.developer.chithlal.mjc.app.engineers_list;
 
 import com.developer.chithlal.mjc.app.database.RealmUser;
 import com.developer.chithlal.mjc.app.database.RealmWork;
@@ -7,8 +7,6 @@ import com.developer.chithlal.mjc.app.work.Work;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.realm.RealmList;
 
 public class User implements Serializable {
 

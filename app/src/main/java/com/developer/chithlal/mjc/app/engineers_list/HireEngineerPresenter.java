@@ -1,4 +1,4 @@
-package com.developer.chithlal.mjc.app.engineer;
+package com.developer.chithlal.mjc.app.engineers_list;
 
 import android.content.Context;
 
@@ -24,6 +24,7 @@ public class HireEngineerPresenter implements HireEngineerContract.Presenter {
         mContext = context;
         mHireEngineerModel.setContext(context);
         mHireEngineerModel.setPresenter(this);
+        mHireEngineerModel.setBuildingType(mView.getBuildingType());
         mHireEngineerModel.getEngineersList(1);
 
 

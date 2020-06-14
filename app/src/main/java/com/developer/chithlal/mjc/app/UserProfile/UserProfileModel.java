@@ -11,7 +11,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.developer.chithlal.mjc.app.firebase.ParseUser;
 import com.developer.chithlal.mjc.app.firebase.UpdateDataUtil;
 import com.developer.chithlal.mjc.app.firebase.UploadUtil;

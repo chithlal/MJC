@@ -2,14 +2,12 @@ package com.developer.chithlal.mjc.app.UserProfile;
 
 import static com.developer.chithlal.mjc.app.util.Constants.NO_IMAGE_AVAILABLE_URL;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 
 
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.developer.chithlal.mjc.app.work.Work;
-import com.developer.chithlal.mjc.root.App;
 import com.developer.chithlal.mjc.root.account_manager.AccountManager;
 
 import java.util.ArrayList;
@@ -20,6 +18,7 @@ public class UserProfilePresenter implements UserProfileContract.Presenter {
     UserProfileContract.Model mModel;
     private UserProfileContract.View mView;
     private Context mContext;
+
     public UserProfilePresenter(UserProfileContract.Model model) {
         mModel = model;
         mModel.setPresenter(this);
@@ -27,10 +26,11 @@ public class UserProfilePresenter implements UserProfileContract.Presenter {
 
     @Override
     public void setUi(UserProfileContract.View view) {
-        mView =view;
+        mView = view;
         mView.setUser(mView.getUser());
-        if (!mView.getUser().isUserMode())
-        setupPreviousWorkImage(mView.getUser());
+        if (!mView.getUser().isUserMode()) {
+            setupPreviousWorkImage(mView.getUser());
+        }
 
     }
 
@@ -65,13 +65,14 @@ public class UserProfilePresenter implements UserProfileContract.Presenter {
     public void onUserDataUpdateInServer(User user) {
         AccountManager accountManager = new AccountManager(mContext);
         accountManager.saveUser(user);
+        accountManager.updateUser();
         mView.setUser(user);
         mView.showMessage("Data updated successfully!");
     }
 
     @Override
-    public void uploadIdCard(Uri imageUri,String userId) {
-        mModel.uploadIdCard(imageUri,userId);
+    public void uploadIdCard(Uri imageUri, String userId) {
+        mModel.uploadIdCard(imageUri, userId);
 
     }
 
@@ -87,14 +88,14 @@ public class UserProfilePresenter implements UserProfileContract.Presenter {
     }
 
     @Override
-    public void uploadProfileImage(Uri profileUri,String userId) {
-        mModel.uploadProfileImage(profileUri,userId);
+    public void uploadProfileImage(Uri profileUri, String userId) {
+        mModel.uploadProfileImage(profileUri, userId);
 
     }
 
     @Override
     public void onProfileImageUploadSuccess(String message) {
-            mView.showMessage(message);
+        mView.showMessage(message);
     }
 
     @Override
@@ -116,8 +117,8 @@ public class UserProfilePresenter implements UserProfileContract.Presenter {
     @Override
     public void onWorkDataResolved(User user) {
         List<SliderItem> slideList = new ArrayList<>();
-        int i=0;
-        if (user.getAllPreviousWorks()!=null&&user.getAllPreviousWorks().size()>0) {
+        int i = 0;
+        if (user.getAllPreviousWorks() != null && user.getAllPreviousWorks().size() > 0) {
             for (Work work : user.getAllPreviousWorks()) {
 
                 if (work.getImages().size() != 0 && work.getImages() != null) {
@@ -129,9 +130,8 @@ public class UserProfilePresenter implements UserProfileContract.Presenter {
 
             }
 
-        }
-        else{
-            slideList.add(new SliderItem(NO_IMAGE_AVAILABLE_URL,"",0));
+        } else {
+            slideList.add(new SliderItem(NO_IMAGE_AVAILABLE_URL, "", 0));
         }
         mView.setPreviousWorkImages(slideList);
     }

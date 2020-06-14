@@ -9,7 +9,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.developer.chithlal.mjc.app.work.Work;
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -100,34 +100,28 @@ public class UpdateDataUtil implements UploadUtil.UploadProgressListener{
 
     public void addWork(Work work){
         Log.d(TAG, "updateWork: updating work"+work.getWorkName());
-        if (work!=null){
 
-                mFirestore.collection("/App/root_app/works")
-                        .add(work)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Log.d(TAG, "onSuccess: getId():"+documentReference.getId()+" Path:"+documentReference.getPath());
-                                work.setFireStoreRef(documentReference.getPath());
-                                work.setWorkId(documentReference.getId());
-                                updateWork(work);
-                                Log.d(TAG, "onSuccess: work updated");
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.d(TAG, "onFailure: updating work failed");
-                                mUpdateListener.onUpdateFailed(e.getMessage());
-                            }
-                        });
+        mFirestore.collection("/App/root_app/works")
+                .add(work)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "onSuccess: getId():"+documentReference.getId()+" Path:"+documentReference.getPath());
+                        work.setFireStoreRef(documentReference.getPath());
+                        work.setWorkId(documentReference.getId());
+                        updateWork(work);
+                        Log.d(TAG, "onSuccess: work updated");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "onFailure: updating work failed");
+                        mUpdateListener.onUpdateFailed(e.getMessage());
+                    }
+                });
 
-           
 
-        }
-        else {
-            mUpdateListener.onUpdateFailed("Invalid work!");
-        }
     }
 
     public void deleteWork(Work work){

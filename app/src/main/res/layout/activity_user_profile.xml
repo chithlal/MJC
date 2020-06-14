@@ -380,6 +380,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:id="@+id/user_profile_layout_number_of_workers"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="@dimen/user_profile_icon_size"
+                    android:layout_height="@dimen/user_profile_icon_size"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/user_profile_icon_margin"
+                    android:id="@+id/iv_workers"
+                    android:src="@drawable/ic_number_of_workers_needed"
+                    app:civ_border_color="@color/app_black" />
+
+                <TextView
+                    android:id="@+id/tv_user_profile_number_workers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/user_profile_details_texview_margin"
+                    android:textSize="@dimen/user_profile_user_details_text_size"
+                    tools:text="Since 12/4/2019" />
+                <EditText
+                    android:id="@+id/et_user_profile_numberof_workers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    style="@style/EditeTextStyle"
+                    android:hint="@string/hint_numberofworkers"
+                    android:visibility="gone"
+                    android:minWidth="@dimen/user_profile_edit_text_min_width"
+                    android:layout_margin="@dimen/user_profile_details_texview_margin"
+                    android:textSize="@dimen/user_profile_user_details_text_size"
+                    tools:text="Since 12/4/2019" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView

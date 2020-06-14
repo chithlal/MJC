@@ -1,4 +1,4 @@
-package com.developer.chithlal.mjc.app.engineer;
+package com.developer.chithlal.mjc.app.engineers_list;
 
 import android.content.Context;
 
@@ -10,6 +10,7 @@ public interface HireEngineerContract  {
 
         void updateList(List<User> engineerList,int pageNumber);
         void showMessage(String message);
+        String getBuildingType();
 
     }
     interface Presenter{
@@ -19,10 +20,12 @@ public interface HireEngineerContract  {
         void onEngineerListUpdateFailed(String message);
 
 
+
     }
     interface Model  {
         void setContext(Context context);
         void setPresenter(HireEngineerContract.Presenter presenter);
+        void setBuildingType(String buildingType);
         void getEngineersList(int pageNumber);
 
     }

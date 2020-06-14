@@ -1,6 +1,6 @@
 package com.developer.chithlal.mjc.app.signup;
 
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.developer.chithlal.mjc.app.firebase.SignupUtil;
 
 public class SignupModel implements SignUpContract.Model {
