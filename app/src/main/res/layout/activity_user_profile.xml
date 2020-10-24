@@ -9,15 +9,22 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/user_profile_toolbar"
         app:layout_constraintTop_toTopOf="parent" >
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_margin="@dimen/margin_toolbar_content"
+            android:textSize="@dimen/font_size_actionbar"
+            android:textColor="@color/app_black"
+            android:id="@+id/action_bar_title"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="end"
             android:orientation="horizontal">
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,16 +39,33 @@
                 android:text="@string/string_edit" />
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
-    <com.facebook.shimmer.ShimmerFrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:shimmer_colored="false"
-        app:shimmer_shape="linear"
-        app:shimmer_auto_start="false"
-        android:id="@+id/user_profile_shimmer">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:id="@+id/cl_user_profile"
+        >
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/user_profile_loading_view"
+            android:layout_width="@dimen/loading_view_size"
+            android:layout_height="@dimen/loading_view_size"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/simple_loading" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:id="@+id/user_profile_scroll_view">
 
         <LinearLayout
@@ -248,6 +272,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/layout_mobile_number"
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -284,6 +309,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/layout_address"
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -291,6 +317,7 @@
                     android:layout_height="@dimen/user_profile_icon_size"
                     android:layout_gravity="top"
                     android:layout_margin="@dimen/user_profile_icon_margin"
+                    android:id="@+id/iv_userProfile_address"
                     android:src="@drawable/ic_address_round"
                     app:civ_border_color="@color/app_black" />
 
@@ -353,6 +380,44 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:id="@+id/user_profile_layout_number_of_workers"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="@dimen/user_profile_icon_size"
+                    android:layout_height="@dimen/user_profile_icon_size"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/user_profile_icon_margin"
+                    android:id="@+id/iv_workers"
+                    android:src="@drawable/ic_number_of_workers_needed"
+                    app:civ_border_color="@color/app_black" />
+
+                <TextView
+                    android:id="@+id/tv_user_profile_number_workers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/user_profile_details_texview_margin"
+                    android:textSize="@dimen/user_profile_user_details_text_size"
+                    tools:text="Since 12/4/2019" />
+                <EditText
+                    android:id="@+id/et_user_profile_numberof_workers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    style="@style/EditeTextStyle"
+                    android:hint="@string/hint_numberofworkers"
+                    android:visibility="gone"
+                    android:minWidth="@dimen/user_profile_edit_text_min_width"
+                    android:layout_margin="@dimen/user_profile_details_texview_margin"
+                    android:textSize="@dimen/user_profile_user_details_text_size"
+                    tools:text="Since 12/4/2019" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -396,6 +461,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_margin="@dimen/app_line_margin"
+                android:id="@+id/lin_user_profile_id_proof_separator"
                 android:background="@color/light_grey" />
 
             <TextView
@@ -403,6 +469,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/user_profile_icon_margin"
                 android:text="@string/user_profile_string_id_proof"
+                android:id="@+id/tv_userProfile_id_proof_title"
                 android:textSize="@dimen/user_profile_user_details_text_size"
                 android:textStyle="bold" />
 
@@ -456,7 +523,7 @@
                 android:id="@+id/slider"
                 android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/user_profile_slider_max_height"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/user_profile_image_margin"
                 android:minHeight="@dimen/user_profile_slider_max_height" />
 
@@ -465,6 +532,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bs_button_height"
                 android:layout_margin="15dp"
+                android:layout_gravity="bottom"
                 android:background="@drawable/bs_continue_button_bg"
                 android:text="@string/bs_string_hire_me"
                 android:textAllCaps="false"
@@ -510,6 +578,6 @@
 
         </LinearLayout>
     </ScrollView>
-    </com.facebook.shimmer.ShimmerFrameLayout>
+
 
 </LinearLayout>

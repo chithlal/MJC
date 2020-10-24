@@ -9,6 +9,7 @@ public class SignUpValidationError {
     private String emailError;
     private String passwordError;
 
+
     public SignUpValidationError() {
     }
 

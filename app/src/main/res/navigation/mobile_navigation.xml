@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_home">
 
 
     <fragment
@@ -21,6 +21,6 @@
     <fragment
         android:id="@+id/navigation_orders"
         android:name="com.developer.chithlal.mjc.app.Base.ui.orders.OrdersFragment"
-        android:label="@string/title_orders"
-        tools:layout="@layout/fragment_orders" />
+        android:label="@string/title_activity"
+        tools:layout="@layout/fragment_activities" />
 </navigation>

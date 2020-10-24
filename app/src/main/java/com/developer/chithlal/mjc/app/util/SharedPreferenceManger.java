@@ -7,8 +7,8 @@ import static com.developer.chithlal.mjc.app.util.Constants.user_details_shared_
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.developer.chithlal.mjc.app.engineer.Engineer;
-import com.developer.chithlal.mjc.app.engineer.User;
+
+import com.developer.chithlal.mjc.app.engineers_list.User;
 
 public class SharedPreferenceManger {
 
@@ -28,8 +28,15 @@ public class SharedPreferenceManger {
     }
 
     public void writeUserDetails(User user){
-        mEditor.putString(user_details_shared_pref_USER_ID,user.getPhone());
-        mEditor.putBoolean(IS_USER_ENGINEER,user.isUserMode());
+        if (user!=null) {
+            mEditor.putString(user_details_shared_pref_USER_ID, user.getUserId());
+            mEditor.putBoolean(IS_USER_ENGINEER, user.isUserMode());
+
+        }
+        else {
+            mEditor.remove(user_details_shared_pref_USER_ID);
+            mEditor.remove(IS_USER_ENGINEER);
+        }
         mEditor.commit();
 
     }

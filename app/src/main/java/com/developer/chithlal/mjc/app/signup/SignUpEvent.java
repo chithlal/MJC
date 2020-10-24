@@ -5,7 +5,7 @@ public class SignUpEvent {
     private String email;
     private String phone;
     private String password;
-    private String UserType;
+    private boolean UserType;
 
     public SignUpEvent() {
     }
@@ -14,11 +14,11 @@ public class SignUpEvent {
         return username;
     }
 
-    public String getUserType() {
+    public boolean getUserType() {
         return UserType;
     }
 
-    public void setUserType(String userType) {
+    public void setUserType(boolean userType) {
         UserType = userType;
     }
 
@@ -51,7 +51,7 @@ public class SignUpEvent {
     }
 
     public SignUpEvent(String username, String email, String phone, String password,
-            String userType) {
+            boolean userType) {
         this.username = username;
         this.email = email;
         this.phone = phone;

@@ -25,6 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:visibility="gone"
                 app:cardCornerRadius="@dimen/bs_card_radius"
                 app:cardElevation="@dimen/intro_cardview_elevation">
                 <LinearLayout
@@ -279,7 +280,7 @@
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:minHeight="50dp"
+                            android:minHeight="@dimen/bs_upload_textView_size"
                             app:cardCornerRadius="@dimen/bs_measurement_card_rad"
                             style="@style/MeasurementCardViewShadow"
                             android:layout_margin="@dimen/bs_measurement_card_margin"
@@ -296,7 +297,7 @@
                                 android:layout_margin="@dimen/bs_upload_margin"/>
                             <ImageView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="@dimen/bs_upload_textView_size"
                                 android:visibility="gone"
                                 android:id="@+id/iv_bs_plan_place_holder"
                                />
@@ -345,6 +346,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:visibility="gone"
                 android:id="@+id/bs_cv_buy_materials"
                 app:cardCornerRadius="@dimen/bs_card_radius"
                 app:cardElevation="@dimen/intro_cardview_elevation">
@@ -436,17 +438,23 @@
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/bs_button_height"
-                android:layout_margin="15dp"
-                android:text="@string/bs_string_continue"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/app_button_text_size"
-                android:textStyle="bold"
-                android:background="@drawable/bs_continue_button_bg"
-                />
+
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bs_button_height"
+        android:layout_margin="15dp"
+        android:background="@drawable/bs_continue_button_bg"
+        android:gravity="center"
+        android:text="@string/bs_string_continue"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/app_button_text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

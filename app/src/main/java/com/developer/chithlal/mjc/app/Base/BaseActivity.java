@@ -9,7 +9,10 @@ import android.widget.Toast;
 
 
 import com.developer.chithlal.mjc.R;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 import com.developer.chithlal.mjc.app.util.PermissionManager;
+import com.developer.chithlal.mjc.databinding.ActivityBaseBinding;
+import com.developer.chithlal.mjc.root.account_manager.AccountManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -17,18 +20,27 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import androidx.navigation.NavGraph;
+import androidx.navigation.NavInflater;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class BaseActivity extends AppCompatActivity {
     private Toolbar mToolbar;
+    private User mUser;
+    ActivityBaseBinding mBinding;
+    AccountManager mAccountManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
-        mToolbar = findViewById(R.id.base_toolbar);
+        mBinding = ActivityBaseBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
+        mToolbar = mBinding.baseToolbar;
+        mAccountManager = new AccountManager(this);
+
+        mUser = mAccountManager.getUser();
 
         //Toolbar setup
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
@@ -38,13 +50,26 @@ public class BaseActivity extends AppCompatActivity {
         ActionBar mActionBar = getSupportActionBar();
         if (mActionBar!=null)
             mActionBar.setDisplayHomeAsUpEnabled(true);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        BottomNavigationView navView = mBinding.navView;
+
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);  // Hostfragment
+        NavInflater inflater = navHostFragment.getNavController().getNavInflater();
+        NavGraph graph = inflater.inflate(R.navigation.mobile_navigation);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.nav_profile, R.id.navigation_orders)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
+        //set nav controller from fragment
+
+
+            graph.setStartDestination(R.id.navigation_home);
+
+        //navHostFragment.getNavController().setGraph(graph);
+        NavController navController = navHostFragment.getNavController();
+        navController.setGraph(graph);
+
         navController.navigateUp();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
@@ -54,6 +79,7 @@ public class BaseActivity extends AppCompatActivity {
     void getPermissions(){
         PermissionManager permissionManager = new PermissionManager(this);
         permissionManager.checkPermissionIfNotRequest(PERMISSION_COARSE_LOCATION);
+
     }
 
     @Override

@@ -26,7 +26,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/home_tv_item_name"
         tools:text = "India"
-        android:textStyle="bold"
+        android:textStyle="normal"
+        android:textColor="@color/app_black"
         android:layout_margin="@dimen/margin_home_item_text"
         android:textSize="@dimen/text_size_home_item"/>
 </LinearLayout>

@@ -2,30 +2,42 @@ package com.developer.chithlal.mjc.root;
 
 import android.app.Application;
 
-import com.developer.chithlal.mjc.app.engineer.Engineer;
-import com.developer.chithlal.mjc.app.engineer.User;
-import com.developer.chithlal.mjc.root.account_manager.AccountManagerInterface;
-import com.developer.chithlal.mjc.root.di.AddWorkModule;
+
+import com.developer.chithlal.mjc.app.util.TypefaceUtil;
 import com.developer.chithlal.mjc.root.di.AppComponent;
 import com.developer.chithlal.mjc.root.di.AppModule;
 import com.developer.chithlal.mjc.root.di.DaggerAppComponent;
 import com.developer.chithlal.mjc.root.di.EngineerListModule;
+import com.developer.chithlal.mjc.root.di.MoreDetailPresenterModule;
+import com.developer.chithlal.mjc.root.di.StartupActivityModule;
 import com.developer.chithlal.mjc.root.di.UserProfileModule;
+import com.google.firebase.FirebaseApp;
+
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class App extends Application {
-    private User mUser;
 
-    AccountManagerInterface mAccountManager;
+
+
     private AppComponent mAppComponent;
     @Override
     public void onCreate() {
         super.onCreate();
-
+        FirebaseApp.initializeApp(getApplicationContext());
+        TypefaceUtil.overrideFont(getApplicationContext(), "SANS", "font/open_sans_regular.ttf");
         mAppComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .engineerListModule(new EngineerListModule())
                 .userProfileModule(new UserProfileModule())
+                .moreDetailPresenterModule(new MoreDetailPresenterModule())
+                .startupActivityModule(new StartupActivityModule())
                 .build();
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder().name("mjc.realm.db").build();
+        Realm.setDefaultConfiguration(config);
+
     }
 
     @Override
@@ -42,31 +54,8 @@ public class App extends Application {
         return mAppComponent;
     }
 
-    //setup after login and logout
-    public void setAccountManager(AccountManagerInterface accountManager){
-        this.mAccountManager = accountManager;
-        setUser(mAccountManager.getUser());
-    }
-
-    private void setUser(User user){
-        mUser = user;
 
 
-    }
-    public User getUser(){
-        //nullable
-        if (mUser!=null){
-            if (mUser.isUserMode())
-                return mUser;
-            else {
-                /*TODO:this code should be replaced with engineer objects*/
-                Engineer engineer = new Engineer(mUser.getName());
-                engineer.setPhone(mUser.getPhone());
-            }
-        }
-        if (mUser!=null)
-        return mUser;
-        else return null;
-    }
+
 
 }

@@ -11,7 +11,7 @@
         android:title="@string/title_home" />
     <item
         android:id="@+id/navigation_orders"
-        android:icon="@drawable/ic_shopping_cart_black_24dp"
-        android:title="@string/title_orders" />
+        android:icon="@drawable/ic_baseline_history_24"
+        android:title="@string/title_activity" />
 
 </menu>

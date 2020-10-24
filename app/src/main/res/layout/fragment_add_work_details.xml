@@ -5,7 +5,11 @@
     android:layout_height="match_parent"
     android:padding="@dimen/login_icon_padding"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".app.UserProfile.AddWorkDetailsFragment">
+    tools:context=".app.work.AddWorkDetailsFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,6 +46,12 @@
         android:layout_margin="@dimen/add_work_frag_edittext_margin"
         android:padding="@dimen/add_work_frag_edittext_padding"
         android:textSize="@dimen/add_work_fragment_text_size"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/add_work_frag_edittext_margin"
+            android:text="@string/text_select_work_type"
+            />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,12 +85,11 @@
         android:layout_margin="@dimen/add_work_frag_edittext_margin"
         android:padding="@dimen/add_work_frag_edittext_padding"
         android:textSize="@dimen/add_work_fragment_text_size"/>
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/et_add_work_date_of_completion"
         android:hint="@string/hint_date_of_completion"
-        android:cursorVisible="true"
         android:maxLines="1"
         android:textColor="@color/app_black"
         android:background="@drawable/app_edit_text_bg_blue"
@@ -121,6 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/rv_add_work_add_image"
+
             android:background="@drawable/app_edit_text_bg_blue"
             android:layout_margin="@dimen/add_work_frag_edittext_margin"
             android:padding="@dimen/add_work_frag_edittext_padding"
@@ -128,19 +138,39 @@
             />
         </LinearLayout>
     <!--</androidx.cardview.widget.CardView>-->
-        <Button
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="@dimen/fragment_add_work_button_width"
             android:layout_height="wrap_content"
             android:id="@+id/bt_add_work_save"
             android:textAllCaps="false"
             android:background="@drawable/bs_continue_button_bg"
             android:textColor="@color/white"
             android:text="@string/string_add"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
             android:layout_gravity="right"
             android:layout_margin="@dimen/add_work_frag_edittext_margin"
             android:padding="@dimen/add_work_frag_edittext_padding"
 
             />
-    </LinearLayout>
+        <TextView
+            android:layout_width="@dimen/fragment_add_work_button_width"
+            android:layout_height="wrap_content"
+            android:id="@+id/bt_add_work_skip"
+            android:textAllCaps="false"
+            android:textColor="@color/color_light_black"
+            android:text="@string/text_skip"
+            android:gravity="center"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="@dimen/add_work_frag_edittext_margin"
+            android:padding="@dimen/add_work_frag_edittext_padding"
 
+            />
+        </RelativeLayout>
+    </LinearLayout>
+    </ScrollView>
 </FrameLayout>

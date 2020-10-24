@@ -2,15 +2,16 @@ package com.developer.chithlal.mjc.app.Login;
 
 import android.content.Context;
 
-import com.developer.chithlal.mjc.app.engineer.User;
+import com.developer.chithlal.mjc.app.engineers_list.User;
 
 public interface LoginContract {
     interface View{
         LoginEvent getLoginData();
         void showValidationMessage(String userNameMessage,String passwordMessage);
-        void onLoginSuccess();
+        void onLoginSuccess(User user);
         void onLoginFailure(String mMessage);
         Context getCurrentContext();
+        void showMessage(String message);
     }
 
     interface Presenter{
@@ -21,8 +22,10 @@ public interface LoginContract {
 
     }
 
-    interface Model{
+    interface Model {
         String login(LoginEvent mLoginEvent);
+        void onLoginSuccess(User user);
+        void onLoginFailure(String message);
 
     }
 
